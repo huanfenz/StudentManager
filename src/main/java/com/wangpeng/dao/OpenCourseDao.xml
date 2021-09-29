@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.OpenCourseDao">
+    <!--添加开课-->
+    <insert id="insertOpenCourse" parameterType="OpenCourse">
+        insert into open_course(oid,year,term,cid,tid,courseId,remark)
+        values(#{oid},#{year},#{term},#{cid},#{tid},#{courseId},#{remark})
+    </insert>
+    <!--删除开课-->
+    <delete id="deleteOpenCourses" parameterType="OpenCourse">
+        delete from open_course where oid in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.oid}
+        </foreach>
+    </delete>
+    <!--修改开课-->
+    <update id="updateOpenCourse" parameterType="OpenCourse">
+        update open_course set year=#{year},term=#{term},cid=#{cid},tid=#{tid},courseId=#{courseId},remark=#{remark}
+        where oid=#{oid}
+    </update>
+    <!--查询所有开课-->
+    <select id="selectOpenCourses" resultType="OpenCourse">
+        select oid,year,term,cid,tid,courseId,remark from open_course
+    </select>
+    <!--根据id查询开课-->
+    <select id="selectOpenCourse" resultType="OpenCourse">
+        select oid,year,term,cid,tid,courseId,remark from open_course where oid = #{oid}
+    </select>
+    <!--分页查询开课-->
+    <select id="selectOpenCoursesByLimit" resultType="OpenCourse">
+        select oid,year,term,cid,tid,courseId,remark from open_course limit #{begin},#{size}
+    </select>
+    <!--获取开课数量-->
+    <select id="getOpenCoursesCount" resultType="int">
+        select count(*) from open_course
+    </select>
+    <!--分页搜索开课-->
+    <select id="searchOpenCoursesByLimit" resultType="OpenCourse">
+        select oid,year,term,cid,tid,courseId,remark from open_course
+        <where>
+            <if test="year != null and year != '' ">
+                and `year` like concat('%',#{year},'%')
+            </if>
+            <if test="term != null and term != '' ">
+                and term like concat('%',#{term},'%')
+            </if>
+            <if test="cid != null and cid != '' ">
+                and cid = #{cid}
+            </if>
+            <if test="tid != null and tid != '' ">
+                and tid = #{tid}
+            </if>
+            <if test="courseId != null and courseId != '' ">
+                and courseId = #{courseId}
+            </if>
+        </where>
+        limit #{begin},#{size}
+    </select>
+    <!--获取搜索的数量-->
+    <select id="getSearchCount" resultType="int">
+        select count(*) from open_course
+        <where>
+            <if test="year != null and year != '' ">
+                and `year` like concat('%',#{year},'%')
+            </if>
+            <if test="term != null and term != '' ">
+                and term like concat('%',#{term},'%')
+            </if>
+            <if test="cid != null and cid != '' ">
+                and cid = #{cid}
+            </if>
+            <if test="tid != null and tid != '' ">
+                and tid = #{tid}
+            </if>
+            <if test="courseId != null and courseId != '' ">
+                and courseId = #{courseId}
+            </if>
+        </where>
+    </select>
+</mapper>

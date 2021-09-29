@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.CourseDao">
+    <!--添加课程-->
+    <insert id="insertCourse" parameterType="Course">
+        insert into course(courseId,courseName,courseRemark)
+        values(#{courseId},#{courseName},#{courseRemark})
+    </insert>
+    <!--删除课程-->
+    <delete id="deleteCourses" parameterType="Course">
+        delete from course where courseId in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.courseId}
+        </foreach>
+    </delete>
+    <!--修改课程-->
+    <update id="updateCourse" parameterType="Course">
+        update course set courseName=#{courseName},courseRemark=#{courseRemark}
+        where courseId=#{courseId}
+    </update>
+    <!--查询所有课程-->
+    <select id="selectCourses" resultType="Course">
+        select courseId,courseName,courseRemark from course
+    </select>
+    <!--根据id查询课程-->
+    <select id="selectCourse" resultType="Course">
+        select courseId,courseName,courseRemark from course where courseId = #{courseId}
+    </select>
+    <!--分页查询课程-->
+    <select id="selectCoursesByLimit" resultType="Course">
+        select courseId,courseName,courseRemark from course limit #{begin},#{size}
+    </select>
+    <!--获取课程数量-->
+    <select id="getCoursesCount" resultType="int">
+        select count(*) from course
+    </select>
+    <!--分页搜索课程-->
+    <select id="searchCoursesByLimit" resultType="Course">
+        select courseId,courseName,courseRemark from course
+        <where>
+            <if test="courseName != null and courseName != '' ">
+                and courseName like concat('%',#{courseName},'%')
+            </if>
+        </where>
+        limit #{begin},#{size}
+    </select>
+    <!--获取搜索的数量-->
+    <select id="getSearchCount" resultType="int">
+        select count(*) from course
+        <where>
+            <if test="courseName != null and courseName != '' ">
+                and courseName like concat('%',#{courseName},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

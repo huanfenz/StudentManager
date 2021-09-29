@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.MajorDao">
+    <!--添加专业-->
+    <insert id="insertMajor" parameterType="Major">
+        insert into major(mid,mname,mdept,mremark)
+        values(#{mid},#{mname},#{mdept},#{mremark})
+    </insert>
+    <!--删除专业-->
+    <delete id="deleteMajors" parameterType="Major">
+        delete from major where mid in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.mid}
+        </foreach>
+    </delete>
+    <!--修改专业-->
+    <update id="updateMajor" parameterType="Major">
+        update major set mname=#{mname},mdept=#{mdept},mremark=#{mremark}
+        where mid=#{mid}
+    </update>
+    <!--查询所有专业-->
+    <select id="selectMajors" resultType="Major">
+        select mid,mname,mdept,mremark from major
+    </select>
+    <!--根据id查询专业-->
+    <select id="selectMajor" resultType="Major">
+        select mid,mname,mdept,mremark from major where mid = #{mid}
+    </select>
+    <!--分页查询专业-->
+    <select id="selectMajorsByLimit" resultType="Major">
+        select mid,mname,mdept,mremark from major limit #{begin},#{size}
+    </select>
+    <!--获取专业数量-->
+    <select id="getMajorsCount" resultType="int">
+        select count(*) from major
+    </select>
+    <!--分页搜索专业-->
+    <select id="searchMajorsByLimit" resultType="Major">
+        select mid,mname,mdept,mremark from major
+        <where>
+            <if test="mname != null and mname != '' ">
+                and mname like concat('%',#{mname},'%')
+            </if>
+            <if test="mdept != null and mdept != '' ">
+                and mdept like concat('%',#{mdept},'%')
+            </if>
+        </where>
+        limit #{begin},#{size}
+    </select>
+    <!--获取搜索的数量-->
+    <select id="getSearchCount" resultType="int">
+        select count(*) from major
+        <where>
+            <if test="mname != null and mname != '' ">
+                and mname like concat('%',#{mname},'%')
+            </if>
+            <if test="mdept != null and mdept != '' ">
+                and mdept like concat('%',#{mdept},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

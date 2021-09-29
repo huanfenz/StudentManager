@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.ManagerDao">
+    <!--添加用户-->
+    <insert id="insertManager" parameterType="Manager">
+        insert into manager(id,username,password,name,remark)
+        values(#{id},#{username},#{password},#{name},#{remark})
+    </insert>
+    <!--删除用户-->
+    <delete id="deleteManagers" parameterType="Manager">
+        delete from manager where id in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.id}
+        </foreach>
+    </delete>
+    <!--修改用户-->
+    <update id="updateManager" parameterType="Manager">
+        update manager set username=#{username},password=#{password},name=#{name},remark=#{remark}
+        where id=#{id}
+    </update>
+    <!--查询所有用户-->
+    <select id="selectManagers" resultType="Manager">
+        select id,username,password,name,remark from manager
+    </select>
+    <!--根据id查询用户-->
+    <select id="selectManager" resultType="Manager">
+        select username,password,name,remark from manager where id = #{id}
+    </select>
+    <!--分页查询用户-->
+    <select id="selectManagersByLimit" resultType="Manager">
+        select id,username,password,name,remark from manager limit #{begin},#{size}
+    </select>
+    <!--获取用户数量-->
+    <select id="getManagersCount" resultType="int">
+        select count(*) from manager
+    </select>
+    <!--分页搜索用户-->
+    <select id="searchManagersByLimit" resultType="Manager">
+        select id,username,password,name,remark from manager
+        <where>
+            <if test="username != null and username != '' ">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="name != name and mdept != '' ">
+                and `name` like concat('%',#{name},'%')
+            </if>
+        </where>
+        limit #{begin},#{size}
+    </select>
+    <!--获取搜索的数量-->
+    <select id="getSearchCount" resultType="int">
+        select count(*) from manager
+        <where>
+            <if test="username != null and username != '' ">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="name != name and mdept != '' ">
+                and `name` like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+    <!--检查用户名和密码-->
+    <select id="checkByUsernameAndPassword" resultType="Manager">
+        select id,username,password,name,remark from manager
+        where username=#{username} and password=#{password}
+    </select>
+</mapper>

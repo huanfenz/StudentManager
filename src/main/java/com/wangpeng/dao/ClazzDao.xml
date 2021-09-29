@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.ClazzDao">
+    <!--添加班级-->
+    <insert id="insertClazz" parameterType="Clazz">
+        insert into clazz(cid,cname,mid,cremark)
+        values(#{cid},#{cname},#{mid},#{cremark})
+    </insert>
+    <!--删除班级-->
+    <delete id="deleteClazzs" parameterType="Clazz">
+        delete from clazz where cid in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.cid}
+        </foreach>
+    </delete>
+    <!--修改班级-->
+    <update id="updateClazz" parameterType="Clazz">
+        update clazz set cname=#{cname},mid=#{mid},cremark=#{cremark}
+        where cid=#{cid}
+    </update>
+    <!--查询所有-->
+    <select id="selectClazzs" resultType="Clazz">
+        select cid,cname,mid,cremark from clazz
+    </select>
+    <!--查询一个-->
+    <select id="selectClazz" resultType="Clazz">
+        select cid,cname,mid,cremark from clazz where cid=#{cid}
+    </select>
+    <!--分页查询-->
+    <select id="selectClazzsByLimit" resultType="Clazz">
+        select cid,cname,mid,cremark from clazz limit #{begin},#{size}
+    </select>
+    <!--获取数量-->
+    <select id="getClazzsCount" resultType="int">
+        select count(*) from clazz
+    </select>
+    <!--分页搜索-->
+    <select id="searchClazzsByLimit" resultType="Clazz">
+        select cid,cname,mid,cremark from clazz
+        <where>
+            <if test="cname != null and cname != '' ">
+                and cname like concat('%',#{cname},'%')
+            </if>
+            <if test="mid != null and mid != '' ">
+                and mid=#{mid}
+            </if>
+        </where>
+        limit #{begin},#{size}
+    </select>
+    <!--获取搜索的数量-->
+    <select id="getSearchCount" resultType="int">
+        select count(*) from clazz
+        <where>
+            <if test="cname != null and cname != '' ">
+                and cname like concat('%',#{cname},'%')
+            </if>
+            <if test="mid != null and mid != '' ">
+                and mid=#{mid}
+            </if>
+        </where>
+    </select>
+</mapper>

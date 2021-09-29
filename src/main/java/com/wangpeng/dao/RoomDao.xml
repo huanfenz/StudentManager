@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.RoomDao">
+    <!--添加教室-->
+    <insert id="insertRoom" parameterType="Room">
+        insert into room(rid,rname,capacity,remark)
+        values(#{rid},#{rname},#{capacity},#{remark})
+    </insert>
+    <!--删除教室-->
+    <delete id="deleteRooms" parameterType="Room">
+        delete from room where rid in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.rid}
+        </foreach>
+    </delete>
+    <!--修改教室-->
+    <update id="updateRoom" parameterType="Room">
+        update room set rname=#{rname},capacity=#{capacity},remark=#{remark}
+        where rid=#{rid}
+    </update>
+    <!--查询所有教室-->
+    <select id="selectRooms" resultType="Room">
+        select rid,rname,capacity,remark from room
+    </select>
+    <!--根据id查询教室-->
+    <select id="selectRoom" resultType="Room">
+        select rid,rname,capacity,remark from room where rid = #{rid}
+    </select>
+    <!--分页查询教室-->
+    <select id="selectRoomsByLimit" resultType="Room">
+        select rid,rname,capacity,remark from room limit #{begin},#{size}
+    </select>
+    <!--获取教室数量-->
+    <select id="getRoomsCount" resultType="int">
+        select count(*) from room
+    </select>
+    <!--分页搜索教室-->
+    <select id="searchRoomsByLimit" resultType="Room">
+        select rid,rname,capacity,remark from room
+        <where>
+            <if test="rname != null and rname != '' ">
+                and rname like concat('%',#{rname},'%')
+            </if>
+            <if test="capacity != null and capacity != '' ">
+                and capacity like concat('%',#{capacity},'%')
+            </if>
+        </where>
+        limit #{begin},#{size}
+    </select>
+    <!--获取搜索的数量-->
+    <select id="getSearchCount" resultType="int">
+        select count(*) from room
+        <where>
+            <if test="rname != null and rname != '' ">
+                and rname like concat('%',#{rname},'%')
+            </if>
+            <if test="capacity != null and capacity != '' ">
+                and capacity like concat('%',#{capacity},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

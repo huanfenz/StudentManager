@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.StudentDao">
+    <!--添加学生-->
+    <insert id="insertStudent" parameterType="Student">
+        insert into student(sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd)
+        values(#{sid},#{sname},#{snum},#{ssex},#{sage},#{cid},#{sstatus},#{sremark},#{idcard},#{phone},#{address},#{entime},#{pswd})
+    </insert>
+    <!--删除学生-->
+    <delete id="deleteStudents" parameterType="Student">
+        delete from student where sid in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.sid}
+        </foreach>
+    </delete>
+    <!--修改学生-->
+    <update id="updateStudent" parameterType="Student">
+        update student set sname=#{sname},snum=#{snum},ssex=#{ssex},sage=#{sage},cid=#{cid},sstatus=#{sstatus},sremark=#{sremark},idcard=#{idcard},phone=#{phone},address=#{address},entime=#{entime},pswd=#{pswd}
+        where sid=#{sid}
+    </update>
+    <!--分页查询学生-->
+    <select id="selectStudentsByLimit" resultType="Student">
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd from student limit #{begin},#{size}
+    </select>
+    <!--获取学生数量-->
+    <select id="getStudentsCount" resultType="int">
+        select count(*) from student
+    </select>
+    <!--分页搜索学生-->
+    <select id="searchStudentsByLimit" resultType="Student">
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd from student
+        <where>
+            <if test="sname != null and sname != '' ">
+                and sname like concat('%',#{sname},'%')
+            </if>
+            <if test="snum != null and snum != '' ">
+                and snum like concat('%',#{snum},'%')
+            </if>
+            <if test="cid != null and cid != '' ">
+                and cid=#{cid}
+            </if>
+        </where>
+        limit #{begin},#{size}
+    </select>
+    <!--获取搜索的数量-->
+    <select id="getSearchCount" resultType="int">
+        select count(*) from student
+        <where>
+            <if test="sname != null and sname != '' ">
+                and sname like concat('%',#{sname},'%')
+            </if>
+            <if test="snum != null and snum != '' ">
+                and snum like concat('%',#{snum},'%')
+            </if>
+            <if test="cid != null and cid != '' ">
+                and cid=#{cid}
+            </if>
+        </where>
+    </select>
+    <!--检查用户名和密码-->
+    <select id="checkByUsernameAndPassword" resultType="Student">
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd from student
+        where snum=#{username} and pswd=#{password}
+    </select>
+</mapper>

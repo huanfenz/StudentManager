@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.TeacherDao">
+    <!--添加老师-->
+    <insert id="insertTeacher" parameterType="Teacher">
+        insert into teacher(tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd)
+        values(#{tid},#{tname},#{tnum},#{tsex},#{tage},#{tstatus},#{tremark},#{idcard},#{phone},#{address},#{entime},#{pswd})
+    </insert>
+    <!--删除老师-->
+    <delete id="deleteTeachers" parameterType="Teacher">
+        delete from teacher where tid in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.tid}
+        </foreach>
+    </delete>
+    <!--修改老师-->
+    <update id="updateTeacher" parameterType="Teacher">
+        update teacher set tname=#{tname},tnum=#{tnum},tsex=#{tsex},tage=#{tage},tstatus=#{tstatus},tremark=#{tremark},idcard=#{idcard},phone=#{phone},address=#{address},entime=#{entime},pswd=#{pswd}
+        where tid=#{tid}
+    </update>
+    <!--查询所有-->
+    <select id="selectTeachers" resultType="Teacher">
+        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd from teacher
+    </select>
+    <!--根据id查教师-->
+    <select id="selectTeacher" resultType="Teacher">
+        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd from teacher where tid=#{tid}
+    </select>
+    <!--分页查询老师-->
+    <select id="selectTeachersByLimit" resultType="Teacher">
+        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd from teacher limit #{begin},#{size}
+    </select>
+    <!--获取老师数量-->
+    <select id="getTeachersCount" resultType="int">
+        select count(*) from teacher
+    </select>
+    <!--分页搜索老师-->
+    <select id="searchTeachersByLimit" resultType="Teacher">
+        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd from teacher
+        <where>
+            <if test="tname != null and tname != '' ">
+                and tname like concat('%',#{tname},'%')
+            </if>
+            <if test="tnum != null and tnum != '' ">
+                and tnum like concat('%',#{tnum},'%')
+            </if>
+        </where>
+        limit #{begin},#{size}
+    </select>
+    <!--获取搜索的数量-->
+    <select id="getSearchCount" resultType="int">
+        select count(*) from teacher
+        <where>
+            <if test="tname != null and tname != '' ">
+                and tname like concat('%',#{tname},'%')
+            </if>
+            <if test="tnum != null and tnum != '' ">
+                and tnum like concat('%',#{tnum},'%')
+            </if>
+        </where>
+    </select>
+    <!--检查用户名和密码-->
+    <select id="checkByUsernameAndPassword" resultType="Teacher">
+        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd from teacher
+        where tnum=#{username} and pswd=#{password}
+    </select>
+</mapper>

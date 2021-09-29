@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.TableShowDao">
+
+    <select id="selectCourseDetail" resultType="CourseDetail">
+        select ct.ctid,weekno,week,start,size,
+               (select courseName from course where course.courseId = oc.courseId)courseName,
+               (select rname from room where room.rid = ct.rid)rname,
+               (select tname from teacher where teacher.tid = oc.tid)tname
+        from course_table ct,open_course oc
+        where ct.oid = oc.oid and cid=#{cid}
+    </select>
+</mapper>
