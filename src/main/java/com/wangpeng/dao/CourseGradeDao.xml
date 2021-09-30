@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.CourseGradeDao">
+    <!--添加成绩-->
+    <insert id="insertCourseGrade" parameterType="CourseGrade">
+        insert into course_grade(cgid,oid,sid,score)
+        values(#{cgid},#{oid},#{sid},#{score})
+    </insert>
+    <!--删除成绩-->
+    <delete id="deleteCourseGrades" parameterType="CourseGrade">
+        delete from course_grade where cgid in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.cgid}
+        </foreach>
+    </delete>
+    <!--修改成绩-->
+    <update id="updateCourseGrade" parameterType="CourseGrade">
+        update course_grade set oid=#{oid},sid=#{sid},score=#{score}
+        where cgid=#{cgid}
+    </update>
+    <!--查询所有成绩-->
+    <select id="selectCourseGrades" resultType="CourseGrade">
+        select cgid,oid,sid,score from course_grade
+    </select>
+    <!--根据id查询成绩-->
+    <select id="selectCourseGrade" resultType="CourseGrade">
+        select cgid,oid,sid,score from course_grade where cgid = #{cgid}
+    </select>
+    <!--分页查询成绩-->
+    <select id="selectCourseGradesByLimit" resultType="CourseGrade">
+        select cgid,oid,sid,score from course_grade limit #{begin},#{size}
+    </select>
+    <!--获取成绩数量-->
+    <select id="getCourseGradesCount" resultType="int">
+        select count(*) from course_grade
+    </select>
+    <!--分页搜索成绩-->
+    <select id="searchCourseGradesByLimit" resultType="CourseGrade">
+        select cgid,oid,sid,score from course_grade
+        <where>
+            <if test="oid != null and oid != '' ">
+                and oid like concat('%',#{oid},'%')
+            </if>
+            <if test="sid != null and sid != '' ">
+                and sid like concat('%',#{sid},'%')
+            </if>
+        </where>
+        limit #{begin},#{size}
+    </select>
+    <!--获取搜索的数量-->
+    <select id="getSearchCount" resultType="int">
+        select count(*) from course_grade
+        <where>
+            <if test="oid != null and oid != '' ">
+                and oid like concat('%',#{oid},'%')
+            </if>
+            <if test="sid != null and sid != '' ">
+                and sid like concat('%',#{sid},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

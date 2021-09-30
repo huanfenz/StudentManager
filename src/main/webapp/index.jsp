@@ -143,11 +143,11 @@
                         case 2:
                             layer.msg("登录成功",{time:1000},function () {
                                 if(data.authority == "manager") {
-                                    location.href="manager/index.jsp";
+                                    location.href="manager/manager_index.jsp";
                                 } else if(data.authority == "teacher") {
-                                    location.href="teacher/index.jsp";
+                                    location.href="teacher/teacher_index.jsp";
                                 } else if(data.authority == "student") {
-                                    location.href="student/index.jsp";
+                                    location.href="student/student_index.jsp";
                                 }
                             });
                             break;

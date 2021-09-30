@@ -1,7 +1,7 @@
 {
   "homeInfo": {
     "title": "首页",
-    "href": "manager/welcome.jsp"
+    "href": "manager/manager_welcome.jsp"
   },
   "logoInfo": {
     "title": "学生管理系统",
@@ -74,12 +74,6 @@
             {
               "title": "课表展示",
               "href": "manager/course_table_show.jsp",
-              "icon": "fa fa-tachometer",
-              "target": "_self"
-            },
-            {
-              "title": "成绩管理",
-              "href": "manager/ea3.html",
               "icon": "fa fa-tachometer",
               "target": "_self"
             },

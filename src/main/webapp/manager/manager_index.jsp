@@ -128,7 +128,7 @@
         $("#myName").html("${sessionScope.loginObj.name}");
 
         var options = {
-            iniUrl: "layuimini/api/init.json",    // 初始化接口
+            iniUrl: "layuimini/api/init_manager.json",    // 初始化接口
             clearUrl: "layuimini/api/clear.json", // 缓存清理接口
             urlHashLocation: true,      // 是否打开hash定位
             bgColorDefault: 7,      // 主题默认配置
@@ -141,7 +141,7 @@
         miniAdmin.render(options);
 
         $('.login-out').on("click", function () {
-            layer.msg('退出登录成功', function () {
+            layer.msg('退出登录成功', {time:1000}, function () {
                 window.location = 'index.jsp';
             });
         });

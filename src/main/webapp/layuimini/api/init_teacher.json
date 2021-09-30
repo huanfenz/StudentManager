@@ -1,0 +1,67 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "teacher/teacher_welcome.jsp"
+  },
+  "logoInfo": {
+    "title": "学生管理系统",
+    "image": "layuimini/images/xiaohui.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "管理1",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "教师功能",
+          "href": "",
+          "icon": "fa fa-home",
+          "target": "_self",
+          "child": [
+            {
+              "title": "教师信息",
+              "href": "teacher/student_list.jsp",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "学生查询",
+              "href": "teacher/student_list.jsp",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "成绩管理",
+              "href": "teacher/student_list.jsp",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "处理审批",
+              "href": "teacher/student_list.jsp",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "其他功能",
+          "href": "",
+          "icon": "fa fa-home",
+          "target": "_self",
+          "child": [
+            {
+              "title": "修改密码",
+              "href": "teacher/password.jsp",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
