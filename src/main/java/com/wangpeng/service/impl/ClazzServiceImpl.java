@@ -84,4 +84,9 @@ public class ClazzServiceImpl implements ClazzService {
         return clazzDao.selectClazzs();
     }
 
+    @Override
+    public List<Clazz> queryAllClazzsByTeacher(int tid) {
+        return clazzDao.getCLazzsByTeacher(tid);
+    }
+
 }

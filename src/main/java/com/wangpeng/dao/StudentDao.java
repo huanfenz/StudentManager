@@ -62,4 +62,13 @@ public interface StudentDao {
      * @return
      */
     Student checkByUsernameAndPassword(Map<String,Object> map);
+
+    /**
+     * 获得教师所教学生的数量
+     * @return
+     */
+    int getStudentsCountByTeacher(int tid);
+
+
+    List<Student> selectStudentsByLimitByTeacher(@Param("begin")int begin, @Param("size")int size, @Param("tid")int tid);
 }

@@ -50,19 +50,19 @@
                 <%--用户名--%>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-username" for="username"></label>
-                    <input type="text" id="username" name="username" lay-verify="required|account" placeholder="学号、职工号、管理员用户名" autocomplete="off" class="layui-input" value="admin">
+                    <input type="text" id="username" name="username" lay-verify="required|account" placeholder="学号、职工号、管理员用户名" autocomplete="off" class="layui-input" value="15001">
                 </div>
                 <%--密码--%>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-password" for="password"></label>
-                    <input type="password" id="password" name="password" lay-verify="required|password" placeholder="密码" autocomplete="off" class="layui-input" value="admin">
+                    <input type="password" id="password" name="password" lay-verify="required|password" placeholder="密码" autocomplete="off" class="layui-input" value="123456">
                 </div>
                 <%--权限authority--%>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-password" for="authority"></label>
                     <select name="authority" id="authority">
                         <option value="manager">管理员</option>
-                        <option value="teacher">教师</option>
+                        <option value="teacher" selected="selected">教师</option>
                         <option value="student">学生</option>
                     </select>
                 </div>

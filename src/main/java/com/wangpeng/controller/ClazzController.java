@@ -1,9 +1,8 @@
 package com.wangpeng.controller;
 
+import com.wangpeng.pojo.*;
 import com.wangpeng.pojo.Clazz;
 import com.wangpeng.pojo.Clazz;
-import com.wangpeng.pojo.Clazz;
-import com.wangpeng.pojo.Major;
 import com.wangpeng.service.ClazzService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +43,16 @@ public class ClazzController {
     @ResponseBody
     public List<Clazz> queryAllClazzs(){
         List<Clazz> clazzes = service.queryAllClazzs();
+        return clazzes;
+    }
+
+    @RequestMapping("queryAllClazzsByTeacher.do")
+    @ResponseBody
+    public List<Clazz> queryAllClazzsByTeacher(HttpServletRequest req){
+        //获取当前账号信息
+        Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
+
+        List<Clazz> clazzes = service.queryAllClazzsByTeacher(loginTeacher.getTid());
         return clazzes;
     }
 

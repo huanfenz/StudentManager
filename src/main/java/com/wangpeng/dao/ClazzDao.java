@@ -35,6 +35,11 @@ public interface ClazzDao {
     List<Clazz> selectClazzs();
 
     /**
+     * 通过教师查询所有
+     */
+    List<Clazz> getCLazzsByTeacher(int tid);
+
+    /**
      * 查询班级
      * @param id
      * @return
@@ -68,4 +73,6 @@ public interface ClazzDao {
      * @return
      */
     int getSearchCount(Map<String,Object> map);
+
+
 }

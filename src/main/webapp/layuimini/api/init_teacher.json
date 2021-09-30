@@ -23,25 +23,25 @@
           "child": [
             {
               "title": "教师信息",
-              "href": "teacher/student_list.jsp",
+              "href": "teacher/teacher_information.jsp",
               "icon": "fa fa-tachometer",
               "target": "_self"
             },
             {
               "title": "学生查询",
-              "href": "teacher/student_list.jsp",
+              "href": "teacher/teacher_student_list.jsp",
               "icon": "fa fa-tachometer",
               "target": "_self"
             },
             {
               "title": "成绩管理",
-              "href": "teacher/student_list.jsp",
+              "href": "teacher/1.jsp",
               "icon": "fa fa-tachometer",
               "target": "_self"
             },
             {
               "title": "处理审批",
-              "href": "teacher/student_list.jsp",
+              "href": "teacher/2.jsp",
               "icon": "fa fa-tachometer",
               "target": "_self"
             }

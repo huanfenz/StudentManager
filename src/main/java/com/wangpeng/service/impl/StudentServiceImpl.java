@@ -77,4 +77,24 @@ public class StudentServiceImpl implements StudentService {
     public int getSearchCount(Map<String, Object> searchParam) {
         return studentDao.getSearchCount(searchParam);
     }
+
+    @Override
+    public int getStudentsCountByTeacher(int tid) {
+        return studentDao.getStudentsCountByTeacher(tid);
+    }
+
+    @Override
+    public List<Student> findStudentsByPageByTeacher(Integer page, Integer size, int tid) {
+        int begin = (page - 1) * size;
+        List<Student> students = studentDao.selectStudentsByLimitByTeacher(begin, size, tid);
+        List<Student> res = new ArrayList<>();
+        //放入班级名信息
+        for(Student student : students) {
+            int cid = student.getCid();
+            Clazz clazz = clazzDao.selectClazz(cid);
+            student.setCname(clazz.getCname());
+            res.add(student);
+        }
+        return res;
+    }
 }

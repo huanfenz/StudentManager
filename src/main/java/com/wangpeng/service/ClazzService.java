@@ -49,4 +49,6 @@ public interface ClazzService {
     int getSearchCount(Map<String, Object> searchParam);
 
     List<Clazz> queryAllClazzs();
+
+    List<Clazz> queryAllClazzsByTeacher(int tid);
 }

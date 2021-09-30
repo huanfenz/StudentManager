@@ -1,6 +1,7 @@
 package com.wangpeng.controller;
 
 import com.wangpeng.pojo.Manager;
+import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +47,8 @@ public class LoginController {
     @ResponseBody
     public int alterPassword(String oldPassword, String newPassword,HttpServletRequest req){
         //获取当前账号信息
-        Manager loginManager = (Manager) req.getSession().getAttribute("loginObj");
+        Manager loginManager =  (Manager) req.getSession().getAttribute("loginObj");
+
         //检查旧密码是否正确
         Manager manager = service.managerLogin(loginManager.getUsername(), oldPassword);
         if(manager == null) {   //旧密码不正确

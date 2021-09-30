@@ -55,4 +55,8 @@ public interface StudentService {
      * @return
      */
     int getSearchCount(Map<String, Object> searchParam);
+
+    int getStudentsCountByTeacher(int tid);
+
+    List<Student> findStudentsByPageByTeacher(Integer page, Integer size, int tid);
 }

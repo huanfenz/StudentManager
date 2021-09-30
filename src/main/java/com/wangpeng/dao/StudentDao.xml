@@ -65,4 +65,16 @@
         select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd from student
         where snum=#{username} and pswd=#{password}
     </select>
+    <!--获得教师所教学生的数量-->
+    <select id="getStudentsCountByTeacher" resultType="int">
+        select count(*) from student
+        where cid in (select distinct cid from open_course where tid=#{tid});
+    </select>
+    <!--获得教师所教的学生-->
+    <select id="selectStudentsByLimitByTeacher" resultType="Student">
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd
+        from student
+        where cid in (select distinct cid from open_course where tid=#{tid})
+        limit #{begin},#{size}
+    </select>
 </mapper>
