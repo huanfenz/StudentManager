@@ -68,4 +68,6 @@ public interface CourseDao {
      * @return
      */
     int getSearchCount(Map<String,Object> map);
+
+    List<Course> selectCoursesByTeacher(int tid);
 }

@@ -68,4 +68,6 @@ public interface CourseGradeDao {
      * @return
      */
     int getSearchCount(Map<String,Object> map);
+
+    List<CourseGrade> selectScoresByOid(Integer oid);
 }

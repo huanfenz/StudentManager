@@ -68,4 +68,8 @@ public interface OpenCourseDao {
      * @return
      */
     int getSearchCount(Map<String,Object> map);
+
+    int getOpenCoursesCountByTeacher(int tid);
+
+    List<OpenCourse> selectOpenCoursesByLimitByTeacher(@Param("begin")int begin, @Param("size")Integer size, @Param("tid")Integer tid);
 }

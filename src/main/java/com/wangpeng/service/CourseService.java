@@ -62,4 +62,5 @@ public interface CourseService {
      */
     int getSearchCount(Map<String, Object> searchParam);
 
+    List<Course> findAllCoursesByTeacher(int tid);
 }

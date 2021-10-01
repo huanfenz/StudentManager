@@ -1,6 +1,7 @@
 package com.wangpeng.controller;
 
 import com.wangpeng.pojo.OpenCourse;
+import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.OpenCourseService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +35,32 @@ public class OpenCourseController {
         int count = service.getOpenCoursesCount();
         //获取数据
         List<OpenCourse> openCourses = service.findOpenCoursesByPage(page,limit);
+        //结果map
+        Map<String,Object> res = new HashMap<String,Object>();
+        res.put("code", 0);
+        res.put("msg", "");
+        res.put("count", count);
+        res.put("data", openCourses);
+
+        return res;
+    }
+
+    /**
+     * 查询开课(教师权限)
+     * @param page  当前页码
+     * @param limit 每页大小
+     * @return 数据
+     */
+    @RequestMapping("queryOpenCoursesByTeacher.do")
+    @ResponseBody
+    public Map<String,Object> queryOpenCoursesByTeacher(Integer page, Integer limit, HttpServletRequest req){
+        //获取当前账号信息
+        Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
+
+        //获取开课数量
+        int count = service.getOpenCoursesCountByTeacher(loginTeacher.getTid());
+        //获取数据
+        List<OpenCourse> openCourses = service.findOpenCoursesByPageByTeacher(page,limit,loginTeacher.getTid());
         //结果map
         Map<String,Object> res = new HashMap<String,Object>();
         res.put("code", 0);

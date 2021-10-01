@@ -62,4 +62,9 @@ public class CourseServiceImpl implements CourseService {
         return courseDao.getSearchCount(searchParam);
     }
 
+    @Override
+    public List<Course> findAllCoursesByTeacher(int tid) {
+        return courseDao.selectCoursesByTeacher(tid);
+    }
+
 }

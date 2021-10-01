@@ -56,4 +56,9 @@
             </if>
         </where>
     </select>
+    <!--教师查询相关课程-->
+    <select id="selectCoursesByTeacher" resultType="Course">
+        select courseId,courseName,courseRemark from course
+        where courseId in (select courseId from open_course where tid=#{tid})
+    </select>
 </mapper>

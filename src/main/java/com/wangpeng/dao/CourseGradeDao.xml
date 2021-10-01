@@ -62,4 +62,7 @@
             </if>
         </where>
     </select>
+    <select id="selectScoresByOid" resultType="CourseGrade">
+        select cgid,oid,sid,score from course_grade where oid=#{oid}
+    </select>
 </mapper>

@@ -62,4 +62,7 @@ public interface OpenCourseService {
      */
     int getSearchCount(Map<String, Object> searchParam);
 
+    int getOpenCoursesCountByTeacher(int tid);
+
+    List<OpenCourse> findOpenCoursesByPageByTeacher(Integer page, Integer size, Integer tid);
 }

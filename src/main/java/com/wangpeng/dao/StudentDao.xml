@@ -21,6 +21,11 @@
         update student set sname=#{sname},snum=#{snum},ssex=#{ssex},sage=#{sage},cid=#{cid},sstatus=#{sstatus},sremark=#{sremark},idcard=#{idcard},phone=#{phone},address=#{address},entime=#{entime},pswd=#{pswd}
         where sid=#{sid}
     </update>
+    <select id="selectStudent" resultType="Student">
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd
+        from student
+        where sid=#{sid}
+    </select>
     <!--分页查询学生-->
     <select id="selectStudentsByLimit" resultType="Student">
         select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd from student limit #{begin},#{size}

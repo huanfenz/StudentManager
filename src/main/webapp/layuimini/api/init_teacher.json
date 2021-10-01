@@ -35,7 +35,7 @@
             },
             {
               "title": "成绩管理",
-              "href": "teacher/1.jsp",
+              "href": "teacher/teacher_open_course_list.jsp",
               "icon": "fa fa-tachometer",
               "target": "_self"
             },
@@ -55,7 +55,7 @@
           "child": [
             {
               "title": "修改密码",
-              "href": "teacher/password.jsp",
+              "href": "common/password.jsp",
               "icon": "fa fa-tachometer",
               "target": "_self"
             }

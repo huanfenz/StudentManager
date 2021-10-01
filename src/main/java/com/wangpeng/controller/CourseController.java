@@ -1,6 +1,7 @@
 package com.wangpeng.controller;
 
 import com.wangpeng.pojo.Course;
+import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.CourseService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +53,18 @@ public class CourseController {
     @ResponseBody
     public List<Course> queryAllCourses(){
         return service.findAllCourses();
+    }
+
+    /**
+     * 查询所有班级
+     * @return
+     */
+    @RequestMapping("queryAllCoursesByTeacher.do")
+    @ResponseBody
+    public List<Course> queryAllCoursesByTeacher(HttpServletRequest req){
+        //获取当前账号信息
+        Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
+        return service.findAllCoursesByTeacher(loginTeacher.getTid());
     }
 
     /**

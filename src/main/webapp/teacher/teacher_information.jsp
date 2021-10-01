@@ -23,54 +23,47 @@
                 <col width="200">
                 <col>
             </colgroup>
-
-<%--            <thead>
-            <tr>
-                <th>key</th>
-                <th>value</th>
-            </tr>
-            </thead>--%>
-
+            
             <tbody>
                 <tr>
-                    <th>姓名:</th>
-                    <th>${sessionScope.loginObj.tname}</th>
+                    <td>姓名:</td>
+                    <td>${sessionScope.loginObj.tname}</td>
                 </tr>
                 <tr>
-                    <th>职工号:</th>
-                    <th>${sessionScope.loginObj.tnum}</th>
+                    <td>职工号:</td>
+                    <td>${sessionScope.loginObj.tnum}</td>
                 </tr>
                 <tr>
-                    <th>性别:</th>
-                    <th>${sessionScope.loginObj.tsex}</th>
+                    <td>性别:</td>
+                    <td>${sessionScope.loginObj.tsex}</td>
                 </tr>
                 <tr>
-                    <th>年龄:</th>
-                    <th>${sessionScope.loginObj.tage}</th>
+                    <td>年龄:</td>
+                    <td>${sessionScope.loginObj.tage}</td>
                 </tr>
                 <tr>
-                    <th>状态:</th>
-                    <th>${sessionScope.loginObj.tstatus}</th>
+                    <td>状态:</td>
+                    <td>${sessionScope.loginObj.tstatus}</td>
                 </tr>
                 <tr>
-                    <th>备注:</th>
-                    <th>${sessionScope.loginObj.tremark}</th>
+                    <td>备注:</td>
+                    <td>${sessionScope.loginObj.tremark}</td>
                 </tr>
                 <tr>
-                    <th>身份证号码:</th>
-                    <th>${sessionScope.loginObj.idcard}</th>
+                    <td>身份证号码:</td>
+                    <td>${sessionScope.loginObj.idcard}</td>
                 </tr>
                 <tr>
-                    <th>手机号码:</th>
-                    <th>${sessionScope.loginObj.phone}</th>
+                    <td>手机号码:</td>
+                    <td>${sessionScope.loginObj.phone}</td>
                 </tr>
                 <tr>
-                    <th>家庭住址:</th>
-                    <th>${sessionScope.loginObj.address}</th>
+                    <td>家庭住址:</td>
+                    <td>${sessionScope.loginObj.address}</td>
                 </tr>
                 <tr>
-                    <th>进校时间:</th>
-                    <th>${sessionScope.loginObj.entime}</th>
+                    <td>进校时间:</td>
+                    <td>${sessionScope.loginObj.entime}</td>
                 </tr>
             </tbody>
         </table>

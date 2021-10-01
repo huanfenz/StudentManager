@@ -3,27 +3,31 @@ package com.wangpeng.pojo;
 import java.math.BigDecimal;
 
 public class CourseGrade {
-    private Integer csid;
+    private Integer cgid;
     private Integer oid;
     private Integer sid;
+    private String snum;
+    private String sname;
     private BigDecimal score;
 
     public CourseGrade() {
     }
 
-    public CourseGrade(Integer csid, Integer oid, Integer sid, BigDecimal score) {
-        this.csid = csid;
+    public CourseGrade(Integer cgid, Integer oid, Integer sid, String snum, String sname, BigDecimal score) {
+        this.cgid = cgid;
         this.oid = oid;
         this.sid = sid;
+        this.snum = snum;
+        this.sname = sname;
         this.score = score;
     }
 
-    public Integer getCsid() {
-        return csid;
+    public Integer getCgid() {
+        return cgid;
     }
 
-    public void setCsid(Integer csid) {
-        this.csid = csid;
+    public void setCgid(Integer cgid) {
+        this.cgid = cgid;
     }
 
     public Integer getOid() {
@@ -42,6 +46,22 @@ public class CourseGrade {
         this.sid = sid;
     }
 
+    public String getSnum() {
+        return snum;
+    }
+
+    public void setSnum(String snum) {
+        this.snum = snum;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
     public BigDecimal getScore() {
         return score;
     }
@@ -53,9 +73,11 @@ public class CourseGrade {
     @Override
     public String toString() {
         return "CourseGrade{" +
-                "csid=" + csid +
+                "cgid=" + cgid +
                 ", oid=" + oid +
                 ", sid=" + sid +
+                ", snum='" + snum + '\'' +
+                ", sname='" + sname + '\'' +
                 ", score=" + score +
                 '}';
     }

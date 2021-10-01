@@ -80,4 +80,13 @@
             </if>
         </where>
     </select>
+    <select id="getOpenCoursesCountByTeacher" resultType="int">
+        select count(*) from open_course where tid = #{tid}
+    </select>
+    <!--分页查询开课-->
+    <select id="selectOpenCoursesByLimitByTeacher" resultType="OpenCourse">
+        select oid,year,term,cid,tid,courseId,remark from open_course
+        where tid=#{tid}
+        limit #{begin},#{size}
+    </select>
 </mapper>

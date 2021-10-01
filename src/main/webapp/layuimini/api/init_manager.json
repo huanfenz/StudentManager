@@ -93,7 +93,7 @@
           "child": [
             {
               "title": "修改密码",
-              "href": "manager/password.jsp",
+              "href": "common/password.jsp",
               "icon": "fa fa-tachometer",
               "target": "_self"
             },

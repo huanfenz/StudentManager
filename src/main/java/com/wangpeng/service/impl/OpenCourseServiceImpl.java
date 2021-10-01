@@ -109,4 +109,34 @@ public class OpenCourseServiceImpl implements OpenCourseService {
         return openCourseDao.getSearchCount(searchParam);
     }
 
+    @Override
+    public int getOpenCoursesCountByTeacher(int tid) {
+        return openCourseDao.getOpenCoursesCountByTeacher(tid);
+    }
+
+    @Override
+    public List<OpenCourse> findOpenCoursesByPageByTeacher(Integer page, Integer size, Integer tid) {
+        int begin = (page - 1) * size;
+        List<OpenCourse> openCourses = openCourseDao.selectOpenCoursesByLimitByTeacher(begin, size, tid);
+
+        List<OpenCourse> res = new ArrayList<>();
+        //放入班级名、教师名、课程名信息
+        for(OpenCourse openCourse : openCourses) {
+            int cid = openCourse.getCid();
+            Clazz clazz = clazzDao.selectClazz(cid);
+            openCourse.setCname(clazz.getCname());
+
+            //int tid = openCourse.getTid();
+            Teacher teacher = teacherDao.selectTeacher(tid);
+            openCourse.setTname(teacher.getTname());
+
+            int courseId = openCourse.getCourseId();
+            Course course = courseDao.selectCourse(courseId);
+            openCourse.setCourseName(course.getCourseName());
+
+            res.add(openCourse);
+        }
+        return res;
+    }
+
 }

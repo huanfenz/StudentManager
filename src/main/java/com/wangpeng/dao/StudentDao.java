@@ -29,6 +29,13 @@ public interface StudentDao {
     int updateStudent(Student student);
 
     /**
+     * 根据id查询学生
+     * @param sid
+     * @return
+     */
+    Student selectStudent(int sid);
+
+    /**
      * 分页查询学生
      * @param begin 起始索引，从0开始
      * @param size  每页大小
