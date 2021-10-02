@@ -89,6 +89,7 @@ public class StudentController {
 
         for(Student student : students) {
             Map<String,Object> map = new HashMap<>();
+            map.put("sid", student.getSid());
             map.put("snum", student.getSnum());
             map.put("sname",student.getSname());
             CourseGrade courseGrade = courseGradeService.findScoreByOidAndSid(oid, student.getSid());
