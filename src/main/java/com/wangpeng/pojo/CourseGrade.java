@@ -6,19 +6,15 @@ public class CourseGrade {
     private Integer cgid;
     private Integer oid;
     private Integer sid;
-    private String snum;
-    private String sname;
     private BigDecimal score;
 
     public CourseGrade() {
     }
 
-    public CourseGrade(Integer cgid, Integer oid, Integer sid, String snum, String sname, BigDecimal score) {
+    public CourseGrade(Integer cgid, Integer oid, Integer sid, BigDecimal score) {
         this.cgid = cgid;
         this.oid = oid;
         this.sid = sid;
-        this.snum = snum;
-        this.sname = sname;
         this.score = score;
     }
 
@@ -46,22 +42,6 @@ public class CourseGrade {
         this.sid = sid;
     }
 
-    public String getSnum() {
-        return snum;
-    }
-
-    public void setSnum(String snum) {
-        this.snum = snum;
-    }
-
-    public String getSname() {
-        return sname;
-    }
-
-    public void setSname(String sname) {
-        this.sname = sname;
-    }
-
     public BigDecimal getScore() {
         return score;
     }
@@ -76,8 +56,6 @@ public class CourseGrade {
                 "cgid=" + cgid +
                 ", oid=" + oid +
                 ", sid=" + sid +
-                ", snum='" + snum + '\'' +
-                ", sname='" + sname + '\'' +
                 ", score=" + score +
                 '}';
     }

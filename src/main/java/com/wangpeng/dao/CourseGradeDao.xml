@@ -62,10 +62,11 @@
             </if>
         </where>
     </select>
-    <select id="selectScoresByOid" resultType="CourseGrade">
-        select cgid,oid,sid,score from course_grade where oid=#{oid}
-    </select>
     <select id="selectCourseGradeByOidAndSid" resultType="CourseGrade">
         select cgid,oid,sid,score from course_grade where oid=#{oid} and sid=#{sid}
     </select>
+    <update id="updateCourseGradeByOidAndSid" parameterType="CourseGrade">
+        update course_grade set score=#{score}
+        where oid=#{oid} and sid=#{sid}
+    </update>
 </mapper>

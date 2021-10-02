@@ -69,7 +69,7 @@ public interface CourseGradeDao {
      */
     int getSearchCount(Map<String,Object> map);
 
-    List<CourseGrade> selectScoresByOid(Integer oid);
-
     CourseGrade selectCourseGradeByOidAndSid(@Param("oid")int oid, @Param("sid")int sid);
+
+    int updateCourseGradeByOidAndSid(CourseGrade courseGrade);
 }

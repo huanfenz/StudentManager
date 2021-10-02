@@ -9,6 +9,7 @@ import com.wangpeng.service.CourseGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,28 +18,21 @@ public class CourseGradeServiceImpl implements CourseGradeService {
 
     @Autowired
     CourseGradeDao courseGradeDao;
-    @Autowired
-    StudentDao studentDao;
-
-    @Override
-    public List<CourseGrade> findScoresByOid(Integer oid) {
-        List<CourseGrade> courseGrades = courseGradeDao.selectScoresByOid(oid);
-        //添加学生姓名信息
-        List<CourseGrade> res = new ArrayList<>();
-        //放入班级名信息、学号信息
-        for(CourseGrade courseGrade : courseGrades) {
-            int sid = courseGrade.getSid();
-            Student student = studentDao.selectStudent(sid);
-            courseGrade.setSname(student.getSname());
-            courseGrade.setSnum(student.getSnum());
-            res.add(courseGrade);
-        }
-        return res;
-    }
 
     @Override
     public CourseGrade findScoreByOidAndSid(int oid,int sid) {
         CourseGrade courseGrade = courseGradeDao.selectCourseGradeByOidAndSid(oid,sid);
         return courseGrade;
+    }
+
+    @Override
+    public int saveCourseGrade(CourseGrade courseGrade) {
+        //先判断表里面有没有当前开课和学生id的成绩
+        CourseGrade cgTmp = courseGradeDao.selectCourseGradeByOidAndSid(courseGrade.getOid(), courseGrade.getSid());
+        int res = 0;
+        if(cgTmp == null) res = courseGradeDao.insertCourseGrade(courseGrade);
+        else res = courseGradeDao.updateCourseGradeByOidAndSid(courseGrade);
+
+        return res;
     }
 }

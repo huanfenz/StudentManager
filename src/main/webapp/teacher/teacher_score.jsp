@@ -44,6 +44,7 @@
 
         <div style="text-align: center">
             <button type="submit" class="layui-btn layui-btn-normal"  lay-submit lay-filter="data-save-btn">完成成绩录入</button>
+            <button type="submit" class="layui-btn layui-btn-danger"  lay-submit lay-filter="data-close-btn">关闭窗口</button>
         </div>
 
     </div>
@@ -70,27 +71,31 @@
 
             //监听提交
             form.on('submit(data-save-btn)', function(data){
-                layer.msg(JSON.stringify(data.field));
+                //layer.msg(JSON.stringify(data.field));
+                var result = JSON.stringify(data.field);
 
-                // var result = JSON.stringify(data.field);
-                //
-                // //保存信息
-                // $.ajax({
-                //     url: 'courseGrade/saveScore.do',
-                //     data: {json:result},
-                //     type: 'post',
-                //     datatype: 'json',
-                //     success: function (res) {
-                //         layer.msg("录入"+res+"个成绩成功",{time:1000});
-                //     }
-                // });
+                //保存信息
+                $.ajax({
+                    url: 'courseGrade/saveScore.do',
+                    data: {json:result, oid: ${param.get('oid')}},
+                    type: 'post',
+                    datatype: 'json',
+                    success: function (res) {
+                        layer.msg("更新"+res+"个成绩成功",{time:1000});
+                    }
+                });
+                return false;
+            });
 
+            form.on('submit(data-close-btn)', function(){
                 //关闭iframe
-                /*var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-                parent.layer.close(index);*/
+                var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                parent.layer.close(index);
                 return false;
             });
         });
+
+
 
     </script>
 
