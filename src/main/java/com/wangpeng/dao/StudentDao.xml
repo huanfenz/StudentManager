@@ -82,4 +82,9 @@
         where cid in (select distinct cid from open_course where tid=#{tid})
         limit #{begin},#{size}
     </select>
+    <select id="selectStudentsByOid" resultType="student">
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd
+        from student
+        where cid in (select cid from open_course where oid=#{oid})
+    </select>
 </mapper>

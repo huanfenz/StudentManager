@@ -51,11 +51,12 @@
     <script type="text/javascript">
 
         $.ajax({
-            url: 'courseGrade/queryScoresByOid.do',
+            url: 'student/queryStudentsByOid.do',
             data: {oid:${param.get('oid')}},
             type: 'post',
             datatype: 'json',
             success: function (res) {
+                console.log(res);
                 $('#tbody1').html();
                 $.each(res,function (i, n) {
                     $('#tbody1')

@@ -35,4 +35,10 @@ public class CourseGradeServiceImpl implements CourseGradeService {
         }
         return res;
     }
+
+    @Override
+    public CourseGrade findScoreByOidAndSid(int oid,int sid) {
+        CourseGrade courseGrade = courseGradeDao.selectCourseGradeByOidAndSid(oid,sid);
+        return courseGrade;
+    }
 }

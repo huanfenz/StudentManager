@@ -10,4 +10,6 @@ public interface CourseGradeService {
 
 
     List<CourseGrade> findScoresByOid(Integer oid);
+
+    CourseGrade findScoreByOidAndSid(int oid, int sid);
 }

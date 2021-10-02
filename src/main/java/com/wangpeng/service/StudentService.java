@@ -59,4 +59,6 @@ public interface StudentService {
     int getStudentsCountByTeacher(int tid);
 
     List<Student> findStudentsByPageByTeacher(Integer page, Integer size, int tid);
+
+    List<Student> findStudentsByOid(int oid);
 }

@@ -1,7 +1,9 @@
 package com.wangpeng.controller;
 
+import com.wangpeng.pojo.CourseGrade;
 import com.wangpeng.pojo.Student;
 import com.wangpeng.pojo.Teacher;
+import com.wangpeng.service.CourseGradeService;
 import com.wangpeng.service.StudentService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +24,8 @@ public class StudentController {
 
     @Autowired
     StudentService service;
+    @Autowired
+    CourseGradeService courseGradeService;
 
     /**
      * 查询所有学生
@@ -67,6 +72,31 @@ public class StudentController {
         res.put("msg", "");
         res.put("count", count);
         res.put("data", students);
+
+        return res;
+    }
+
+    /**
+     * 查询所有学生通过oid
+     */
+    @RequestMapping("queryStudentsByOid.do")
+    @ResponseBody
+    public List<Map<String,Object>> queryStudentsByOid(int oid){
+        //获取学生数据
+        List<Student> students = service.findStudentsByOid(oid);
+
+        List<Map<String,Object>> res = new ArrayList<>();
+
+        for(Student student : students) {
+            Map<String,Object> map = new HashMap<>();
+            map.put("snum", student.getSnum());
+            map.put("sname",student.getSname());
+            CourseGrade courseGrade = courseGradeService.findScoreByOidAndSid(oid, student.getSid());
+            if(courseGrade == null) map.put("score", null);
+            else map.put("score", courseGrade.getScore());
+
+            res.add(map);
+        }
 
         return res;
     }

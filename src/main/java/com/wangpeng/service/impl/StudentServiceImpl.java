@@ -97,4 +97,10 @@ public class StudentServiceImpl implements StudentService {
         }
         return res;
     }
+
+    @Override
+    public List<Student> findStudentsByOid(int oid) {
+        List<Student> students =  studentDao.selectStudentsByOid(oid);
+        return students;
+    }
 }

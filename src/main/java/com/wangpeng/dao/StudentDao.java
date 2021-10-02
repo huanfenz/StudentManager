@@ -78,4 +78,6 @@ public interface StudentDao {
 
 
     List<Student> selectStudentsByLimitByTeacher(@Param("begin")int begin, @Param("size")int size, @Param("tid")int tid);
+
+    List<Student> selectStudentsByOid(int oid);
 }
