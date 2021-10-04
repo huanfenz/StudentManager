@@ -1,6 +1,8 @@
 package com.wangpeng.controller;
 
 import com.wangpeng.pojo.OpenCourse;
+import com.wangpeng.pojo.OpenCourseAndScore;
+import com.wangpeng.pojo.Student;
 import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.OpenCourseService;
 import com.wangpeng.utils.JsonUtil;
@@ -68,6 +70,26 @@ public class OpenCourseController {
         res.put("count", count);
         res.put("data", openCourses);
 
+        return res;
+    }
+
+    /**
+     * 查询(学生权限)
+     * @return 数据
+     */
+    @RequestMapping("queryOpenCoursesByStudent.do")
+    @ResponseBody
+    public Map<String,Object> queryOpenCoursesByStudent(Integer oid, HttpServletRequest req){
+        //获取当前账号信息
+        Student loginStudent =  (Student) req.getSession().getAttribute("loginObj");
+        //获得数据
+        List<OpenCourseAndScore> openCourseAndScores = service.findOpenCoursesByStudent(loginStudent.getSid());
+        //结果map
+        Map<String,Object> res = new HashMap<String,Object>();
+        res.put("code", 0);
+        res.put("msg", "");
+        res.put("count", openCourseAndScores.size());
+        res.put("data", openCourseAndScores);
         return res;
     }
 

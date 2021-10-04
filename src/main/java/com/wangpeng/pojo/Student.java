@@ -9,6 +9,7 @@ public class Student {
     private String ssex;
     private Integer sage;
     private Integer cid;
+    private String cname;
     private String sstatus;
     private String sremark;
     private String idcard;
@@ -16,18 +17,18 @@ public class Student {
     private String address;
     private String entime;
     private String pswd;
-    private String cname;
 
     public Student() {
     }
 
-    public Student(Integer sid, String sname, String snum, String ssex, Integer sage, Integer cid, String sstatus, String sremark, String idcard, String phone, String address, String entime, String pswd, String cname) {
+    public Student(Integer sid, String sname, String snum, String ssex, Integer sage, Integer cid, String cname, String sstatus, String sremark, String idcard, String phone, String address, String entime, String pswd) {
         this.sid = sid;
         this.sname = sname;
         this.snum = snum;
         this.ssex = ssex;
         this.sage = sage;
         this.cid = cid;
+        this.cname = cname;
         this.sstatus = sstatus;
         this.sremark = sremark;
         this.idcard = idcard;
@@ -35,7 +36,6 @@ public class Student {
         this.address = address;
         this.entime = entime;
         this.pswd = pswd;
-        this.cname = cname;
     }
 
     public Integer getSid() {
@@ -84,6 +84,14 @@ public class Student {
 
     public void setCid(Integer cid) {
         this.cid = cid;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
     }
 
     public String getSstatus() {
@@ -142,14 +150,6 @@ public class Student {
         this.pswd = pswd;
     }
 
-    public String getCname() {
-        return cname;
-    }
-
-    public void setCname(String cname) {
-        this.cname = cname;
-    }
-
     @Override
     public String toString() {
         return "Student{" +
@@ -159,14 +159,14 @@ public class Student {
                 ", ssex='" + ssex + '\'' +
                 ", sage=" + sage +
                 ", cid=" + cid +
-                ", sstatu='" + sstatus + '\'' +
+                ", cname='" + cname + '\'' +
+                ", sstatus='" + sstatus + '\'' +
                 ", sremark='" + sremark + '\'' +
                 ", idcard='" + idcard + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", entime=" + entime +
+                ", entime='" + entime + '\'' +
                 ", pswd='" + pswd + '\'' +
-                ", cname='" + cname + '\'' +
                 '}';
     }
 }

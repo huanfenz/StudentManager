@@ -1,6 +1,7 @@
 package com.wangpeng.dao;
 
 import com.wangpeng.pojo.OpenCourse;
+import com.wangpeng.pojo.OpenCourseAndScore;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -72,4 +73,6 @@ public interface OpenCourseDao {
     int getOpenCoursesCountByTeacher(int tid);
 
     List<OpenCourse> selectOpenCoursesByLimitByTeacher(@Param("begin")int begin, @Param("size")Integer size, @Param("tid")Integer tid);
+
+    List<OpenCourseAndScore> selectOpenCoursesByStudent(Integer sid);
 }

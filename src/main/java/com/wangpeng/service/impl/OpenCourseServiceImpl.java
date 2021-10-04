@@ -139,4 +139,24 @@ public class OpenCourseServiceImpl implements OpenCourseService {
         return res;
     }
 
+    @Override
+    public List<OpenCourseAndScore> findOpenCoursesByStudent(Integer sid) {
+        List<OpenCourseAndScore> openCourseAndScores = openCourseDao.selectOpenCoursesByStudent(sid);
+        //添加信息
+        List<OpenCourseAndScore> res = new ArrayList<>();
+        //放入教师名、课程名信息
+        for(OpenCourseAndScore openCourseAndScore : openCourseAndScores) {
+            int tid = openCourseAndScore.getTid();
+            Teacher teacher = teacherDao.selectTeacher(tid);
+            openCourseAndScore.setTname(teacher.getTname());
+
+            int courseId = openCourseAndScore.getCourseId();
+            Course course = courseDao.selectCourse(courseId);
+            openCourseAndScore.setCourseName(course.getCourseName());
+
+            res.add(openCourseAndScore);
+        }
+        return res;
+    }
+
 }

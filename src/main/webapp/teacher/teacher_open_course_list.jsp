@@ -143,6 +143,7 @@
                 {field: 'term', title: '学期'},
                 {field: 'cname', title: '班级名'},
                 {field: 'tname', title: '教师名'},
+                {field: 'remark', title: '备注'},
                 {field: 'courseName', title: '课程名'}
             ]],
             limits: [5, 10, 15, 20, 25, 50, 100],

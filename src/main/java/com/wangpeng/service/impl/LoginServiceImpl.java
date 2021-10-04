@@ -1,8 +1,10 @@
 package com.wangpeng.service.impl;
 
+import com.wangpeng.dao.ClazzDao;
 import com.wangpeng.dao.StudentDao;
 import com.wangpeng.dao.TeacherDao;
 import com.wangpeng.dao.ManagerDao;
+import com.wangpeng.pojo.Clazz;
 import com.wangpeng.pojo.Student;
 import com.wangpeng.pojo.Teacher;
 import com.wangpeng.pojo.Manager;
@@ -22,6 +24,8 @@ public class LoginServiceImpl implements LoginService {
     TeacherDao teacherDao;
     @Autowired
     StudentDao studentDao;
+    @Autowired
+    ClazzDao clazzDao;
 
     @Override
     public Manager managerLogin(String username, String password) {
@@ -44,7 +48,12 @@ public class LoginServiceImpl implements LoginService {
         Map<String,Object> map = new HashMap<>();
         map.put("username",username);
         map.put("password",password);
-        return studentDao.checkByUsernameAndPassword(map);
+        Student student = studentDao.checkByUsernameAndPassword(map);
+        //添加班级名信息
+        int cid = student.getCid();
+        Clazz clazz = clazzDao.selectClazz(cid);
+        student.setCname(clazz.getCname());
+        return student;
     }
 
     @Override

@@ -27,27 +27,31 @@
             <tbody>
                 <tr>
                     <td>姓名:</td>
-                    <td>${sessionScope.loginObj.tname}</td>
+                    <td>${sessionScope.loginObj.sname}</td>
                 </tr>
                 <tr>
-                    <td>职工号:</td>
-                    <td>${sessionScope.loginObj.tnum}</td>
+                    <td>学号:</td>
+                    <td>${sessionScope.loginObj.snum}</td>
                 </tr>
                 <tr>
                     <td>性别:</td>
-                    <td>${sessionScope.loginObj.tsex}</td>
+                    <td>${sessionScope.loginObj.ssex}</td>
                 </tr>
                 <tr>
                     <td>年龄:</td>
-                    <td>${sessionScope.loginObj.tage}</td>
+                    <td>${sessionScope.loginObj.sage}</td>
+                </tr>
+                <tr>
+                    <td>班级:</td>
+                    <td>${sessionScope.loginObj.cname}</td>
                 </tr>
                 <tr>
                     <td>状态:</td>
-                    <td>${sessionScope.loginObj.tstatus}</td>
+                    <td>${sessionScope.loginObj.sstatus}</td>
                 </tr>
                 <tr>
                     <td>备注:</td>
-                    <td>${sessionScope.loginObj.tremark}</td>
+                    <td>${sessionScope.loginObj.sremark}</td>
                 </tr>
                 <tr>
                     <td>身份证号码:</td>

@@ -231,6 +231,7 @@
                 {field: 'cname', title: '班级名'},
                 {field: 'tname', title: '教师名'},
                 {field: 'courseName', title: '课程名'},
+                {field: 'remark', title: '备注'},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [5, 10, 15, 20, 25, 50, 100],

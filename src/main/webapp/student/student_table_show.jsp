@@ -117,15 +117,8 @@ String basePath = request.getScheme() + "://"
     <div style="margin: 10px 10px 10px 10px;">
         <form class="layui-form layui-form-pane" action="" lay-filter="searchForm">
             <div class="layui-form-item">
-                <%--班级--%>
-                <div class="layui-inline">
-                    <label class="layui-form-label">班级</label>
-                    <div class="layui-input-inline">
-                        <select name="cid" id="search_cid" lay-search="">
-                            <option value="">请选择班级</option>
-                        </select>
-                    </div>
-                </div>
+                <%--隐藏域，cid--%>
+                <input type="hidden" id="search_cid" name="cid" class="layui-input" value="${sessionScope.loginObj.cid}">
                 <%--周数--%>
                 <div class="layui-inline">
                     <label class="layui-form-label">周数</label>
@@ -169,8 +162,6 @@ String basePath = request.getScheme() + "://"
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
             var result = JSON.stringify(data.field);
-            // console.log(data.field);
-            // console.log(data.field.cid);
             $.getJSON({
                 url: 'tableShow/queryTable.do',
                 data: {json: result},
@@ -181,7 +172,6 @@ String basePath = request.getScheme() + "://"
                         timetables: courseListOther,
                         styles:{
                             Gheight: 65,
-                            /*palette: ['#dedcda', '#ff4081']*/
                         },
                         timetableType: courseType,
                         gridOnClick: function (e) {

@@ -59,12 +59,14 @@
                 </form>
             </div>
         </fieldset>
+        <%--头部工具栏--%>
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm layui-btn-normal data-plan-btn" lay-event="seeInfo"> 查看学生信息 </button>
+            </div>
+        </script>
         <%--表格容器--%>
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
-        <%--行工具栏--%>
-        <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">查看</a>
-        </script>
     </div>
 </div>
 <%--js代码--%>
@@ -117,7 +119,6 @@
                 {field: 'cname', title: '所属班级'},
                 {field: 'sstatus', title: '状态'},
                 {field: 'sremark', title: '备注'},
-                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [5, 10, 15, 20, 25, 50, 100],
             limit: 10,
@@ -163,14 +164,32 @@
             return false;   //不跳转
         });
 
-        table.on('tool(currentTableFilter)', function (obj) {
-            var mdata = obj.data;   //获取该行的数据
+        table.on('toolbar(currentTableFilter)', function (obj) {
+            if (obj.event === 'seeInfo') {  //监听查看信息操作
+                var checkStatus = table.checkStatus('currentTableId')
+                    , data = checkStatus.data;
 
-            if (obj.event === 'edit') { //监听查看按钮
-                //待补充
-                return false;
+                console.log(data);
+                if (data.length != 1) {
+                    layer.msg("请选择一行记录！", {time: 1000});
+                    return false;
+                }
+
+                /*layer.open({
+                    title: "查看排课",
+                    type: 2,    //iframe
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['90%', '90%'],
+                    btn: ['确定'],
+                    content: 'teacher/teacher_course_table_list.jsp?oid=' + data[0].oid,
+                    yes: function (index, layero) { //确认的回调
+                        layer.close(index); //关闭弹出框
+                    }
+                })*/
             }
         });
+
 
     });
 </script>

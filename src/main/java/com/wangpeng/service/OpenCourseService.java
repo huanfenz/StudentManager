@@ -1,6 +1,7 @@
 package com.wangpeng.service;
 
 import com.wangpeng.pojo.OpenCourse;
+import com.wangpeng.pojo.OpenCourseAndScore;
 
 import java.util.List;
 import java.util.Map;
@@ -65,4 +66,6 @@ public interface OpenCourseService {
     int getOpenCoursesCountByTeacher(int tid);
 
     List<OpenCourse> findOpenCoursesByPageByTeacher(Integer page, Integer size, Integer tid);
+
+    List<OpenCourseAndScore> findOpenCoursesByStudent(Integer sid);
 }
