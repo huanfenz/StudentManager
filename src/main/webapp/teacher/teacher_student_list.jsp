@@ -175,18 +175,18 @@
                     return false;
                 }
 
-                /*layer.open({
+                layer.open({
                     title: "查看排课",
                     type: 2,    //iframe
                     maxmin: true,
                     shadeClose: true,
                     area: ['90%', '90%'],
                     btn: ['确定'],
-                    content: 'teacher/teacher_course_table_list.jsp?oid=' + data[0].oid,
+                    content: 'teacher/teacher_student_information.jsp?sid=' + data[0].sid,
                     yes: function (index, layero) { //确认的回调
                         layer.close(index); //关闭弹出框
                     }
-                })*/
+                })
             }
         });
 

@@ -103,4 +103,14 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students =  studentDao.selectStudentsByOid(oid);
         return students;
     }
+
+    @Override
+    public Student findStudentBySid(Integer sid) {
+        Student student = studentDao.selectStudent(sid);
+        //添加班级名信息
+        int cid = student.getCid();
+        Clazz clazz = clazzDao.selectClazz(cid);
+        student.setCname(clazz.getCname());
+        return student;
+    }
 }

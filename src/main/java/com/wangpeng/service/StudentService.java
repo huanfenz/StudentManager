@@ -61,4 +61,6 @@ public interface StudentService {
     List<Student> findStudentsByPageByTeacher(Integer page, Integer size, int tid);
 
     List<Student> findStudentsByOid(int oid);
+
+    Student findStudentBySid(Integer sid);
 }

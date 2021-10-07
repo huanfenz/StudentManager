@@ -51,6 +51,18 @@ public class StudentController {
     }
 
     /**
+     * 查询学生
+     * @return 数据
+     */
+    @RequestMapping("queryStudent.do")
+    @ResponseBody
+    public Student queryStudent(Integer sid){
+        //获取数据
+        Student student = service.findStudentBySid(sid);
+        return student;
+    }
+
+    /**
      * 查询所有学生（教师权限）
      * @param page  当前页码
      * @param limit 每页大小
