@@ -38,12 +38,6 @@
               "href": "teacher/teacher_open_course_list.jsp",
               "icon": "fa fa-tachometer",
               "target": "_self"
-            },
-            {
-              "title": "处理审批",
-              "href": "teacher/2.jsp",
-              "icon": "fa fa-tachometer",
-              "target": "_self"
             }
           ]
         },

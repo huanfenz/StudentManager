@@ -23,30 +23,34 @@
 <%--编辑弹出框--%>
 <div class="site-text" style="margin: 5%; display: none" id="edit_window">
     <div class="layui-form" style="width: 400px;" lay-filter="editForm">
-        <%--隐藏域，sid--%>
+        <%--隐藏域，aid--%>
         <input type="hidden" id="aid" name="aid" class="layui-input" value="null">
+        <%--隐藏域，sid--%>
+        <input type="hidden" id="aid" name="sid" class="layui-input" value="null">
         <!--审批名-->
         <div class="layui-form-item">
-            <label class="layui-form-label">审批名</label>
+            <label class="layui-form-label">标题</label>
             <div class="layui-input-block">
                 <input type="text" id="title" name="title" value="" lay-verify="required" lay-reqtext="审批名不能为空" placeholder="请输入姓名" class="layui-input">
             </div>
         </div>
         <!--院系-->
         <div class="layui-form-item">
-            <label class="layui-form-label">所属院系</label>
+            <label class="layui-form-label">类型</label>
             <div class="layui-input-block">
                 <input type="text" id="type" name="type" value="" placeholder="请输入院系" class="layui-input">
             </div>
         </div>
-        <!--备注-->
+        <!--院系-->
         <div class="layui-form-item">
-            <label class="layui-form-label">备注</label>
+            <label class="layui-form-label">创建日期</label>
             <div class="layui-input-block">
-                <input type="text" id="status" name="status" value="" placeholder="请输入备注" class="layui-input">
+                <input type="text" id="time" name="time" value="" placeholder="请输入院系" class="layui-input">
             </div>
         </div>
 
+        <%--隐藏域,审批情况--%>
+        <input type="hidden" id="status" name="status" class="layui-input" value="null">
     </div>
 </div>
 <%--数据表格布局--%>
@@ -85,9 +89,10 @@
             cols: [[
                 {type: "checkbox"},
                 {field: 'aid', title: '序号', sort: true},
-                {field: 'title', title: '审批名'},
-                {field: 'type', title: '所属院系'},
-                {field: 'status', title: '备注'},
+                {field: 'title', title: '标题'},
+                {field: 'type', title: '类型'},
+                {field: 'time', title: '创建日期'},
+                {field: 'status', title: '审批情况'},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [5, 10, 15, 20, 25, 50, 100],
@@ -114,9 +119,11 @@
                         //给表单赋值
                         form.val("editForm", {
                             "aid": null,
-                            "title": '美术学',
-                            "type": '美术学院',
-                            "status": '无',
+                            "sid": ${sessionScope.loginObj.sid},
+                            "title": '本人要请假',
+                            "type": '请假',
+                            "time": '2021-10-07',
+                            "status": '等待审批'
                         });
                     },
                     yes: function(index,layero){ //确认的回调
@@ -182,6 +189,7 @@
                             "aid": mdata.aid,
                             "title": mdata.title,
                             "type": mdata.type,
+                            "time": mdata.time,
                             "status": mdata.status,
                         });
                     },
