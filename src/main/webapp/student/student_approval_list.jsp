@@ -34,18 +34,24 @@
                 <input type="text" id="title" name="title" value="" lay-verify="required" lay-reqtext="审批名不能为空" placeholder="请输入姓名" class="layui-input">
             </div>
         </div>
-        <!--院系-->
+        <!--类型-->
         <div class="layui-form-item">
             <label class="layui-form-label">类型</label>
             <div class="layui-input-block">
-                <input type="text" id="type" name="type" value="" placeholder="请输入院系" class="layui-input">
+                <select name="type" id="edit_type" lay-search="">
+                    <option value="请假">请假</option>
+                    <option value="休学">休学</option>
+                    <option value="辍学">辍学</option>
+                    <option value="复学">复学</option>
+                    <option value="转学">转学</option>
+                </select>
             </div>
         </div>
-        <!--院系-->
+        <!--日期-->
         <div class="layui-form-item">
             <label class="layui-form-label">创建日期</label>
             <div class="layui-input-block">
-                <input type="text" id="time" name="time" value="" placeholder="请输入院系" class="layui-input">
+                <input type="text" name="time" id="time" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -74,8 +80,8 @@
 </div>
 <%--js代码--%>
 <script>
-    layui.use(['form', 'table'], function () {
-        var $ = layui.jquery, form = layui.form, table = layui.table;
+    layui.use(['form', 'table','laydate'], function () {
+        var $ = layui.jquery, form = layui.form, table = layui.table, date=layui.laydate;
         //加载数据表格
         table.render({
             elem: '#currentTableId',
@@ -102,6 +108,10 @@
                 next: '下一页',
             },
             skin: 'line'
+        });
+
+        date.render({
+            elem: '#time'
         });
 
         //toolbar监听事件
