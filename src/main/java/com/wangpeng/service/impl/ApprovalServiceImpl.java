@@ -1,11 +1,14 @@
 package com.wangpeng.service.impl;
 
 import com.wangpeng.dao.ApprovalDao;
+import com.wangpeng.dao.StudentDao;
 import com.wangpeng.pojo.Approval;
+import com.wangpeng.pojo.Student;
 import com.wangpeng.service.ApprovalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +17,8 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     @Autowired
     ApprovalDao approvalDao;
+    @Autowired
+    StudentDao studentDao;
 
     @Override
     public List<Approval> findAllApprovals() {
@@ -23,7 +28,16 @@ public class ApprovalServiceImpl implements ApprovalService {
     @Override
     public List<Approval> findApprovalsByPage(int page, int size) {
         int begin = (page - 1) * size;
-        return approvalDao.selectApprovalsByLimit(begin,size);
+        List<Approval> approvals = approvalDao.selectApprovalsByLimit(begin, size);
+        List<Approval> res = new ArrayList<>();
+        //添加学生姓名信息
+        for(Approval approval : approvals) {
+            Integer sid = approval.getSid();
+            Student student = studentDao.selectStudent(sid);
+            approval.setSname(student.getSname());
+            res.add(approval);
+        }
+        return res;
     }
 
     @Override
@@ -54,7 +68,8 @@ public class ApprovalServiceImpl implements ApprovalService {
     @Override
     public List<Approval> findApprovalsByPageBySid(Integer page, Integer size, Integer sid) {
         int begin = (page - 1) * size;
-        return approvalDao.selectApprovalsByLimitBySid(begin,size,sid);
+        List<Approval> approvals = approvalDao.selectApprovalsByLimitBySid(begin, size, sid);
+        return approvals;
     }
 
 }

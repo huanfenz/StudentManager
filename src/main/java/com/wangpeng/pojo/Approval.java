@@ -3,6 +3,7 @@ package com.wangpeng.pojo;
 public class Approval {
     private Integer aid;
     private Integer sid;
+    private String sname;
     private String title;
     private String type;
     private String time;
@@ -11,9 +12,10 @@ public class Approval {
     public Approval() {
     }
 
-    public Approval(Integer aid, Integer sid, String title, String type, String time, String status) {
+    public Approval(Integer aid, Integer sid, String sname, String title, String type, String time, String status) {
         this.aid = aid;
         this.sid = sid;
+        this.sname = sname;
         this.title = title;
         this.type = type;
         this.time = time;
@@ -34,6 +36,14 @@ public class Approval {
 
     public void setSid(Integer sid) {
         this.sid = sid;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
     }
 
     public String getTitle() {
@@ -73,6 +83,7 @@ public class Approval {
         return "Approval{" +
                 "aid=" + aid +
                 ", sid=" + sid +
+                ", sname='" + sname + '\'' +
                 ", title='" + title + '\'' +
                 ", type='" + type + '\'' +
                 ", time='" + time + '\'' +

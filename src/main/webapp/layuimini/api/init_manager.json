@@ -79,7 +79,7 @@
             },
             {
               "title": "审批管理",
-              "href": "manager/ea5.html",
+              "href": "manager/approval_list.jsp",
               "icon": "fa fa-tachometer",
               "target": "_self"
             }
