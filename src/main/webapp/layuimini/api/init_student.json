@@ -41,7 +41,7 @@
             },
             {
               "title": "申请审批",
-              "href": "student/2.jsp",
+              "href": "student/student_approval_list.jsp",
               "icon": "fa fa-tachometer",
               "target": "_self"
             }

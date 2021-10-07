@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.ApprovalDao">
+    <!--添加审批-->
+    <insert id="insertApproval" parameterType="Approval">
+        insert into approval(aid,sid,title,type,status)
+        values(#{aid},#{sid},#{title},#{type},#{status})
+    </insert>
+    <!--删除审批-->
+    <delete id="deleteApprovals" parameterType="Approval">
+        delete from approval where aid in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.aid}
+        </foreach>
+    </delete>
+    <!--修改审批-->
+    <update id="updateApproval" parameterType="Approval">
+        update approval set title=#{title},type=#{type},status=#{status}
+        where aid=#{aid}
+    </update>
+    <!--查询所有审批-->
+    <select id="selectApprovals" resultType="Approval">
+        select aid,sid,title,type,status from approval
+    </select>
+    <!--根据id查询审批-->
+    <select id="selectApproval" resultType="Approval">
+        select aid,sid,title,type,status from approval where aid = #{aid}
+    </select>
+    <!--分页查询审批-->
+    <select id="selectApprovalsByLimit" resultType="Approval">
+        select aid,sid,title,type,status from approval limit #{begin},#{size}
+    </select>
+    <!--获取审批数量-->
+    <select id="getApprovalsCount" resultType="int">
+        select count(*) from approval
+    </select>
+    <!--获取审批数量（sid）-->
+    <select id="getApprovalsCountBySid" resultType="int">
+        select count(*) from approval where sid=#{sid}
+    </select>
+    <!--分页查询审批(sid)-->
+    <select id="selectApprovalsByLimitBySid" resultType="Approval">
+        select aid,sid,title,type,status from approval where sid=#{sid} limit #{begin},#{size}
+    </select>
+</mapper>
