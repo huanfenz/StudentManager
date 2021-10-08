@@ -18,7 +18,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="icon" href="layuimini/images/favicon.ico">
+    <link rel="icon" href="layuimini/images/xiaohui.png">
     <link rel="stylesheet" href="layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="layuimini/css/layuimini.css?v=2.0.4.2" media="all">
     <link rel="stylesheet" href="layuimini/css/themes/default.css" media="all">
