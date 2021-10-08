@@ -58,4 +58,8 @@ public interface ApprovalDao {
     int getApprovalsCountBySid(int sid);
 
     List<Approval> selectApprovalsByLimitBySid(@Param("begin") int begin, @Param("size") Integer size, @Param("sid") Integer sid);
+
+    int getApprovalsCountByWait();
+
+    List<Approval> selectApprovalsByLimitByWait(@Param("begin") int begin, @Param("size")int size);
 }

@@ -50,4 +50,8 @@ public interface ApprovalService {
     int getApprovalsCountBySid(Integer sid);
 
     List<Approval> findApprovalsByPageBySid(Integer page, Integer size, Integer sid);
+
+    int getApprovalsCountByWait();
+
+    List<Approval> findApprovalsByPageByWait(Integer page, Integer size);
 }

@@ -1,12 +1,8 @@
 package com.wangpeng.service.impl;
 
-import com.wangpeng.dao.CourseTableDao;
-import com.wangpeng.dao.OpenCourseDao;
 import com.wangpeng.dao.TableShowDao;
 import com.wangpeng.pojo.CourseDetail;
-import com.wangpeng.pojo.CourseTable;
 import com.wangpeng.service.TableShowService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

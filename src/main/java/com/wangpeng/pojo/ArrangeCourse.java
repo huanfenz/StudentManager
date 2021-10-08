@@ -1,6 +1,6 @@
 package com.wangpeng.pojo;
 
-public class CourseTable {
+public class ArrangeCourse {
     private Integer ctid;
     private Integer oid;
     private Integer rid;
@@ -10,10 +10,10 @@ public class CourseTable {
     private Integer start;
     private Integer size;
 
-    public CourseTable() {
+    public ArrangeCourse() {
     }
 
-    public CourseTable(Integer ctid, Integer oid, Integer rid, String rname, String weekno, Integer week, Integer start, Integer size) {
+    public ArrangeCourse(Integer ctid, Integer oid, Integer rid, String rname, String weekno, Integer week, Integer start, Integer size) {
         this.ctid = ctid;
         this.oid = oid;
         this.rid = rid;
@@ -90,7 +90,7 @@ public class CourseTable {
 
     @Override
     public String toString() {
-        return "CourseTable{" +
+        return "ArrangeCourse{" +
                 "ctid=" + ctid +
                 ", oid=" + oid +
                 ", rid=" + rid +

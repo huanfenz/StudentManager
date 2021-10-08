@@ -25,13 +25,8 @@
     <div class="layui-form" style="width: 400px;" lay-filter="editForm">
         <%--隐藏域，ctid--%>
         <input type="hidden" id="ctid" name="ctid" class="layui-input" value="null">
-        <%--开课id--%>
-<%--        <div class="layui-form-item">
-            <label class="layui-form-label">开课id</label>
-            <div class="layui-input-block">
-                <input type="text" id="oid" name="oid" value="" lay-verify="required" lay-reqtext="不能为空" placeholder="请输入" class="layui-input">
-            </div>
-        </div>--%>
+        <%--隐藏域，oid--%>
+        <input type="hidden" id="oid" name="oid" class="layui-input" value="${param.oid}">
         <%--教室--%>
         <div class="layui-form-item">
             <label class="layui-form-label">教室</label>
@@ -112,7 +107,7 @@
         //加载数据表格
         table.render({
             elem: '#currentTableId',
-            url: 'courseTable/queryCourseTablesByOid.do?oid=' + ${param.oid},
+            url: 'arrangeCourse/queryArrangeCoursesByOid.do?oid=' + ${param.oid},
             toolbar: '#toolbarDemo',
             defaultToolbar: null,
             cols: [[
@@ -157,13 +152,13 @@
                         var mdata = form.val('editForm');
                         //向服务器请求
                         $.getJSON({
-                            url: 'courseTable/addCourseTable.do',
+                            url: 'arrangeCourse/addArrangeCourse.do',
                             data: {json:JSON.stringify(mdata)},    //发json
                             success:function (res) {
                                 layer.msg("添加"+res+"行成功！",{time:800});
                                 //获得最后一页的页码并重载
                                 $.getJSON({
-                                    url: 'courseTable/getAmount.do',
+                                    url: 'arrangeCourse/getAmount.do',
                                     success: function (res) {
                                         //数据长度
                                         var len = res;
@@ -186,7 +181,7 @@
                     layer.close(index); //关闭提示框
                     //向服务器请求
                     $.getJSON({
-                        url: 'courseTable/deleteCourseTables.do',
+                        url: 'arrangeCourse/deleteArrangeCourses.do',
                         data: {json:JSON.stringify(data)},   //发json过去
                         success:function (res) {
                             layer.msg("删除"+res+"行成功！",{time:800});
@@ -225,7 +220,7 @@
                         layer.close(index); //关闭弹出框
                         var mdata = form.val('editForm');   //获取表单的数据
                         $.getJSON({
-                            url: 'courseTable/updateCourseTable.do',
+                            url: 'arrangeCourse/updateArrangeCourse.do',
                             data: {json:JSON.stringify(mdata)},   //发json过去
                             success:function (res) {
                                 layer.msg("修改"+res+"行成功!",{time:800});
@@ -246,7 +241,7 @@
                     layer.close(index); //关闭窗口
                     //向服务器请求
                     $.getJSON({
-                        url: 'courseTable/deleteCourseTables.do',
+                        url: 'arrangeCourse/deleteArrangeCourses.do',
                         data: {json:JSON.stringify(mdata)},   //发json过去
                         success:function (res) {
                             layer.msg("删除"+res+"行成功！",{time:800});

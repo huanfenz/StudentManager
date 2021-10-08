@@ -210,7 +210,7 @@
                     shadeClose: true,
                     area: ['90%', '90%'],
                     btn: ['确定'],
-                    content: 'teacher/teacher_course_table_list.jsp?oid=' + data[0].oid,
+                    content: 'teacher/teacher_arrange_course_list.jsp?oid=' + data[0].oid,
                     yes: function (index, layero) { //确认的回调
                         layer.close(index); //关闭弹出框
                     }

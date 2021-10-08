@@ -49,7 +49,7 @@
         //加载数据表格
         table.render({
             elem: '#currentTableId',
-            url: 'courseTable/queryCourseTablesByOid.do?oid=' + ${param.oid},
+            url: 'arrangeCourse/queryArrangeCoursesByOid.do?oid=' + ${param.oid},
             cols: [[
                 {type: "checkbox"},
                 {field: 'rname', title: '教室'},

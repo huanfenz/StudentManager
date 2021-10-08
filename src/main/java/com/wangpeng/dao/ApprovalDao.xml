@@ -33,9 +33,16 @@
     <select id="selectApprovalsByLimit" resultType="Approval">
         select aid,sid,title,type,time,status from approval limit #{begin},#{size}
     </select>
+    <select id="selectApprovalsByLimitByWait" resultType="Approval">
+        select aid,sid,title,type,time,status from approval where status='等待审批' limit #{begin},#{size}
+    </select>
     <!--获取审批数量-->
     <select id="getApprovalsCount" resultType="int">
         select count(*) from approval
+    </select>
+    <!--获取审批数量（等待审批）-->
+    <select id="getApprovalsCountByWait" resultType="int">
+        select count(*) from approval where status='等待审批'
     </select>
     <!--获取审批数量（sid）-->
     <select id="getApprovalsCountBySid" resultType="int">

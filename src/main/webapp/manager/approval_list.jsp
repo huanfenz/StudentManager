@@ -37,7 +37,6 @@
             <label class="layui-form-label">选择</label>
             <div class="layui-input-block">
                 <select name="status" id="edit_cid" lay-search="">
-                    <option value="等待审批">等待审批</option>
                     <option value="审批通过">审批通过</option>
                     <option value="审批驳回">审批驳回</option>
                 </select>
@@ -66,7 +65,7 @@
         //加载数据表格
         table.render({
             elem: '#currentTableId',
-            url: 'approval/queryApprovals.do',
+            url: 'approval/queryApprovalsByWait.do',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',

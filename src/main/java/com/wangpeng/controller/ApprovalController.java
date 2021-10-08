@@ -46,6 +46,29 @@ public class ApprovalController {
     }
 
     /**
+     * 查询审批（等待审批的）
+     * @param page  当前页码
+     * @param limit 每页大小
+     * @return 数据
+     */
+    @RequestMapping("queryApprovalsByWait.do")
+    @ResponseBody
+    public Map<String,Object> queryApprovalsByWait(Integer page, Integer limit){
+        //获取审批数量
+        int count = service.getApprovalsCountByWait();
+        //获取数据
+        List<Approval> approvals = service.findApprovalsByPageByWait(page,limit);
+        //结果map
+        Map<String,Object> res = new HashMap<String,Object>();
+        res.put("code", 0);
+        res.put("msg", "");
+        res.put("count", count);
+        res.put("data", approvals);
+
+        return res;
+    }
+
+    /**
      * 查询审批
      * @param page  当前页码
      * @param limit 每页大小

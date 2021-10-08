@@ -362,7 +362,7 @@
                     shadeClose: true,
                     area: ['90%', '90%'],
                     btn: ['确定'],
-                    content: 'manager/course_table_list.jsp?oid=' + data[0].oid,
+                    content: 'manager/arrange_course_list.jsp?oid=' + data[0].oid,
                     // success: function () {  //弹出框成功回调
                     //
                     // },

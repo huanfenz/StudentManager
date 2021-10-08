@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.ArrangeCourseDao">
+    <!--添加课表-->
+    <insert id="insertArrangeCourse" parameterType="ArrangeCourse">
+        insert into arrange_course(ctid,oid,rid,weekno,week,start,size)
+        values(#{ctid},#{oid},#{rid},#{weekno},#{week},#{start},#{size})
+    </insert>
+    <!--删除课表-->
+    <delete id="deleteArrangeCourses" parameterType="ArrangeCourse">
+        delete from arrange_course where ctid in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.ctid}
+        </foreach>
+    </delete>
+    <!--修改课表-->
+    <update id="updateArrangeCourse" parameterType="ArrangeCourse">
+        update arrange_course set oid=#{oid},rid=#{rid},weekno=#{weekno},week=#{week},start=#{start},size=#{size}
+        where ctid=#{ctid}
+    </update>
+    <!--查询所有课表-->
+    <select id="selectArrangeCourses" resultType="ArrangeCourse">
+        select ctid,oid,rid,weekno,week,start,size from arrange_course
+    </select>
+    <!--根据id查询课表-->
+    <select id="selectArrangeCourse" resultType="ArrangeCourse">
+        select ctid,oid,rid,weekno,week,start,size from arrange_course where ctid = #{ctid}
+    </select>
+    <!--分页查询课表-->
+    <select id="selectArrangeCoursesByLimit" resultType="ArrangeCourse">
+        select ctid,oid,rid,weekno,week,start,size from arrange_course limit #{begin},#{size}
+    </select>
+    <!--获取课表数量-->
+    <select id="getArrangeCoursesCount" resultType="int">
+        select count(*) from arrange_course
+    </select>
+    <!--根据oid查询课表-->
+    <select id="selectArrangeCoursesByLimitByOid" resultType="ArrangeCourse">
+        select ctid,oid,rid,weekno,week,start,size from arrange_course where oid=#{oid} limit #{begin},#{size}
+    </select>
+    <!--根据cid查询课表-->
+    <select id="selectArrangeCoursesByCid" resultType="ArrangeCourse">
+        select ctid,oid,rid,weekno,week,start,size from arrange_course where oid=#{cid}
+    </select>
+</mapper>

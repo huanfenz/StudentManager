@@ -72,4 +72,24 @@ public class ApprovalServiceImpl implements ApprovalService {
         return approvals;
     }
 
+    @Override
+    public int getApprovalsCountByWait() {
+        return approvalDao.getApprovalsCountByWait();
+    }
+
+    @Override
+    public List<Approval> findApprovalsByPageByWait(Integer page, Integer size) {
+        int begin = (page - 1) * size;
+        List<Approval> approvals = approvalDao.selectApprovalsByLimitByWait(begin, size);
+        List<Approval> res = new ArrayList<>();
+        //添加学生姓名信息
+        for(Approval approval : approvals) {
+            Integer sid = approval.getSid();
+            Student student = studentDao.selectStudent(sid);
+            approval.setSname(student.getSname());
+            res.add(approval);
+        }
+        return res;
+    }
+
 }

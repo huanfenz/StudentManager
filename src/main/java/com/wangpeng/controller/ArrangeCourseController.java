@@ -1,7 +1,7 @@
 package com.wangpeng.controller;
 
-import com.wangpeng.pojo.CourseTable;
-import com.wangpeng.service.CourseTableService;
+import com.wangpeng.pojo.ArrangeCourse;
+import com.wangpeng.service.ArrangeCourseService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/courseTable")
-public class CourseTableController {
+@RequestMapping("/arrangeCourse")
+public class ArrangeCourseController {
 
     @Autowired
-    CourseTableService service;
+    ArrangeCourseService service;
 
     /**
      * 查询课表
@@ -26,19 +26,19 @@ public class CourseTableController {
      * @param limit 每页大小
      * @return 数据
      */
-    @RequestMapping("queryCourseTables.do")
+    @RequestMapping("queryArrangeCourses.do")
     @ResponseBody
-    public Map<String,Object> queryCourseTables(Integer page, Integer limit){
+    public Map<String,Object> queryArrangeCourses(Integer page, Integer limit){
         //获取课表数量
-        int count = service.getCourseTablesCount();
+        int count = service.getArrangeCoursesCount();
         //获取数据
-        List<CourseTable> courseTables = service.findCourseTablesByPage(page,limit);
+        List<ArrangeCourse> arrangeCourses = service.findArrangeCoursesByPage(page,limit);
         //结果map
         Map<String,Object> res = new HashMap<String,Object>();
         res.put("code", 0);
         res.put("msg", "");
         res.put("count", count);
-        res.put("data", courseTables);
+        res.put("data", arrangeCourses);
 
         return res;
     }
@@ -47,10 +47,10 @@ public class CourseTableController {
      * 查询所有课表
      * @return
      */
-    @RequestMapping("queryAllCourseTables.do")
+    @RequestMapping("queryAllArrangeCourses.do")
     @ResponseBody
-    public List<CourseTable> queryAllCourseTables(){
-        return service.findAllCourseTables();
+    public List<ArrangeCourse> queryAllArrangeCourses(){
+        return service.findAllArrangeCourses();
     }
 
     /**
@@ -58,12 +58,12 @@ public class CourseTableController {
      * @param json
      * @return 返回成功的行数
      */
-    @RequestMapping("deleteCourseTables.do")
+    @RequestMapping("deleteArrangeCourses.do")
     @ResponseBody
-    public Integer deleteCourseTables(String json){
+    public Integer deleteArrangeCourses(String json){
         if(json.charAt(0) != '[') json = '[' + json + ']';  //如果不是数组形式，变成数组形式
-        List<CourseTable> courseTables = JsonUtil.parseList(json, CourseTable.class);
-        int res = service.deleteCourseTables(courseTables);
+        List<ArrangeCourse> arrangeCourses = JsonUtil.parseList(json, ArrangeCourse.class);
+        int res = service.deleteArrangeCourses(arrangeCourses);
         return res;
     }
 
@@ -72,11 +72,11 @@ public class CourseTableController {
      * @param json
      * @return 成功标志1
      */
-    @RequestMapping("addCourseTable.do")
+    @RequestMapping("addArrangeCourse.do")
     @ResponseBody
-    public Integer addCourseTable(String json){
-        CourseTable courseTable = JsonUtil.parseObject(json, CourseTable.class);
-        return service.addCourseTable(courseTable);
+    public Integer addArrangeCourse(String json){
+        ArrangeCourse arrangeCourse = JsonUtil.parseObject(json, ArrangeCourse.class);
+        return service.addArrangeCourse(arrangeCourse);
     }
 
     /**
@@ -84,11 +84,11 @@ public class CourseTableController {
      * @param json
      * @return 成功标志1
      */
-    @RequestMapping("updateCourseTable.do")
+    @RequestMapping("updateArrangeCourse.do")
     @ResponseBody
-    public Integer updateCourseTable(String json){
-        CourseTable courseTable = JsonUtil.parseObject(json, CourseTable.class);
-        return service.updateCourseTable(courseTable);
+    public Integer updateArrangeCourse(String json){
+        ArrangeCourse arrangeCourse = JsonUtil.parseObject(json, ArrangeCourse.class);
+        return service.updateArrangeCourse(arrangeCourse);
     }
 
     /**
@@ -99,7 +99,7 @@ public class CourseTableController {
     @RequestMapping("getAmount.do")
     @ResponseBody
     public Integer getAmount() {
-        return service.getCourseTablesCount();
+        return service.getArrangeCoursesCount();
     }
 
     /**
@@ -108,17 +108,17 @@ public class CourseTableController {
      * @param limit 每页大小
      * @return 数据
      */
-    @RequestMapping("queryCourseTablesByOid.do")
+    @RequestMapping("queryArrangeCoursesByOid.do")
     @ResponseBody
-    public Map<String,Object> queryCourseTablesByOid(Integer page, Integer limit, Integer oid){
+    public Map<String,Object> queryArrangeCoursesByOid(Integer page, Integer limit, Integer oid){
         //获取数据
-        List<CourseTable> courseTables = service.findCourseTablesByPageByOid(page,limit,oid);
+        List<ArrangeCourse> arrangeCourses = service.findArrangeCoursesByPageByOid(page,limit,oid);
         //结果map
         Map<String,Object> res = new HashMap<String,Object>();
         res.put("code", 0);
         res.put("msg", "");
-        res.put("count", courseTables.size());
-        res.put("data", courseTables);
+        res.put("count", arrangeCourses.size());
+        res.put("data", arrangeCourses);
 
         return res;
     }
