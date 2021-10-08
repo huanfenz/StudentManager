@@ -141,16 +141,14 @@
         miniAdmin.render(options);
 
         $('.login-out').on("click", function () {
-            $('.login-out').on("click", function () {
-                $.ajax({
-                    url: 'login/exitLogin.do',
-                    type: 'get',
-                    success: function (res) {
-                        layer.msg('退出登录成功', {time:1000}, function () {
-                            window.location = 'index.jsp';
-                        });
-                    }
-                });
+            $.ajax({
+                url: 'login/exitLogin.do',
+                type: 'get',
+                success: function (res) {
+                    layer.msg('退出登录成功', {time:1000}, function () {
+                        window.location = 'index.jsp';
+                    });
+                }
             });
         });
     });
