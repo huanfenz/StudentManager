@@ -141,7 +141,7 @@
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加开课 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除选中行 </button>
-                <button class="layui-btn layui-btn-sm layui-btn-warm data-plan-btn" lay-event="plan"> 计划课表 </button>
+                <button class="layui-btn layui-btn-sm layui-btn-warm data-plan-btn" lay-event="plan"> 课程排课 </button>
             </div>
         </script>
         <%--表格容器--%>
@@ -356,7 +356,7 @@
                 }
 
                 layer.open({
-                    title: "计划课表",
+                    title: "课程排课",
                     type: 2,    //iframe
                     maxmin: true,
                     shadeClose: true,

@@ -51,7 +51,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-block">
-                <input type="text" id="sage" name="sage" value="" placeholder="请输入年龄" class="layui-input">
+                <input type="number" id="sage" name="sage" value="" placeholder="请输入年龄" class="layui-input">
             </div>
         </div>
         <!--班级-->
@@ -81,14 +81,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">身份证号</label>
             <div class="layui-input-block">
-                <input type="text" id="idcard" name="idcard" value="" placeholder="请输入身份证号" class="layui-input">
+                <input type="number" id="idcard" name="idcard" value="" placeholder="请输入身份证号" class="layui-input">
             </div>
         </div>
         <!--手机号码-->
         <div class="layui-form-item">
             <label class="layui-form-label">手机号码</label>
             <div class="layui-input-block">
-                <input type="text" id="phone" name="phone" value="" placeholder="请输入手机号码" class="layui-input">
+                <input type="tel" id="phone" name="phone" value="" placeholder="请输入手机号码" class="layui-input">
             </div>
         </div>
         <!--地址-->

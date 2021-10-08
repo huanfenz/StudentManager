@@ -51,56 +51,56 @@
         <div class="layui-form-item">
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-block">
-                <input type="email" id="tage" name="tage" value="" placeholder="请输入年龄" class="layui-input">
+                <input type="number" id="tage" name="tage" value="" placeholder="请输入年龄" class="layui-input">
             </div>
         </div>
         <!--状态-->
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <input type="email" id="tstatus" name="tstatus" value="" placeholder="请输入状态" class="layui-input">
+                <input type="text" id="tstatus" name="tstatus" value="" placeholder="请输入状态" class="layui-input">
             </div>
         </div>
         <!--备注-->
         <div class="layui-form-item">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-                <input type="email" id="tremark" name="tremark" value="" placeholder="请输入备注" class="layui-input">
+                <input type="text" id="tremark" name="tremark" value="" placeholder="请输入备注" class="layui-input">
             </div>
         </div>
         <!--身份证-->
         <div class="layui-form-item">
             <label class="layui-form-label">身份证号</label>
             <div class="layui-input-block">
-                <input type="email" id="idcard" name="idcard" value="" placeholder="请输入身份证号" class="layui-input">
+                <input type="number" id="idcard" name="idcard" value="" placeholder="请输入身份证号" class="layui-input">
             </div>
         </div>
         <!--手机号码-->
         <div class="layui-form-item">
             <label class="layui-form-label">手机号码</label>
             <div class="layui-input-block">
-                <input type="email" id="phone" name="phone" value="" placeholder="请输入手机号码" class="layui-input">
+                <input type="tel" id="phone" name="phone" value="" placeholder="请输入手机号码" class="layui-input">
             </div>
         </div>
         <!--地址-->
         <div class="layui-form-item">
             <label class="layui-form-label">家庭地址</label>
             <div class="layui-input-block">
-                <input type="email" id="address" name="address" value="" placeholder="请输入家庭地址" class="layui-input">
+                <input type="text" id="address" name="address" value="" placeholder="请输入家庭地址" class="layui-input">
             </div>
         </div>
         <!--入学时间-->
         <div class="layui-form-item">
             <label class="layui-form-label">入学时间</label>
             <div class="layui-input-block">
-                <input type="email" id="entime" name="entime" value="" lay-verify="date" placeholder="请选择入学时间" class="layui-input">
+                <input type="text" id="entime" name="entime" value="" lay-verify="date" placeholder="请选择入学时间" class="layui-input">
             </div>
         </div>
         <!--登录密码-->
         <div class="layui-form-item">
             <label class="layui-form-label">登录密码</label>
             <div class="layui-input-block">
-                <input type="email" id="pswd" name="pswd" value="" placeholder="请输入登录密码" class="layui-input">
+                <input type="text" id="pswd" name="pswd" value="" placeholder="请输入登录密码" class="layui-input">
             </div>
         </div>
     </div>
