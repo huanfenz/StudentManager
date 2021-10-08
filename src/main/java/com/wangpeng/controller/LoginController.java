@@ -38,7 +38,8 @@ public class LoginController {
         if(obj == null) return 1;
         else {
             //保存用户登陆的信息到Session域中
-            req.getSession().setAttribute("loginObj", obj);
+            req.getSession().setAttribute("authority",authority);   //权限身份
+            req.getSession().setAttribute("loginObj", obj);         //登录对象
             return 2;
         }
     }
@@ -57,5 +58,12 @@ public class LoginController {
             service.setPassword(loginManager, newPassword);
             return 1;
         }
+    }
+
+    @RequestMapping("exitLogin.do")
+    @ResponseBody
+    public void exitLogin(HttpServletRequest req){
+        req.getSession().setAttribute("authority", null);
+        req.getSession().setAttribute("loginObj", null);
     }
 }
