@@ -52,31 +52,20 @@
 
     <!--登录过滤器-->
     <filter>
-        <filter-name>ManagerAuthorityFilter</filter-name>
-        <filter-class>com.wangpeng.filter.ManagerAuthorityFilter</filter-class>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.wangpeng.filter.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>ManagerAuthorityFilter</filter-name>
+        <filter-name>LoginFilter</filter-name>
         <url-pattern>/manager/*</url-pattern>
     </filter-mapping>
-
-    <filter>
-        <filter-name>TeacherAuthorityFilter</filter-name>
-        <filter-class>com.wangpeng.filter.TeacherAuthorityFilter</filter-class>
-    </filter>
     <filter-mapping>
-        <filter-name>TeacherAuthorityFilter</filter-name>
+        <filter-name>LoginFilter</filter-name>
         <url-pattern>/teacher/*</url-pattern>
     </filter-mapping>
-
-    <filter>
-        <filter-name>StudentAuthorityFilter</filter-name>
-        <filter-class>com.wangpeng.filter.StudentAuthorityFilter</filter-class>
-    </filter>
     <filter-mapping>
-        <filter-name>StudentAuthorityFilter</filter-name>
+        <filter-name>LoginFilter</filter-name>
         <url-pattern>/student/*</url-pattern>
     </filter-mapping>
-
 
 </web-app>

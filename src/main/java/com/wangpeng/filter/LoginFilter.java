@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class TeacherAuthorityFilter implements Filter {
+public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -16,9 +16,9 @@ public class TeacherAuthorityFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
-        String authority = (String) req.getSession().getAttribute("authority");
+        Object loginObj = req.getSession().getAttribute("loginObj");
 
-        if(authority.equals("teacher")) {
+        if(loginObj != null) {
             // 继续访问目标资源
             filterChain.doFilter(servletRequest,servletResponse);
         } else {
