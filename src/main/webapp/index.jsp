@@ -138,13 +138,13 @@
             data = data.field;
             console.log(data);
             if (data.username == '') {
-                layer.msg('用户名不能为空');
+                layer.msg('用户名不能为空',{time:1000});
                 return false;
             } else if (data.password == '') {
-                layer.msg('密码不能为空');
+                layer.msg('密码不能为空',{time:1000});
                 return false;
             } else if (data.captcha == '') {
-                layer.msg('验证码不能为空');
+                layer.msg('验证码不能为空',{time:1000});
                 return false;
             }
 
@@ -166,13 +166,16 @@
                     * */
                     switch (res) {
                         case 3:
-                            layer.msg("验证码失效，请重新刷新验证码!");
+                            layer.msg("验证码失效，请重新输入!",{time:1000});
+                            $("#code_pic").prop("src","${basePath}kaptcha.jpg?d=" + new Date());
                             break;
                         case 0:
-                            layer.msg("验证码错误!");
+                            layer.msg("验证码错误!",{time:1000});
+                            $("#code_pic").prop("src","${basePath}kaptcha.jpg?d=" + new Date());
                             break;
                         case 1:
-                            layer.msg("账号或密码错误!");
+                            layer.msg("账号或密码错误!",{time:1000});
+                            $("#code_pic").prop("src","${basePath}kaptcha.jpg?d=" + new Date());
                             break;
                         case 2: //登录成功
 

@@ -17,11 +17,12 @@ public class Student {
     private String address;
     private String entime;
     private String pswd;
+    private String pic;
 
     public Student() {
     }
 
-    public Student(Integer sid, String sname, String snum, String ssex, Integer sage, Integer cid, String cname, String sstatus, String sremark, String idcard, String phone, String address, String entime, String pswd) {
+    public Student(Integer sid, String sname, String snum, String ssex, Integer sage, Integer cid, String cname, String sstatus, String sremark, String idcard, String phone, String address, String entime, String pswd, String pic) {
         this.sid = sid;
         this.sname = sname;
         this.snum = snum;
@@ -36,6 +37,7 @@ public class Student {
         this.address = address;
         this.entime = entime;
         this.pswd = pswd;
+        this.pic = pic;
     }
 
     public Integer getSid() {
@@ -150,6 +152,14 @@ public class Student {
         this.pswd = pswd;
     }
 
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -167,6 +177,7 @@ public class Student {
                 ", address='" + address + '\'' +
                 ", entime='" + entime + '\'' +
                 ", pswd='" + pswd + '\'' +
+                ", pic='" + pic + '\'' +
                 '}';
     }
 }

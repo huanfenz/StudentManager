@@ -16,61 +16,63 @@
     <script src="layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 </head>
 <body>
-    <div>
-        <h1 align="center">个人信息档案</h1>
+    <h1 align="center">个人信息档案</h1>
+    <div class="layui-container" style="width: 60%;" align="center">
         <table class="layui-table">
             <colgroup>
-                <col width="200">
+                <col width="100px">
                 <col>
+                <col width="100px">
             </colgroup>
-            
-            <tbody>
-                <tr>
-                    <td>姓名:</td>
-                    <td>${sessionScope.loginObj.sname}</td>
-                </tr>
-                <tr>
-                    <td>学号:</td>
-                    <td>${sessionScope.loginObj.snum}</td>
-                </tr>
-                <tr>
-                    <td>性别:</td>
-                    <td>${sessionScope.loginObj.ssex}</td>
-                </tr>
-                <tr>
-                    <td>年龄:</td>
-                    <td>${sessionScope.loginObj.sage}</td>
-                </tr>
-                <tr>
-                    <td>班级:</td>
-                    <td>${sessionScope.loginObj.cname}</td>
-                </tr>
-                <tr>
-                    <td>状态:</td>
-                    <td>${sessionScope.loginObj.sstatus}</td>
-                </tr>
-                <tr>
-                    <td>备注:</td>
-                    <td>${sessionScope.loginObj.sremark}</td>
-                </tr>
-                <tr>
-                    <td>身份证号码:</td>
-                    <td>${sessionScope.loginObj.idcard}</td>
-                </tr>
-                <tr>
-                    <td>手机号码:</td>
-                    <td>${sessionScope.loginObj.phone}</td>
-                </tr>
-                <tr>
-                    <td>家庭住址:</td>
-                    <td>${sessionScope.loginObj.address}</td>
-                </tr>
-                <tr>
-                    <td>进校时间:</td>
-                    <td>${sessionScope.loginObj.entime}</td>
-                </tr>
-            </tbody>
+
+            <tr>
+                <td>姓名:</td>
+                <td>${sessionScope.loginObj.sname}</td>
+                <td rowspan="3"><img src="http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/20211009223500.jpg"></td>
+            </tr>
+            <tr>
+                <td>学号:</td>
+                <td>${sessionScope.loginObj.snum}</td>
+            </tr>
+            <tr>
+                <td>性别:</td>
+                <td>${sessionScope.loginObj.ssex}</td>
+            </tr>
+            <tr>
+                <td>年龄:</td>
+                <td colspan="2">${sessionScope.loginObj.sage}</td>
+            </tr>
+            <tr>
+                <td>班级:</td>
+                <td colspan="2">${sessionScope.loginObj.cname}</td>
+            </tr>
+            <tr>
+                <td>状态:</td>
+                <td colspan="2">${sessionScope.loginObj.sstatus}</td>
+            </tr>
+            <tr>
+                <td>备注:</td>
+                <td colspan="2">${sessionScope.loginObj.sremark}</td>
+            </tr>
+            <tr>
+                <td>身份证号码:</td>
+                <td colspan="2">${sessionScope.loginObj.idcard}</td>
+            </tr>
+            <tr>
+                <td>手机号码:</td>
+                <td colspan="2">${sessionScope.loginObj.phone}</td>
+            </tr>
+            <tr>
+                <td>家庭住址:</td>
+                <td colspan="2">${sessionScope.loginObj.address}</td>
+            </tr>
+            <tr>
+                <td>进校时间:</td>
+                <td colspan="2">${sessionScope.loginObj.entime}</td>
+            </tr>
+
         </table>
     </div>
+
 </body>
 </html>

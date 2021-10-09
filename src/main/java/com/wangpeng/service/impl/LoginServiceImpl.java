@@ -50,9 +50,11 @@ public class LoginServiceImpl implements LoginService {
         map.put("password",password);
         Student student = studentDao.checkByUsernameAndPassword(map);
         //添加班级名信息
-        int cid = student.getCid();
-        Clazz clazz = clazzDao.selectClazz(cid);
-        student.setCname(clazz.getCname());
+        if(student != null) {
+            int cid = student.getCid();
+            Clazz clazz = clazzDao.selectClazz(cid);
+            student.setCname(clazz.getCname());
+        }
         return student;
     }
 

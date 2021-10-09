@@ -6,8 +6,8 @@
 <mapper namespace="com.wangpeng.dao.StudentDao">
     <!--添加学生-->
     <insert id="insertStudent" parameterType="Student">
-        insert into student(sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd)
-        values(#{sid},#{sname},#{snum},#{ssex},#{sage},#{cid},#{sstatus},#{sremark},#{idcard},#{phone},#{address},#{entime},#{pswd})
+        insert into student(sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd,pic)
+        values(#{sid},#{sname},#{snum},#{ssex},#{sage},#{cid},#{sstatus},#{sremark},#{idcard},#{phone},#{address},#{entime},#{pswd},#{pic})
     </insert>
     <!--删除学生-->
     <delete id="deleteStudents" parameterType="Student">
@@ -18,17 +18,18 @@
     </delete>
     <!--修改学生-->
     <update id="updateStudent" parameterType="Student">
-        update student set sname=#{sname},snum=#{snum},ssex=#{ssex},sage=#{sage},cid=#{cid},sstatus=#{sstatus},sremark=#{sremark},idcard=#{idcard},phone=#{phone},address=#{address},entime=#{entime},pswd=#{pswd}
+        update student set sname=#{sname},snum=#{snum},ssex=#{ssex},sage=#{sage},cid=#{cid},sstatus=#{sstatus},sremark=#{sremark},idcard=#{idcard},phone=#{phone},address=#{address},entime=#{entime},pswd=#{pswd},pic=#{pic}
         where sid=#{sid}
     </update>
+    <!--通过id查询学生-->
     <select id="selectStudent" resultType="Student">
-        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd,pic
         from student
         where sid=#{sid}
     </select>
     <!--分页查询学生-->
     <select id="selectStudentsByLimit" resultType="Student">
-        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd from student limit #{begin},#{size}
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd,pic from student limit #{begin},#{size}
     </select>
     <!--获取学生数量-->
     <select id="getStudentsCount" resultType="int">
@@ -36,7 +37,7 @@
     </select>
     <!--分页搜索学生-->
     <select id="searchStudentsByLimit" resultType="Student">
-        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd from student
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd,pic from student
         <where>
             <if test="sname != null and sname != '' ">
                 and sname like concat('%',#{sname},'%')
@@ -67,7 +68,7 @@
     </select>
     <!--检查用户名和密码-->
     <select id="checkByUsernameAndPassword" resultType="Student">
-        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd from student
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd,pic from student
         where snum=#{username} and pswd=#{password}
     </select>
     <!--获得教师所教学生的数量-->
@@ -77,13 +78,13 @@
     </select>
     <!--获得教师所教的学生-->
     <select id="selectStudentsByLimitByTeacher" resultType="Student">
-        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd,pic
         from student
         where cid in (select distinct cid from open_course where tid=#{tid})
         limit #{begin},#{size}
     </select>
     <select id="selectStudentsByOid" resultType="student">
-        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd,pic
         from student
         where cid in (select cid from open_course where oid=#{oid})
     </select>

@@ -25,6 +25,13 @@
     <div class="layui-form" style="width: 400px;" lay-filter="editForm">
         <%--隐藏域，sid--%>
         <input type="hidden" id="sid" name="sid" class="layui-input" value="null">
+        <%--上传图片--%>
+        <%--<div class="layui-form-item">
+            <label class="layui-form-label">上传头像</label>
+            <div class="layui-input-block">
+                <input type="">
+            </div>
+        </div>--%>
         <!--姓名-->
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
