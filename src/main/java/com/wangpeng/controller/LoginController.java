@@ -1,7 +1,6 @@
 package com.wangpeng.controller;
 
 import com.wangpeng.pojo.Manager;
-import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/login")
@@ -19,11 +19,23 @@ public class LoginController {
 
     @RequestMapping("login.do")
     @ResponseBody
-    public int login(String username, String password, String authority, String captcha, HttpServletRequest req){
-        /*  status: 0验证码错误，1账号密码错误，2成功
+    public int login(String username, String password, String authority, String captcha, HttpServletRequest req, HttpServletResponse resp){
+        /*  status: 0验证码错误，1账号密码错误，2成功，3验证码失效
          */
+
+        //获取Session中的验证码
+        String token = (String) req.getSession().getAttribute("KAPTCHA_SESSION_KEY");
+        //删除Session中的验证码
+        req.getSession().removeAttribute("KAPTCHA_SESSION_KEY");
+
+        System.out.println("验证码[" + token + "]");
+
+        if(token == null) { //验证码失效
+            return 3;
+        }
+
         // 验证码错误
-        if( !captcha.equals("xszg")) return 0;
+        if( !captcha.equals(token)) return 0;
 
         // 账号密码错误
         Object obj = null;
@@ -38,8 +50,9 @@ public class LoginController {
         if(obj == null) return 1;
         else {
             //保存用户登陆的信息到Session域中
-/*            req.getSession().setAttribute("authority",authority);   //权限身份*/
+/*          req.getSession().setAttribute("authority",authority);   //权限身份*/
             req.getSession().setAttribute("loginObj", obj);         //登录对象
+
             return 2;
         }
     }

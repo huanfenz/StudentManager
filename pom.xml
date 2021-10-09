@@ -107,10 +107,17 @@
       <artifactId>standard</artifactId>
       <version>1.1.2</version>
     </dependency>
+    <!--谷歌验证码-->
+    <dependency>
+      <groupId>com.github.penggle</groupId>
+      <artifactId>kaptcha</artifactId>
+      <version>2.3.2</version>
+    </dependency>
+
   </dependencies>
 
   <build>
-    <finalName>studentManager</finalName>
+    <finalName>StudentManager</finalName>
     <!--目的是把src/main/java目录下的xml文件包含到输出结果中(classes中)。-->
     <resources>
       <resource>
