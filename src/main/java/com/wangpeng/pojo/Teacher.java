@@ -13,11 +13,12 @@ public class Teacher {
     private String address;
     private String entime;
     private String pswd;
+    private String pic;
 
     public Teacher() {
     }
 
-    public Teacher(Integer tid, String tname, String tnum, String tsex, Integer tage, String tstatus, String tremark, String idcard, String phone, String address, String entime, String pswd) {
+    public Teacher(Integer tid, String tname, String tnum, String tsex, Integer tage, String tstatus, String tremark, String idcard, String phone, String address, String entime, String pswd, String pic) {
         this.tid = tid;
         this.tname = tname;
         this.tnum = tnum;
@@ -30,6 +31,7 @@ public class Teacher {
         this.address = address;
         this.entime = entime;
         this.pswd = pswd;
+        this.pic = pic;
     }
 
     public Integer getTid() {
@@ -128,6 +130,14 @@ public class Teacher {
         this.pswd = pswd;
     }
 
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +
@@ -143,6 +153,7 @@ public class Teacher {
                 ", address='" + address + '\'' +
                 ", entime='" + entime + '\'' +
                 ", pswd='" + pswd + '\'' +
+                ", pic='" + pic + '\'' +
                 '}';
     }
 }

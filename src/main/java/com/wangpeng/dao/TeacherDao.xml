@@ -6,8 +6,8 @@
 <mapper namespace="com.wangpeng.dao.TeacherDao">
     <!--添加老师-->
     <insert id="insertTeacher" parameterType="Teacher">
-        insert into teacher(tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd)
-        values(#{tid},#{tname},#{tnum},#{tsex},#{tage},#{tstatus},#{tremark},#{idcard},#{phone},#{address},#{entime},#{pswd})
+        insert into teacher(tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd,pic)
+        values(#{tid},#{tname},#{tnum},#{tsex},#{tage},#{tstatus},#{tremark},#{idcard},#{phone},#{address},#{entime},#{pswd},#{pic})
     </insert>
     <!--删除老师-->
     <delete id="deleteTeachers" parameterType="Teacher">
@@ -18,20 +18,20 @@
     </delete>
     <!--修改老师-->
     <update id="updateTeacher" parameterType="Teacher">
-        update teacher set tname=#{tname},tnum=#{tnum},tsex=#{tsex},tage=#{tage},tstatus=#{tstatus},tremark=#{tremark},idcard=#{idcard},phone=#{phone},address=#{address},entime=#{entime},pswd=#{pswd}
+        update teacher set tname=#{tname},tnum=#{tnum},tsex=#{tsex},tage=#{tage},tstatus=#{tstatus},tremark=#{tremark},idcard=#{idcard},phone=#{phone},address=#{address},entime=#{entime},pswd=#{pswd},pic=#{pic}
         where tid=#{tid}
     </update>
     <!--查询所有-->
     <select id="selectTeachers" resultType="Teacher">
-        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd from teacher
+        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd,pic from teacher
     </select>
     <!--根据id查教师-->
     <select id="selectTeacher" resultType="Teacher">
-        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd from teacher where tid=#{tid}
+        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd,pic from teacher where tid=#{tid}
     </select>
     <!--分页查询老师-->
     <select id="selectTeachersByLimit" resultType="Teacher">
-        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd from teacher limit #{begin},#{size}
+        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd,pic from teacher limit #{begin},#{size}
     </select>
     <!--获取老师数量-->
     <select id="getTeachersCount" resultType="int">
@@ -39,7 +39,7 @@
     </select>
     <!--分页搜索老师-->
     <select id="searchTeachersByLimit" resultType="Teacher">
-        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd from teacher
+        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd,pic from teacher
         <where>
             <if test="tname != null and tname != '' ">
                 and tname like concat('%',#{tname},'%')
@@ -64,7 +64,8 @@
     </select>
     <!--检查用户名和密码-->
     <select id="checkByUsernameAndPassword" resultType="Teacher">
-        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd from teacher
+        select tid,tname,tnum,tsex,tage,tstatus,tremark,idcard,phone,address,entime,pswd,pic from teacher
         where tnum=#{username} and pswd=#{password}
+        limit 1
     </select>
 </mapper>

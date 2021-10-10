@@ -14,20 +14,41 @@
     <link rel="stylesheet" href="layuimini/css/public.css" media="all">
     <script src="layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
     <script src="layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+
+    <style>
+        body {background: #F2F2F2;}
+        #my_table{
+            margin: 0px auto; /*居中*/
+            width: 60%;
+            background-color: #FFFFFF;  /*设置背景颜色*/
+            border: 1px solid #EEEEEE;  /*设置边框*/
+            border-collapse: collapse;  /*边框合并*/
+        }
+        #my_table td,th {
+            border: 1px solid #EEEEEE;  /*设置边框*/
+            height: 30px; /*设置高度*/
+            /*设置内边距*/
+            padding: 10px;
+        }
+    </style>
+
 </head>
 <body>
     <div>
         <h1 align="center">个人信息档案</h1>
-        <table class="layui-table">
-            <colgroup>
-                <col width="200">
-                <col>
-            </colgroup>
-            
-            <tbody>
+        <div  style="margin-top: 20px">
+            <table id="my_table">
+                <colgroup>
+                    <col width="15%">
+                    <col>
+                    <col width="15%">
+                </colgroup>
+
+                <tbody>
                 <tr>
                     <td>姓名:</td>
                     <td>${sessionScope.loginObj.tname}</td>
+                    <td rowspan="6"><img width="200px" src="${sessionScope.loginObj.pic}"></td>
                 </tr>
                 <tr>
                     <td>职工号:</td>
@@ -51,22 +72,24 @@
                 </tr>
                 <tr>
                     <td>身份证号码:</td>
-                    <td>${sessionScope.loginObj.idcard}</td>
+                    <td colspan="2">${sessionScope.loginObj.idcard}</td>
                 </tr>
                 <tr>
                     <td>手机号码:</td>
-                    <td>${sessionScope.loginObj.phone}</td>
+                    <td colspan="2">${sessionScope.loginObj.phone}</td>
                 </tr>
                 <tr>
                     <td>家庭住址:</td>
-                    <td>${sessionScope.loginObj.address}</td>
+                    <td colspan="2">${sessionScope.loginObj.address}</td>
                 </tr>
                 <tr>
                     <td>进校时间:</td>
-                    <td>${sessionScope.loginObj.entime}</td>
+                    <td colspan="2">${sessionScope.loginObj.entime}</td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </body>
 </html>

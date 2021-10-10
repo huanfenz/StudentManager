@@ -22,16 +22,11 @@
 <body>
 <%--编辑弹出框--%>
 <div class="site-text" style="margin: 5%; display: none" id="edit_window">
-    <div class="layui-form" style="width: 400px;" lay-filter="editForm">
+    <div class="layui-form" style="width: 400px; float: left" lay-filter="editForm">
         <%--隐藏域，sid--%>
         <input type="hidden" id="sid" name="sid" class="layui-input" value="null">
-        <%--上传图片--%>
-        <%--<div class="layui-form-item">
-            <label class="layui-form-label">上传头像</label>
-            <div class="layui-input-block">
-                <input type="">
-            </div>
-        </div>--%>
+        <%--隐藏域，pic（头像地址）--%>
+        <input type="hidden" id="pic" name="pic" class="layui-input" value="null">
         <!--姓名-->
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
@@ -120,6 +115,28 @@
             </div>
         </div>
     </div>
+    
+    <div style="float:right;">
+        <p>上传头像</p>
+        <div style="margin-top: 20px"></div>
+        <div class="layui-upload">
+            <button type="button" class="layui-btn" id="test1">上传图片</button>
+            <div class="layui-upload-list">
+                <img width="200px" class="layui-upload-img" id="demo1" />
+                <p id="demoText"></p>
+            </div>
+            <div style="width: 95px">
+                <div
+                        class="layui-progress layui-progress-big"
+                        lay-showpercent="yes"
+                        lay-filter="demo"
+                >
+                    <div class="layui-progress-bar" lay-percent=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <%--数据表格布局--%>
 <div class="layuimini-container">
@@ -178,8 +195,60 @@
 </div>
 <%--js代码--%>
 <script>
-    layui.use(['form', 'table','laydate'], function () {
-        var $ = layui.jquery, form = layui.form, table = layui.table, date=layui.laydate;
+    layui.use(['form', 'table','laydate', "upload", "element", "layer"], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            date = layui.laydate,
+            upload = layui.upload,
+            element = layui.element,
+            layer = layui.layer;
+
+        //上传图片
+        var uploadInst = upload.render({
+            elem: "#test1",
+            url: "update/updateImg.do", //此处用的是第三方的 http 请求演示，实际使用时改成您自己的上传接口即可。
+            before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    console.log(result);
+                    $("#demo1").attr("src", result); //图片链接（base64）
+                });
+
+                element.progress("demo", "0%"); //进度条复位
+                layer.msg("上传中", { icon: 16, time: 0 });
+            },
+            done: function (res) {
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg("上传失败");
+                }
+                //上传成功的一些操作
+                //把地址写到表单的隐藏域中
+                $("#pic").val(res.data.src);
+                //图片链接替换
+                $("#demo1").attr("src", res.data.src);
+
+                $("#demoText").html(""); //置空上传失败的状态
+            },
+            error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $("#demoText");
+                demoText.html(
+                    '<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>'
+                );
+                demoText.find(".demo-reload").on("click", function () {
+                    uploadInst.upload();
+                });
+            },
+            //进度条
+            progress: function (n, elem, e) {
+                element.progress("demo", n + "%"); //可配合 layui 进度条元素使用
+                if (n == 100) {
+                    layer.msg("上传完毕", { icon: 1 });
+                }
+            },
+        });
 
         $(function () {
             //获取所有的班级信息
@@ -280,26 +349,28 @@
                     type: 1,
                     maxmin:true,
                     shadeClose: true,
-                    area:['500px','100%'],
+                    area:['800px','90%'],
                     btn: ['确定', '取消'],
                     content: $("#edit_window"),
                     success: function () {  //弹出框成功回调
                         //给表单赋值
                         form.val("editForm", {
                             "sid": null,
-                            "sname": '刘亦菲',
+                            "sname": '王守仁',
                             "snum": '2020710050',
-                            "ssex": '女',
+                            "ssex": '男',
                             "sage": 20,
                             "cid": 4,
                             "sstatus":'正常',
                             "sremark":'无',
                             "idcard":'320282200002181243',
                             "phone":'13912345678',
-                            "address":'江苏省无锡市滨湖区鼋头渚',
+                            "address":'浙江省宁波市余姚市王府',
                             "entime":'2020-09-01',
-                            "pswd":'123456'
+                            "pswd":'123456',
+                            "pic": 'http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/20211010200811.jpg'
                         });
+                        $("#demo1").attr("src", "http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/20211010200811.jpg");
                     },
                     yes: function(index,layero){ //确认的回调
                         layer.close(index); //关闭弹出框
@@ -354,7 +425,7 @@
                     type: 1,    //界面层
                     maxmin:true,
                     shadeClose: true,
-                    area: ['500px', '100%'],
+                    area: ['800px', '90%'],
                     btn: ['确定', '取消'],
                     content: $("#edit_window"),
                     success: function () {
@@ -374,8 +445,10 @@
                             "phone": mdata.phone,
                             "address": mdata.address,
                             "entime": mdata.entime,
-                            "pswd": mdata.pswd
+                            "pswd": mdata.pswd,
+                            "pic": mdata.pic
                         });
+                        $("#demo1").attr("src", mdata.pic);
                     },
                     yes: function () {  //确认回调
                         layer.close(index); //关闭弹出框

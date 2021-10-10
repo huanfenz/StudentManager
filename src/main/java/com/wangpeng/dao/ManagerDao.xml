@@ -66,5 +66,6 @@
     <select id="checkByUsernameAndPassword" resultType="Manager">
         select id,username,password,name,remark from manager
         where username=#{username} and password=#{password}
+        limit 1
     </select>
 </mapper>

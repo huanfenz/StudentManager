@@ -59,8 +59,20 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public void setPassword(Manager manager, String password) {
+    public void setManagerPassword(Manager manager, String password) {
         manager.setPassword(password);
         managerDao.updateManager(manager);
+    }
+
+    @Override
+    public void setTeacherPassword(Teacher teacher, String password) {
+        teacher.setPswd(password);
+        teacherDao.updateTeacher(teacher);
+    }
+
+    @Override
+    public void setStudentPassword(Student student, String password) {
+        student.setPswd(password);
+        studentDao.updateStudent(student);
     }
 }

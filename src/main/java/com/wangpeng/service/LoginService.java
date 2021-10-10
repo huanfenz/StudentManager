@@ -11,5 +11,9 @@ public interface LoginService {
 
     Student studentLogin(String username, String password);
 
-    void setPassword(Manager manager, String password);
+    void setManagerPassword(Manager manager, String password);
+
+    void setTeacherPassword(Teacher loginTeacher, String password);
+
+    void setStudentPassword(Student loginStudent, String password);
 }
