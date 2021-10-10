@@ -151,26 +151,9 @@ String basePath = request.getScheme() + "://"
 
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery, form = layui.form, table = layui.table;
-        $(function () {
-            $.getJSON({
-                url: 'clazz/queryAllClazzs.do',
-                success: function (data) {
-                    console.log(data);
-                    $("#search_cid").html();
-                    $.each(data, function (i, n) {
-                        $("#search_cid")
-                            .append("<option value=\"" + n.cid + "\">" + n.cname + "</option>")
-                    });
-                    form.render('select', 'searchForm'); //刷新select选择框渲染
-                }
-            });
-        });
 
-        // 监听搜索操作
-        form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
-            // console.log(data.field);
-            // console.log(data.field.cid);
+        function my_search(data) {
+            var result = JSON.stringify(data);
             $.getJSON({
                 url: 'tableShow/queryTable.do',
                 data: {json: result},
@@ -179,17 +162,45 @@ String basePath = request.getScheme() + "://"
                     var courseListOther = res;
                     Timetable.setOption({
                         timetables: courseListOther,
+                        gridOnClick: function (e) {
+                            alert(e.name + '  ' + e.week + ', 第' + e.index + '节课, 课长' + e.length + '节');
+                            console.log(e);
+                        },
                         styles:{
                             Gheight: 65,
                             /*palette: ['#dedcda', '#ff4081']*/
                         },
-                        timetableType: courseType,
-                        gridOnClick: function (e) {
-                            console.log(e);
-                        }
+                        timetableType: courseType
                     });
                 }
             });
+        }
+
+        $.getJSON({
+            url: 'clazz/queryAllClazzs.do',
+            success: function (data) {
+                console.log(data);
+                $("#search_cid").html();
+                $.each(data, function (i, n) {
+                    $("#search_cid")
+                        .append("<option value=\"" + n.cid + "\">" + n.cname + "</option>")
+                });
+                form.render('select', 'searchForm'); //刷新select选择框渲染
+
+                form.val("searchForm", {
+                    "cid": 7,
+                    "weekno": 1,
+                });
+                var data = form.val("searchForm");
+                console.log(data);
+                my_search(data);
+            }
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            console.log(data.field);
+            my_search(data.field);
             return false;
         });
     })
