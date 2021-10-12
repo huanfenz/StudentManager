@@ -131,7 +131,7 @@
             iniUrl: "layuimini/api/init_teacher.json",    // 初始化接口
             clearUrl: "layuimini/api/clear.json", // 缓存清理接口
             urlHashLocation: true,      // 是否打开hash定位
-            bgColorDefault: 3,      // 主题默认配置
+            bgColorDefault: 4,      // 主题默认配置
             multiModule: true,          // 是否开启多模块
             menuChildOpen: false,       // 是否默认展开菜单
             loadingTime: 0,             // 初始化加载时间
