@@ -54,13 +54,21 @@
                 </select>
             </div>
         </div>
-        <!--日期-->
+        <!--开始日期-->
         <div class="layui-form-item">
-            <label class="layui-form-label">事件日期</label>
+            <label class="layui-form-label">开始日期</label>
             <div class="layui-input-block">
-                <input type="text" name="time" id="time" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                <input type="text" id="sDate" name="sDate" value="" lay-verify="date" placeholder="请输入开始日期" class="layui-input">
             </div>
         </div>
+        <%--结束日期--%>
+        <div class="layui-form-item">
+            <label class="layui-form-label">结束日期</label>
+            <div class="layui-input-block">
+                <input type="text" id="eDate" name="eDate" value="" lay-verify="date" placeholder="请输入结束日期" class="layui-input">
+            </div>
+        </div>
+
         <%--附件上传--%>
         <div class="layui-form-item">
             <label class="layui-form-label">附件</label>
@@ -100,7 +108,7 @@
 
 <script>
     layui.use(['form', 'table','laydate','upload'], function () {
-        var $ = layui.jquery, form = layui.form, table = layui.table, date=layui.laydate, upload=layui.upload;
+        var $ = layui.jquery, form = layui.form, table = layui.table, laydate=layui.laydate, upload=layui.upload;
 
         //上传附件
         upload.render({
@@ -128,13 +136,15 @@
             }],
             cols: [[
                 {type: "checkbox"},
-                {field: 'aid', title: '序号', sort: true},
+                /*{field: 'aid', title: '序号', sort: true},*/
                 {field: 'title', title: '标题'},
-                {field: 'reason', width: 300, title: '原因'},
+                {field: 'reason', width: 200, title: '原因'},
                 {field: 'type', title: '类型'},
-                {field: 'time', title: '事件日期'},
-                {field: 'status', title: '审批情况'},
-                {field: 'attName', title: '附件',templet: '#urlTpl' },
+                {field: 'sDate', title: '开始日期', sort: true},
+                {field: 'eDate', title: '结束日期', sort: true},
+                {field: 'status', title: '审批情况', sort: true},
+                {field: 'attName', title: '附件(点击打开)',templet: '#urlTpl' },
+                {field: 'msg', width: 200, title: '回复'}
             ]],
             limits: [5, 10, 15, 20, 25, 50, 100],
             limit: 10,
@@ -144,8 +154,11 @@
             },
         });
 
-        date.render({
-            elem: '#time'
+        laydate.render({
+            elem: '#sDate'
+        });
+        laydate.render({
+            elem: '#eDate'
         });
 
         //toolbar监听事件
@@ -156,22 +169,32 @@
                     type: 1,
                     maxmin:true,
                     shadeClose: true,
-                    area:['500px','450px'],
+                    area:['550px','500px'],
                     btn: ['确定', '取消'],
                     content: $("#edit_window"),
                     success: function () {  //弹出框成功回调
+                        var nowDate = new Date();
+                        var year = nowDate.getFullYear();
+                        var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1)
+                            : nowDate.getMonth() + 1;
+                        var day = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate
+                            .getDate();
+                        var dateStr = year + "-" + month + "-" + day;
+
                         $("#fileName").html("");
                         //给表单赋值
                         form.val("editForm", {
                             "aid": null,
                             "sid": ${sessionScope.loginObj.sid},
-                            "reason": '',
+                            "reason": null,
                             "title": '本人要请假',
                             "type": '请假',
-                            "time": '2021-10-07',
+                            "sDate": dateStr,
+                            "eDate": dateStr,
                             "status": '等待审批',
                             "att": null,
-                            "attName": null
+                            "attName": null,
+                            "msg":null
                         });
                     },
                     yes: function(index,layero){ //确认的回调

@@ -125,50 +125,50 @@
                                 <div class="welcome-module">
                                     <div class="layui-row layui-col-space10 layuimini-qiuck">
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/menu.html" data-title="学生管理" data-icon="fa fa-pencil">
+                                            <a href="javascript:;" layuimini-content-href="manager/student_list.jsp" data-title="学生管理" data-icon="fa fa-pencil">
                                                 <i class="fa fa-pencil"></i>
                                                 <cite>学生管理</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/setting.html" data-title="教师管理" data-icon="fa fa-briefcase">
+                                            <a href="javascript:;" layuimini-content-href="manager/teacher_list.jsp" data-title="教师管理" data-icon="fa fa-briefcase">
                                                 <i class="fa fa-briefcase"></i>
                                                 <cite>教师管理</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/table.html" data-title="班级管理" data-icon="fa fa-window-maximize">
+                                            <a href="javascript:;" layuimini-content-href="manager/clazz_list.jsp" data-title="班级管理" data-icon="fa fa-window-maximize">
                                                 <i class="fa fa-window-maximize"></i>
                                                 <cite>班级管理</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/icon.html" data-title="教室管理" data-icon="fa fa-bank">
+                                            <a href="javascript:;" layuimini-content-href="manager/room_list.jsp" data-title="教室管理" data-icon="fa fa-bank">
                                                 <i class="fa fa-bank"></i>
                                                 <cite>教室管理</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/form.html" data-title="开课管理" data-icon="fa fa-calendar">
+                                            <a href="javascript:;" layuimini-content-href="manager/open_course_list.jsp" data-title="开课管理" data-icon="fa fa-calendar">
                                                 <i class="fa fa-calendar"></i>
                                                 <cite>开课管理</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/404.html" data-title="审批管理" data-icon="fa fa-book">
+                                            <a href="javascript:;" layuimini-content-href="manager/approval_list.jsp" data-title="审批管理" data-icon="fa fa-book">
                                                 <i class="fa fa-book"></i>
                                                 <cite>审批管理</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/button.html" data-title="管理员管理" data-icon="fa fa-snowflake-o">
-                                                <i class="fa fa-snowflake-o"></i>
+                                            <a href="javascript:;" layuimini-content-href="manager/manager_list.jsp" data-title="管理员管理" data-icon="fa fa-cloud">
+                                                <i class="fa fa-cloud"></i>
                                                 <cite>管理员管理</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="https://www.baidu.com" data-title="修改密码" data-icon="fa fa-barcode">
-                                                <i class="fa fa-barcode"></i>
+                                            <a href="javascript:;" layuimini-content-href="common/password.jsp" data-title="修改密码" data-icon="fa fa-key">
+                                                <i class="fa fa-key"></i>
                                                 <cite>修改密码</cite>
                                             </a>
                                         </div>
@@ -337,7 +337,7 @@
             },
             series: [
                 {
-                    name: '访问来源',
+                    name: '数量统计',
                     type: 'pie',
                     radius: '55%',
                     center: ['50%', '60%'],

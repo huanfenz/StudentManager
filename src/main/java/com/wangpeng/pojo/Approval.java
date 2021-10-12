@@ -7,25 +7,29 @@ public class Approval {
     private String title;
     private String reason;
     private String type;
-    private String time;
+    private String sDate;
+    private String eDate;
     private String status;
     private String attName;
     private String att;
+    private String msg;
 
     public Approval() {
     }
 
-    public Approval(Integer aid, Integer sid, String sname, String title, String reason, String type, String time, String status, String attName, String att) {
+    public Approval(Integer aid, Integer sid, String sname, String title, String reason, String type, String sDate, String eDate, String status, String attName, String att, String msg) {
         this.aid = aid;
         this.sid = sid;
         this.sname = sname;
         this.title = title;
         this.reason = reason;
         this.type = type;
-        this.time = time;
+        this.sDate = sDate;
+        this.eDate = eDate;
         this.status = status;
         this.attName = attName;
         this.att = att;
+        this.msg = msg;
     }
 
     public Integer getAid() {
@@ -76,12 +80,20 @@ public class Approval {
         this.type = type;
     }
 
-    public String getTime() {
-        return time;
+    public String getsDate() {
+        return sDate;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setsDate(String sDate) {
+        this.sDate = sDate;
+    }
+
+    public String geteDate() {
+        return eDate;
+    }
+
+    public void seteDate(String eDate) {
+        this.eDate = eDate;
     }
 
     public String getStatus() {
@@ -108,6 +120,14 @@ public class Approval {
         this.att = att;
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
     @Override
     public String toString() {
         return "Approval{" +
@@ -117,10 +137,12 @@ public class Approval {
                 ", title='" + title + '\'' +
                 ", reason='" + reason + '\'' +
                 ", type='" + type + '\'' +
-                ", time='" + time + '\'' +
+                ", sDate='" + sDate + '\'' +
+                ", eDate='" + eDate + '\'' +
                 ", status='" + status + '\'' +
                 ", attName='" + attName + '\'' +
                 ", att='" + att + '\'' +
+                ", msg='" + msg + '\'' +
                 '}';
     }
 }

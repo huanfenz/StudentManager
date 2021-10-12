@@ -70,7 +70,7 @@
                     <select name="authority" id="authority">
                         <option value="manager">管理员</option>
                         <option value="teacher">教师</option>
-                        <option value="student">学生</option>
+                        <option value="student" selected="selected">学生</option>
                     </select>
                 </div>
                 <%--验证码--%>
@@ -112,15 +112,17 @@
         console.log(authority);
         console.log(rememberMe);
 
-        if(typeof(password) != "undefined") password = $.base64.decode(password);
+        if(password !== undefined) password = $.base64.decode(password);
 
         //给表单赋值
-        form.val("loginForm", {
-            "username":username,
-            "password":password,
-            "authority":authority,
-            "rememberMe":rememberMe
-        });
+        if(username !== undefined) {
+            form.val("loginForm", {
+                "username":username,
+                "password":password,
+                "authority":authority,
+                "rememberMe":rememberMe
+            });
+        }
 
         // 登录过期的时候，跳出ifram框架
         if (top.location != self.location) top.location = self.location;

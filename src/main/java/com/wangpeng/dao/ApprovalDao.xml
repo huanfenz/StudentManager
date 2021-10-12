@@ -6,8 +6,8 @@
 <mapper namespace="com.wangpeng.dao.ApprovalDao">
     <!--添加审批-->
     <insert id="insertApproval" parameterType="Approval">
-        insert into approval(aid,sid,title,reason,type,time,status,attName,att)
-        values(#{aid},#{sid},#{title},#{reason},#{type},#{time},#{status},#{attName},#{att})
+        insert into approval(aid,sid,title,reason,type,sDate,eDate,status,attName,att,msg)
+        values(#{aid},#{sid},#{title},#{reason},#{type},#{sDate},#{eDate},#{status},#{attName},#{att},#{msg})
     </insert>
     <!--删除审批-->
     <delete id="deleteApprovals" parameterType="Approval">
@@ -18,23 +18,23 @@
     </delete>
     <!--修改审批-->
     <update id="updateApproval" parameterType="Approval">
-        update approval set title=#{title},reason=#{reason},type=#{type},time=#{time},status=#{status},attName=#{attName},att=#{att}
+        update approval set title=#{title},reason=#{reason},type=#{type},sDate=#{sDate},eDate=#{eDate},status=#{status},attName=#{attName},att=#{att},msg=#{msg}
         where aid=#{aid}
     </update>
     <!--查询所有审批-->
     <select id="selectApprovals" resultType="Approval">
-        select aid,sid,title,reason,type,time,status,attName,att from approval
+        select aid,sid,title,reason,type,sDate,eDate,status,attName,att,msg from approval
     </select>
     <!--根据id查询审批-->
     <select id="selectApproval" resultType="Approval">
-        select aid,sid,title,reason,type,time,status,attName,att from approval where aid = #{aid}
+        select aid,sid,title,reason,type,sDate,eDate,status,attName,att,msg from approval where aid = #{aid}
     </select>
     <!--分页查询审批-->
     <select id="selectApprovalsByLimit" resultType="Approval">
-        select aid,sid,title,reason,type,time,status,attName,att from approval limit #{begin},#{size}
+        select aid,sid,title,reason,type,sDate,eDate,status,attName,att,msg from approval limit #{begin},#{size}
     </select>
     <select id="selectApprovalsByLimitByWait" resultType="Approval">
-        select aid,sid,title,reason,type,time,status,attName,att from approval where status='等待审批' limit #{begin},#{size}
+        select aid,sid,title,reason,type,sDate,eDate,status,attName,att,msg from approval where status='等待审批' limit #{begin},#{size}
     </select>
     <!--获取审批数量-->
     <select id="getApprovalsCount" resultType="int">
@@ -50,6 +50,6 @@
     </select>
     <!--分页查询审批(sid)-->
     <select id="selectApprovalsByLimitBySid" resultType="Approval">
-        select aid,sid,title,reason,type,time,status,attName,att from approval where sid=#{sid} limit #{begin},#{size}
+        select aid,sid,title,reason,type,sDate,eDate,status,attName,att,msg from approval where sid=#{sid} limit #{begin},#{size}
     </select>
 </mapper>

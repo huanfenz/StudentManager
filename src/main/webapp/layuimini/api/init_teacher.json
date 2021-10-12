@@ -24,19 +24,19 @@
             {
               "title": "教师信息",
               "href": "teacher/teacher_information.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-briefcase",
               "target": "_self"
             },
             {
               "title": "学生查询",
               "href": "teacher/teacher_student_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-pencil",
               "target": "_self"
             },
             {
               "title": "成绩管理",
               "href": "teacher/teacher_open_course_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-graduation-cap",
               "target": "_self"
             }
           ]
@@ -44,12 +44,12 @@
         {
           "title": "其他功能",
           "href": "",
-          "icon": "fa fa-home",
+          "icon": "fa fa-navicon",
           "target": "_self",
           "child": [
             {
               "title": "修改密码",
-              "href": "common/password.jsp",
+              "href": "common/fa-key",
               "icon": "fa fa-tachometer",
               "target": "_self"
             }

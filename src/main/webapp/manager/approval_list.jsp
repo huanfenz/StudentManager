@@ -32,12 +32,15 @@
         <input type="hidden" id="reason" name="reason" class="layui-input" value="null">
         <%--隐藏域，type--%>
         <input type="hidden" id="type" name="type" class="layui-input" value="null">
-        <%--隐藏域，time--%>
-        <input type="hidden" id="type" name="time" class="layui-input" value="null">
+        <%--隐藏域，sDate--%>
+        <input type="hidden" id="sDate" name="sDate" class="layui-input" value="null">
+        <%--隐藏域，eDate--%>
+        <input type="hidden" id="eDate" name="eDate" class="layui-input" value="null">
         <%--隐藏域，attName--%>
         <input type="hidden" id="attName" name="attName" class="layui-input" value="null">
         <%--隐藏域，att--%>
         <input type="hidden" id="att" name="att" class="layui-input" value="null">
+
         <!--状态-->
         <div class="layui-form-item">
             <label class="layui-form-label">选择</label>
@@ -46,6 +49,13 @@
                     <option value="审批通过">审批通过</option>
                     <option value="审批驳回">审批驳回</option>
                 </select>
+            </div>
+        </div>
+        <%--回复--%>
+        <div class="layui-form-item">
+            <label class="layui-form-label">回复</label>
+            <div class="layui-input-block">
+                <textarea id="msg" name="msg" lay-verify="required" lay-reqtext="回复不能为空" placeholder="请输入回复" class="layui-textarea"></textarea>
             </div>
         </div>
     </div>
@@ -58,6 +68,7 @@
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="dispose"> 处理审批 </button>
+                <button class="layui-btn layui-btn-danger layui-btn-sm data-add-btn" lay-event="delete"> 删除审批 </button>
             </div>
         </script>
         <%--表格容器--%>
@@ -76,7 +87,7 @@
         //加载数据表格
         table.render({
             elem: '#currentTableId',
-            url: 'approval/queryApprovalsByWait.do',
+            url: 'approval/queryApprovals.do',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -86,14 +97,20 @@
             cols: [[
                 {type: "checkbox"},
                 {field: 'aid', title: '序号', sort: true},
-                {field: 'sname', title: '学生姓名', sort: true},
+                {field: 'sname', title: '学生姓名'},
                 {field: 'title', title: '标题'},
-                {field: 'reason', width: 300, title: '原因'},
+                {field: 'reason', width: 200, title: '原因'},
                 {field: 'type', title: '类型'},
-                {field: 'time', title: '事件日期'},
-                {field: 'status', title: '审批情况'},
-                {field: 'attName', title: '附件',templet: '#urlTpl' },
+                {field: 'sDate', title: '开始日期', sort: true},
+                {field: 'eDate', title: '结束日期', sort: true},
+                {field: 'status', title: '审批情况', sort: true},
+                {field: 'attName', title: '附件(点击打开)',templet: '#urlTpl' },
+                {field: 'msg', title: '回复'},
             ]],
+            initSort: {
+                field: 'status' //排序字段，对应 cols 设定的各字段名
+                ,type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            },
             limits: [5, 10, 15, 20, 25, 50, 100],
             limit: 10,
             page: {
@@ -125,19 +142,26 @@
                     content: $("#edit_window"),
                     success: function () {  //弹出框成功回调
                         var mdata = data[0];   //获取该行的数据
+                        console.log(mdata);
                         //给表单赋值
                         form.val("editForm", {
                             "aid": mdata.aid,
                             "sid": mdata.sid,
                             "title": mdata.title,
+                            "reason": mdata.reason,
                             "type": mdata.type,
-                            "time": mdata.time,
-                            "status": mdata.status
+                            "sDate": mdata.sDate,
+                            "eDate": mdata.eDate,
+                            "status": mdata.status,
+                            "attName": mdata.attName,
+                            "att": mdata.att,
+                            "msg": mdata.msg
                         });
                     },
                     yes: function (index,layero) {  //确认回调
                         layer.close(index); //关闭弹出框
                         var mdata = form.val('editForm');   //获取表单的数据
+                        console.log(mdata);
                         $.getJSON({
                             url: 'approval/updateApproval.do',
                             data: {json:JSON.stringify(mdata)},   //发json过去
@@ -148,6 +172,22 @@
                             }
                         });
                     }
+                });
+            } else if (obj.event === 'delete') {  // 监听删除操作
+                layer.confirm('如果删除，学生端也将无法显示！\n确定要删除选中行吗？', function(index){
+                    var checkStatus = table.checkStatus('currentTableId')
+                        , data = checkStatus.data;
+                    layer.close(index); //关闭提示框
+                    //向服务器请求
+                    $.getJSON({
+                        url: 'approval/deleteApprovals.do',
+                        data: {json:JSON.stringify(data)},   //发json过去
+                        success:function (res) {
+                            layer.msg("删除"+res+"行成功！",{time:800});
+                            //重载表格
+                            table.reload('currentTableId',{page:{curr:1}});
+                        }
+                    });
                 });
             }
         });

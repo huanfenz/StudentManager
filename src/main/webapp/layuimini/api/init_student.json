@@ -24,25 +24,25 @@
             {
               "title": "学生信息",
               "href": "student/student_information.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-pencil",
               "target": "_self"
             },
             {
               "title": "课表查看",
               "href": "student/student_table_show.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-table",
               "target": "_self"
             },
             {
               "title": "成绩查询",
               "href": "student/student_score.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-graduation-cap",
               "target": "_self"
             },
             {
               "title": "申请审批",
               "href": "student/student_approval_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-book",
               "target": "_self"
             }
           ]
@@ -50,13 +50,13 @@
         {
           "title": "其他功能",
           "href": "",
-          "icon": "fa fa-home",
+          "icon": "fa fa-navicon",
           "target": "_self",
           "child": [
             {
               "title": "修改密码",
               "href": "common/password.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-key",
               "target": "_self"
             }
           ]

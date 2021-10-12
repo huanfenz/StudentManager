@@ -24,31 +24,31 @@
             {
               "title": "学生管理",
               "href": "manager/student_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-pencil",
               "target": "_self"
             },
             {
               "title": "教师管理",
               "href": "manager/teacher_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-briefcase",
               "target": "_self"
             },
             {
               "title": "班级管理",
               "href": "manager/clazz_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-window-maximize",
               "target": "_self"
             },
             {
               "title": "专业管理",
               "href": "manager/major_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-leaf",
               "target": "_self"
             },
             {
               "title": "教室管理",
               "href": "manager/room_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-bank",
               "target": "_self"
             }
           ]
@@ -56,31 +56,31 @@
         {
           "title": "教务管理",
           "href": "",
-          "icon": "fa fa-home",
+          "icon": "fa fa-mortar-board",
           "target": "_self",
           "child": [
             {
               "title": "课程管理",
               "href": "manager/course_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-legal",
               "target": "_self"
             },
             {
               "title": "开课管理",
               "href": "manager/open_course_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-calendar",
               "target": "_self"
             },
             {
               "title": "课表展示",
               "href": "manager/course_table_show.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-table",
               "target": "_self"
             },
             {
               "title": "审批管理",
               "href": "manager/approval_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-book",
               "target": "_self"
             }
           ]
@@ -88,19 +88,19 @@
         {
           "title": "其他管理",
           "href": "",
-          "icon": "fa fa-home",
+          "icon": "fa fa-navicon",
           "target": "_self",
           "child": [
             {
               "title": "修改密码",
               "href": "common/password.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-key",
               "target": "_self"
             },
             {
               "title": "管理员管理",
               "href": "manager/manager_list.jsp",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-cloud",
               "target": "_self"
             }
           ]
