@@ -182,6 +182,7 @@
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加学生 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除选中行 </button>
+                <button class="layui-btn layui-btn-sm data-plan-btn" lay-event="seeInfo"> 查看学生信息 </button>
             </div>
         </script>
         <%--表格容器--%>
@@ -415,6 +416,28 @@
                         }
                     });
                 });
+            }else if (obj.event === 'seeInfo') {  //监听查看信息操作
+                var checkStatus = table.checkStatus('currentTableId')
+                    , data = checkStatus.data;
+
+                console.log(data);
+                if (data.length != 1) {
+                    layer.msg("请选择一行记录！", {time: 1000});
+                    return false;
+                }
+
+                layer.open({
+                    title: "查看学生信息",
+                    type: 2,    //iframe
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['90%', '90%'],
+                    btn: ['确定'],
+                    content: 'manager/manager_student_information.jsp?sid=' + data[0].sid,
+                    yes: function (index, layero) { //确认的回调
+                        layer.close(index); //关闭弹出框
+                    }
+                })
             }
         });
 

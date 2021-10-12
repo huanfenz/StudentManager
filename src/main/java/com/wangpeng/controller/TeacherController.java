@@ -55,6 +55,17 @@ public class TeacherController {
     }
 
     /**
+     * 根据tid查询教师
+     * @return
+     */
+    @RequestMapping("queryTeacher.do")
+    @ResponseBody
+    public Teacher queryTeacher(int tid){
+        return service.findTeacher(tid);
+    }
+
+
+    /**
      * 删除教师
      * @param json
      * @return 返回成功的行数

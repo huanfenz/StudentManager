@@ -49,7 +49,7 @@
         </div>
         <!--日期-->
         <div class="layui-form-item">
-            <label class="layui-form-label">创建日期</label>
+            <label class="layui-form-label">事件日期</label>
             <div class="layui-input-block">
                 <input type="text" name="time" id="time" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
             </div>
@@ -97,7 +97,7 @@
                 {field: 'aid', title: '序号', sort: true},
                 {field: 'title', title: '标题'},
                 {field: 'type', title: '类型'},
-                {field: 'time', title: '创建日期'},
+                {field: 'time', title: '事件日期'},
                 {field: 'status', title: '审批情况'},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],

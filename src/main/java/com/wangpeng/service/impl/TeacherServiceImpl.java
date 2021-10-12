@@ -65,4 +65,9 @@ public class TeacherServiceImpl implements TeacherService {
     public List<Teacher> findAllTeachers() {
         return teacherDao.selectTeachers();
     }
+
+    @Override
+    public Teacher findTeacher(int tid) {
+        return teacherDao.selectTeacher(tid);
+    }
 }

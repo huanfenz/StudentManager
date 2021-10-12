@@ -176,7 +176,7 @@
                 }
 
                 layer.open({
-                    title: "查看排课",
+                    title: "查看学生信息",
                     type: 2,    //iframe
                     maxmin: true,
                     shadeClose: true,

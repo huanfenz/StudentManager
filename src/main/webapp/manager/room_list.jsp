@@ -114,7 +114,7 @@
                 {type: "checkbox"},
                 {field: 'rid', title: '序号', sort: true},
                 {field: 'rname', title: '教室名'},
-                {field: 'capacity', title: '所属院系'},
+                {field: 'capacity', title: '容量'},
                 {field: 'remark', title: '备注'},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],

@@ -1,3 +1,2 @@
-# StudentManager 学生信息管理系统
-
+# StudentManager
 有空再写

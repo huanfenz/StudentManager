@@ -62,4 +62,6 @@ public interface TeacherService {
      * @return
      */
     List<Teacher> findAllTeachers();
+
+    Teacher findTeacher(int tid);
 }

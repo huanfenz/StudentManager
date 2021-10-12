@@ -9,7 +9,7 @@
 <html>
 <head>
     <base href="<%=basePath%>" />
-    <title>学生信息</title>
+    <title>教师信息</title>
     <link rel="stylesheet" href="layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="layuimini/css/public.css" media="all">
     <script src="layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
@@ -37,30 +37,29 @@
 
     <script type="text/javascript">
         $.ajax({
-            url: 'student/queryStudent.do',
-            data: {sid:${param.sid}},
+            url: 'teacher/queryTeacher.do',
+            data: {tid:${param.tid}},
             type: 'post',
             datatype: 'json',
-            success: function (student) {
-                $("#sname").html(student.sname);
-                $("#snum").html(student.snum);
-                $("#ssex").html(student.ssex);
-                $("#sage").html(student.sage);
-                $("#cname").html(student.cname);
-                $("#sstatus").html(student.sstatus);
-                $("#sremark").html(student.sremark);
-                $("#idcard").html(student.idcard);
-                $("#phone").html(student.phone);
-                $("#address").html(student.address);
-                $("#entime").html(student.entime);
-                $("#pic").attr("src",student.pic);
+            success: function (teacher) {
+                $("#tname").html(teacher.tname);
+                $("#tnum").html(teacher.tnum);
+                $("#tsex").html(teacher.tsex);
+                $("#tage").html(teacher.tage);
+                $("#tstatus").html(teacher.tstatus);
+                $("#tremark").html(teacher.tremark);
+                $("#idcard").html(teacher.idcard);
+                $("#phone").html(teacher.phone);
+                $("#address").html(teacher.address);
+                $("#entime").html(teacher.entime);
+                $("#pic").attr("src",teacher.pic);
             }
         });
     </script>
 
     <div>
         <h1 align="center">个人信息档案</h1>
-        <div style="margin-top: 20px">
+        <div  style="margin-top: 20px">
             <table id="my_table">
                 <colgroup>
                     <col width="15%">
@@ -71,32 +70,28 @@
                 <tbody>
                 <tr>
                     <td>姓名:</td>
-                    <td id="sname"></td>
+                    <td id="tname"></td>
                     <td rowspan="6"><img id="pic" width="200px" src=""></td>
                 </tr>
                 <tr>
-                    <td>学号:</td>
-                    <td id="snum"></td>
+                    <td>职工号:</td>
+                    <td id="tnum"></td>
                 </tr>
                 <tr>
                     <td>性别:</td>
-                    <td id="ssex"></td>
+                    <td id="tsex"></td>
                 </tr>
                 <tr>
                     <td>年龄:</td>
-                    <td id="sage"></td>
-                </tr>
-                <tr>
-                    <td>班级:</td>
-                    <td id="cname"></td>
+                    <td id="tage"></td>
                 </tr>
                 <tr>
                     <td>状态:</td>
-                    <td id="sstatus"></td>
+                    <td id="tstatus"></td>
                 </tr>
                 <tr>
                     <td>备注:</td>
-                    <td id="sremark" colspan="2"></td>
+                    <td id="tremark"></td>
                 </tr>
                 <tr>
                     <td>身份证号码:</td>
