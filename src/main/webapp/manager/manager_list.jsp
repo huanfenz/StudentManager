@@ -132,7 +132,6 @@
                 prev: '上一页',
                 next: '下一页',
             },
-            skin: 'line',
             done: function (res) {
                 console.log(res);
             }

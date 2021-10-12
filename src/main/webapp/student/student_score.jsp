@@ -127,7 +127,6 @@
                 {field: 'remark', title: '备注'},
                 {field: 'score', title: '分数'}
             ]],
-            skin: 'line'
         });
 
         // 监听搜索操作

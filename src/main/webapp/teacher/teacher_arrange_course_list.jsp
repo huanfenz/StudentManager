@@ -58,7 +58,6 @@
                 {field: 'start', title: '开始节数'},
                 {field: 'size', title: '课长'}
             ]],
-            skin: 'line'
         });
 
     });

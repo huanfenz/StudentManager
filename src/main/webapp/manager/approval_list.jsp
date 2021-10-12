@@ -28,10 +28,16 @@
         <input type="hidden" id="sid" name="sid" class="layui-input" value="null">
         <%--隐藏域，title--%>
         <input type="hidden" id="title" name="title" class="layui-input" value="null">
+        <%--隐藏域，reason--%>
+        <input type="hidden" id="reason" name="reason" class="layui-input" value="null">
         <%--隐藏域，type--%>
         <input type="hidden" id="type" name="type" class="layui-input" value="null">
         <%--隐藏域，time--%>
         <input type="hidden" id="type" name="time" class="layui-input" value="null">
+        <%--隐藏域，attName--%>
+        <input type="hidden" id="attName" name="attName" class="layui-input" value="null">
+        <%--隐藏域，att--%>
+        <input type="hidden" id="att" name="att" class="layui-input" value="null">
         <!--状态-->
         <div class="layui-form-item">
             <label class="layui-form-label">选择</label>
@@ -59,6 +65,11 @@
     </div>
 </div>
 <%--js代码--%>
+<%--自定义数据表格模板：url--%>
+<script type="text/html" id="urlTpl">
+    <a href="{{d.att}}" class="layui-table-link" target="_blank">{{ d.attName }}</a>
+</script>
+
 <script>
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery, form = layui.form, table = layui.table;
@@ -77,9 +88,11 @@
                 {field: 'aid', title: '序号', sort: true},
                 {field: 'sname', title: '学生姓名', sort: true},
                 {field: 'title', title: '标题'},
+                {field: 'reason', width: 300, title: '原因'},
                 {field: 'type', title: '类型'},
-                {field: 'time', title: '创建日期'},
+                {field: 'time', title: '事件日期'},
                 {field: 'status', title: '审批情况'},
+                {field: 'attName', title: '附件',templet: '#urlTpl' },
             ]],
             limits: [5, 10, 15, 20, 25, 50, 100],
             limit: 10,

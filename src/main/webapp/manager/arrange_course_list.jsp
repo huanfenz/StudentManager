@@ -121,7 +121,6 @@
                 {field: 'size', title: '课长'},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
-            skin: 'line'
         });
 
         //toolbar监听事件

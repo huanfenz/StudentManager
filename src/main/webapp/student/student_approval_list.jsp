@@ -34,6 +34,13 @@
                 <input type="text" id="title" name="title" value="" lay-verify="required" lay-reqtext="审批名不能为空" placeholder="请输入姓名" class="layui-input">
             </div>
         </div>
+        <%--原因--%>
+        <div class="layui-form-item">
+            <label class="layui-form-label">原因</label>
+            <div class="layui-input-block">
+                <textarea id="reason" name="reason" lay-verify="required" lay-reqtext="原因不能为空" placeholder="请输入原因" class="layui-textarea"></textarea>
+            </div>
+        </div>
         <!--类型-->
         <div class="layui-form-item">
             <label class="layui-form-label">类型</label>
@@ -54,7 +61,18 @@
                 <input type="text" name="time" id="time" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
             </div>
         </div>
-
+        <%--附件上传--%>
+        <div class="layui-form-item">
+            <label class="layui-form-label">附件</label>
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" id="att_update"><i class="layui-icon"></i>上传文件</button>
+                <span id="fileName"></span>
+            </div>
+        </div>
+        <%--隐藏域,附件上传的地址--%>
+        <input type="hidden" id="att" name="att" class="layui-input" value="null">
+        <%--隐藏域,附件上传的名称--%>
+        <input type="hidden" id="attName" name="attName" class="layui-input" value="null">
         <%--隐藏域,审批情况--%>
         <input type="hidden" id="status" name="status" class="layui-input" value="null">
     </div>
@@ -66,22 +84,38 @@
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加审批 </button>
-                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除选中行 </button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 撤销审批 </button>
             </div>
         </script>
         <%--表格容器--%>
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
-        <%--行工具栏--%>
-        <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
-        </script>
     </div>
 </div>
 <%--js代码--%>
+
+<%--自定义数据表格模板：url--%>
+<script type="text/html" id="urlTpl">
+    <a href="{{d.att}}" class="layui-table-link" target="_blank">{{ d.attName }}</a>
+</script>
+
 <script>
-    layui.use(['form', 'table','laydate'], function () {
-        var $ = layui.jquery, form = layui.form, table = layui.table, date=layui.laydate;
+    layui.use(['form', 'table','laydate','upload'], function () {
+        var $ = layui.jquery, form = layui.form, table = layui.table, date=layui.laydate, upload=layui.upload;
+
+        //上传附件
+        upload.render({
+            elem: '#att_update',
+            url: 'update/updateAttachment.do',
+            accept: 'file', //普通文件
+            done: function(res){
+                layer.msg('上传成功');
+                console.log(res);
+                $("#att").val(res.data.src);
+                $("#attName").val(res.fileName);
+                $("#fileName").html(res.fileName);
+            }
+        });
+
         //加载数据表格
         table.render({
             elem: '#currentTableId',
@@ -96,10 +130,11 @@
                 {type: "checkbox"},
                 {field: 'aid', title: '序号', sort: true},
                 {field: 'title', title: '标题'},
+                {field: 'reason', width: 300, title: '原因'},
                 {field: 'type', title: '类型'},
                 {field: 'time', title: '事件日期'},
                 {field: 'status', title: '审批情况'},
-                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
+                {field: 'attName', title: '附件',templet: '#urlTpl' },
             ]],
             limits: [5, 10, 15, 20, 25, 50, 100],
             limit: 10,
@@ -107,7 +142,6 @@
                 prev: '上一页',
                 next: '下一页',
             },
-            skin: 'line'
         });
 
         date.render({
@@ -126,14 +160,18 @@
                     btn: ['确定', '取消'],
                     content: $("#edit_window"),
                     success: function () {  //弹出框成功回调
+                        $("#fileName").html("");
                         //给表单赋值
                         form.val("editForm", {
                             "aid": null,
                             "sid": ${sessionScope.loginObj.sid},
+                            "reason": '',
                             "title": '本人要请假',
                             "type": '请假',
                             "time": '2021-10-07',
-                            "status": '等待审批'
+                            "status": '等待审批',
+                            "att": null,
+                            "attName": null
                         });
                     },
                     yes: function(index,layero){ //确认的回调
@@ -181,63 +219,6 @@
                 });
             }
         });
-
-        table.on('tool(currentTableFilter)', function (obj) {
-            if (obj.event === 'edit') { //监听编辑按钮
-                var index = layer.open({
-                    title: '编辑用户',
-                    type: 1,    //界面层
-                    maxmin:true,
-                    shadeClose: true,
-                    area: ['500px', '450px'],
-                    btn: ['确定', '取消'],
-                    content: $("#edit_window"),
-                    success: function () {
-                        var mdata = obj.data;   //获取该行的数据
-                        //给表单赋值
-                        form.val("editForm", {
-                            "aid": mdata.aid,
-                            "title": mdata.title,
-                            "type": mdata.type,
-                            "time": mdata.time,
-                            "status": mdata.status,
-                        });
-                    },
-                    yes: function () {  //确认回调
-                        layer.close(index); //关闭弹出框
-                        var mdata = form.val('editForm');   //获取表单的数据
-                        $.getJSON({
-                            url: 'approval/updateApproval.do',
-                            data: {json:JSON.stringify(mdata)},   //发json过去
-                            success:function (res) {
-                                layer.msg("修改"+res+"行成功!",{time:800});
-                                //重载表格
-                                table.reload('currentTableId');
-                            }
-                        });
-                    }
-                });
-                $(window).on("resize", function () {
-                    layer.full(index);
-                });
-                return false;
-            } else if (obj.event === 'delete') {    //监听删除按钮
-                layer.confirm('确定要删除该行吗？', function (index) {
-                    var mdata = obj.data;    //获取该行的数据
-                    obj.del();  //删除对应行（tr）的DOM结构，并更新缓存
-                    layer.close(index); //关闭窗口
-                    //向服务器请求
-                    $.getJSON({
-                        url: 'approval/deleteApprovals.do',
-                        data: {json:JSON.stringify(mdata)},   //发json过去
-                        success:function (res) {
-                            layer.msg("删除"+res+"行成功！",{time:800});
-                        }
-                    });
-                });
-            }
-        });
-
     });
 </script>
 

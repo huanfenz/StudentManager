@@ -5,21 +5,27 @@ public class Approval {
     private Integer sid;
     private String sname;
     private String title;
+    private String reason;
     private String type;
     private String time;
     private String status;
+    private String attName;
+    private String att;
 
     public Approval() {
     }
 
-    public Approval(Integer aid, Integer sid, String sname, String title, String type, String time, String status) {
+    public Approval(Integer aid, Integer sid, String sname, String title, String reason, String type, String time, String status, String attName, String att) {
         this.aid = aid;
         this.sid = sid;
         this.sname = sname;
         this.title = title;
+        this.reason = reason;
         this.type = type;
         this.time = time;
         this.status = status;
+        this.attName = attName;
+        this.att = att;
     }
 
     public Integer getAid() {
@@ -54,6 +60,14 @@ public class Approval {
         this.title = title;
     }
 
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
     public String getType() {
         return type;
     }
@@ -78,6 +92,22 @@ public class Approval {
         this.status = status;
     }
 
+    public String getAttName() {
+        return attName;
+    }
+
+    public void setAttName(String attName) {
+        this.attName = attName;
+    }
+
+    public String getAtt() {
+        return att;
+    }
+
+    public void setAtt(String att) {
+        this.att = att;
+    }
+
     @Override
     public String toString() {
         return "Approval{" +
@@ -85,9 +115,12 @@ public class Approval {
                 ", sid=" + sid +
                 ", sname='" + sname + '\'' +
                 ", title='" + title + '\'' +
+                ", reason='" + reason + '\'' +
                 ", type='" + type + '\'' +
                 ", time='" + time + '\'' +
                 ", status='" + status + '\'' +
+                ", attName='" + attName + '\'' +
+                ", att='" + att + '\'' +
                 '}';
     }
 }

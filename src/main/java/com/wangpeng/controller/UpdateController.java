@@ -19,13 +19,18 @@ import java.util.Map;
 @RequestMapping("/update")
 public class UpdateController {
 
-    @RequestMapping("updateImg.do")
-    @ResponseBody
-    public Map<String,Object> updateImg(HttpServletRequest req, HttpServletResponse resp){
-
-        String picPath = req.getSession().getServletContext().getRealPath("pictures");
+    /**
+     *
+     * @param req
+     * @param resp
+     * @param dirName exp:"pictures"
+     * @return
+     */
+    private Map<String,String> myUpdate(HttpServletRequest req, HttpServletResponse resp, String dirName) {
+        String picPath = req.getSession().getServletContext().getRealPath(dirName);
 
         String resPath = null;
+        String fileName = null;
 
         //先判断上传的数据是否多段数据（只有是多段的数据，才是文件上传的）
         if (ServletFileUpload.isMultipartContent(req)) {
@@ -47,9 +52,10 @@ public class UpdateController {
                         // 上传的文件
                         System.out.println("表单项的 name 属性值：" + fileItem.getFieldName());
                         System.out.println("上传的文件名：" + fileItem.getName());
+                        fileName = fileItem.getName();
                         // 加个时间戳防止重名
-                        String newFileName = System.currentTimeMillis() + fileItem.getName();
-                        resPath = "http://localhost:8080/StudentManager/pictures/" + newFileName;
+                        String newFileName = System.currentTimeMillis() + fileName;
+                        resPath = "http://localhost:8080/StudentManager/" + dirName + "/" + newFileName;
                         fileItem.write(new File(picPath + "\\" + newFileName));
                     }
                 }
@@ -57,6 +63,19 @@ public class UpdateController {
                 e.printStackTrace();
             }
         }
+
+        Map<String,String> resMap = new HashMap<>();
+        resMap.put("resPath", resPath);
+        resMap.put("fileName", fileName);
+
+        return resMap;
+    }
+
+    @RequestMapping("updateImg.do")
+    @ResponseBody
+    public Map<String,Object> updateImg(HttpServletRequest req, HttpServletResponse resp){
+
+        String resPath = myUpdate(req, resp, "pictures").get("resPath");
 
         Map<String,Object> res = new HashMap<>();
         res.put("code",0);
@@ -68,4 +87,22 @@ public class UpdateController {
         return res;
     }
 
+    @RequestMapping("updateAttachment.do")
+    @ResponseBody
+    public Map<String,Object> updateAttachment(HttpServletRequest req, HttpServletResponse resp){
+
+        Map<String, String> map = myUpdate(req, resp, "attachment");
+        String resPath = map.get("resPath");
+        String fileName = map.get("fileName");
+
+        Map<String,Object> res = new HashMap<>();
+        res.put("code",0);
+        res.put("msg","");
+        Map<String,String> tmp = new HashMap<>();
+        tmp.put("src",resPath);
+        res.put("data", tmp);
+        res.put("fileName", fileName);
+
+        return res;
+    }
 }
