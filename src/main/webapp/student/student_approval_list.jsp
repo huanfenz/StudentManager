@@ -142,8 +142,8 @@
                 {field: 'type', title: '类型'},
                 {field: 'sDate', title: '开始日期', sort: true},
                 {field: 'eDate', title: '结束日期', sort: true},
-                {field: 'status', title: '审批情况', sort: true},
                 {field: 'attName', title: '附件(点击打开)',templet: '#urlTpl' },
+                {field: 'status', title: '审批情况', sort: true},
                 {field: 'msg', width: 200, title: '回复'}
             ]],
             limits: [5, 10, 15, 20, 25, 50, 100],

@@ -6,7 +6,7 @@
   "logoInfo": {
     "title": "学生管理系统",
     "image": "layuimini/images/xiaohui.png",
-    "href": ""
+    "href": "student/student_index.jsp"
   },
   "menuInfo": [
     {

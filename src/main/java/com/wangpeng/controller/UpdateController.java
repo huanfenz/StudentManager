@@ -29,6 +29,10 @@ public class UpdateController {
     private Map<String,String> myUpdate(HttpServletRequest req, HttpServletResponse resp, String dirName) {
         String picPath = req.getSession().getServletContext().getRealPath(dirName);
 
+        String basePath = req.getScheme() + "://"
+                + req.getServerName() + ":" + req.getServerPort()
+                + req.getContextPath() + "/";
+
         String resPath = null;
         String fileName = null;
 
@@ -55,8 +59,8 @@ public class UpdateController {
                         fileName = fileItem.getName();
                         // 加个时间戳防止重名
                         String newFileName = System.currentTimeMillis() + fileName;
-                        resPath = "http://localhost:8080/StudentManager/" + dirName + "/" + newFileName;
-                        fileItem.write(new File(picPath + "\\" + newFileName));
+                        resPath = basePath + dirName + "/" + newFileName;
+                        fileItem.write(new File(picPath + "/" + newFileName));
                     }
                 }
             } catch (Exception e) {
