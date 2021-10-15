@@ -50,7 +50,7 @@
             {
               "title": "修改密码",
               "href": "common/fa-key",
-              "icon": "fa fa-tachometer",
+              "icon": "fa fa-key",
               "target": "_self"
             }
           ]

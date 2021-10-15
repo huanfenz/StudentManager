@@ -65,17 +65,20 @@
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">文章名</label>
                                                     <div class="layui-input-inline">
-                                                        <input type="text" id="title" name="title" autocomplete="off" class="layui-input">
+                                                        <input type="text" name="title" autocomplete="off" class="layui-input">
                                                     </div>
                                                 </div>
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">日期</label>
                                                     <div class="layui-input-inline">
-                                                        <input type="text" id="date" name="date" autocomplete="off" placeholder="yyyy-MM-dd" class="layui-input">
+                                                        <input type="text" id="search_date" name="date" autocomplete="off" placeholder="yyyy-MM-dd" class="layui-input">
                                                     </div>
                                                 </div>
                                                 <div class="layui-inline">
-                                                    <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                                                    <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜　　索 </button>
+                                                </div>
+                                                <div class="layui-inline">
+                                                    <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-all-btn"><i class="layui-icon"></i> 显示全部 </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -138,25 +141,25 @@
                         <div class="welcome-module">
                             <div class="layui-row layui-col-space10 layuimini-qiuck">
                                 <div class="layui-col-xs3 layuimini-qiuck-module">
-                                    <a href="javascript:;" layuimini-content-href="page/menu.html" data-title="学生信息" data-icon="fa fa-pencil">
+                                    <a href="javascript:;" layuimini-content-href="student/student_information.jsp" data-title="个人信息" data-icon="fa fa-pencil">
                                         <i class="fa fa-pencil"></i>
                                         <cite>学生信息</cite>
                                     </a>
                                 </div>
                                 <div class="layui-col-xs3 layuimini-qiuck-module">
-                                    <a href="javascript:;" layuimini-content-href="page/setting.html" data-title="课表查看" data-icon="fa fa-table">
+                                    <a href="javascript:;" layuimini-content-href="student/student_table_show.jsp" data-title="课表查看" data-icon="fa fa-table">
                                         <i class="fa fa-table"></i>
                                         <cite>课表查看</cite>
                                     </a>
                                 </div>
                                 <div class="layui-col-xs3 layuimini-qiuck-module">
-                                    <a href="javascript:;" layuimini-content-href="page/table.html" data-title="成绩查询" data-icon="fa fa-graduation-cap">
+                                    <a href="javascript:;" layuimini-content-href="student/student_score.jsp" data-title="成绩查询" data-icon="fa fa-graduation-cap">
                                         <i class="fa fa-graduation-cap"></i>
                                         <cite>成绩查询</cite>
                                     </a>
                                 </div>
                                 <div class="layui-col-xs3 layuimini-qiuck-module">
-                                    <a href="javascript:;" layuimini-content-href="page/icon.html" data-title="申请审批" data-icon="fa fa-book">
+                                    <a href="javascript:;" layuimini-content-href="student/student_approval_list.jsp" data-title="申请审批" data-icon="fa fa-book">
                                         <i class="fa fa-book"></i>
                                         <cite>申请审批</cite>
                                     </a>
@@ -198,7 +201,7 @@
                             <tr>
                                 <td>下载地址</td>
                                 <td>
-                                    iframe版-v2：<a href="" target="_blank">github</a> / <a href="" target="_blank">gitee</a><br>
+                                    <a href="https://github.com/huanfenz/StudentManager" target="_blank">github</a> / <a href="https://gitee.com/huanfenz/StudentManager" target="_blank">gitee</a><br>
                                     喜欢此项目的可以给我的GitHub和Gitee加个Star支持一下
                                 </td>
                             </tr>
@@ -218,37 +221,89 @@
     </div>
 </div>
 
-<%--自定义数据表格模板：url--%>
-<script type="text/html" id="urlTpl">
-    <a href="{{d.url}}" class="layui-table-link" target="_blank">{{ d.title }}</a>
-</script>
-
 <script>
-    layui.use(['layer', 'miniTab','echarts', 'form', 'table'], function () {
+    layui.use(['layer', 'miniTab', 'form', 'table'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
             miniTab = layui.miniTab,
-            echarts = layui.echarts,
-            form = layui.form;
-        table = layui.table;
+            form = layui.form,
+            date = layui.date,
+            table = layui.table;
 
         miniTab.listen();
 
         table.render({
             elem: '#currentTableId',
-            url: 'layuimini/api/my_table.json',
+            url: 'article/queryArticles.do',
             cols: [[
                 {field: 'id', title: '序号', width: 100},
-                {field: 'title', width: 600, title: '文章标题', templet: '#urlTpl'},
+                {field: 'title', width: 600, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
                 {field: 'people', title: '添加人'},
                 {field: 'date', title: '日期', sort: true}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
-            page: true
+            page: {
+                prev: '上一页',
+                next: '下一页',
+            }
+        });
+
+        date.render({
+            elem: '#date'
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            var result = JSON.stringify(data.field);
+            console.log(result);
+            //执行搜索重载
+            table.reload('currentTableId', {
+                url: 'article/searchArticles.do',
+                where: {json:result},   //把json传过去
+                page: {curr: 1}, //重新从第 1 页开始
+                done: function (res) {
+                    layer.msg("搜索到"+res.count+"个结果", {time:800});
+                    return res;
+                }
+            });
+
+            return false;   //不跳转
+        });
+
+        // 监听显示全部操作
+        form.on('submit(data-all-btn)', function (data) {
+            form.val("searchForm", {
+                'sname':null,
+                'snum':null,
+                'cid':null
+            });
+            //执行搜索重载
+            table.reload('currentTableId', {
+                url: 'article/queryArticles.do',
+                page: {curr: 1}, //重新从第 1 页开始
+                done: null
+            });
+
+            return false;   //不跳转
+        });
+
+        //监听单元格事件
+        table.on('tool(currentTableFilter)', function(obj){
+            if(obj.event === 'show') {
+                var mdata = obj.data;
+                layer.open({
+                    title: mdata.title,
+                    type: 2,    //iframe
+                    shadeClose: true,
+                    area: ['95%', '95%'],
+                    content: mdata.url
+                })
+            }
         });
 
     });
+
 </script>
 </body>
 </html>

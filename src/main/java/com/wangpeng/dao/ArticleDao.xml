@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定对应的Dao/Mapper接口-->
+<mapper namespace="com.wangpeng.dao.ArticleDao">
+    <!--添加文章-->
+    <insert id="insertArticle" parameterType="Article">
+        insert into article(id,title,people,date,url)
+        values(#{id},#{title},#{people},#{date},#{url})
+    </insert>
+    <!--删除文章-->
+    <delete id="deleteArticles" parameterType="Article">
+        delete from article where id in
+        <foreach collection="list" open="(" close=")" item="obj" separator=",">
+            #{obj.id}
+        </foreach>
+    </delete>
+    <!--修改文章-->
+    <update id="updateArticle" parameterType="Article">
+        update article set title=#{title},people=#{people},date=#{date},url=#{url}
+        where id=#{id}
+    </update>
+    <!--查询所有文章-->
+    <select id="selectArticles" resultType="Article">
+        select id,title,people,date,url from article
+    </select>
+    <!--根据id查询文章-->
+    <select id="selectArticle" resultType="Article">
+        select id,title,people,date,url from article where id = #{id}
+    </select>
+    <!--分页查询文章-->
+    <select id="selectArticlesByLimit" resultType="Article">
+        select id,title,people,date,url from article limit #{begin},#{size}
+    </select>
+    <!--获取文章数量-->
+    <select id="getArticlesCount" resultType="int">
+        select count(*) from article
+    </select>
+    <!--分页搜索文章-->
+    <select id="searchArticlesByLimit" resultType="Article">
+        select id,title,people,date,url from article
+        <where>
+            <if test="title != null and title != '' ">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test="date != null and date != '' ">
+                and date = #{date}
+            </if>
+        </where>
+        limit #{begin},#{size}
+    </select>
+    <!--获取搜索的数量-->
+    <select id="getSearchCount" resultType="int">
+        select count(*) from article
+        <where>
+            <if test="title != null and title != '' ">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test="date != null and date != '' ">
+                and date = #{date}
+            </if>
+        </where>
+    </select>
+</mapper>

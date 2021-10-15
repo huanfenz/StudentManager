@@ -228,7 +228,7 @@
                             <tr>
                                 <td>下载地址</td>
                                 <td>
-                                    iframe版-v2：<a href="" target="_blank">github</a> / <a href="" target="_blank">gitee</a><br>
+                                    <a href="https://github.com/huanfenz/StudentManager" target="_blank">github</a> / <a href="https://gitee.com/huanfenz/StudentManager" target="_blank">gitee</a><br>
                                     喜欢此项目的可以给我的GitHub和Gitee加个Star支持一下
                                 </td>
                             </tr>
