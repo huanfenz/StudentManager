@@ -105,4 +105,23 @@ public class UpdateController {
 
         return res;
     }
+
+    @RequestMapping("updateArticle.do")
+    @ResponseBody
+    public Map<String,Object> updateArticle(HttpServletRequest req, HttpServletResponse resp){
+
+        Map<String, String> map = myUpdate(req, resp, "article");
+        String resPath = map.get("resPath");
+        String fileName = map.get("fileName");
+
+        Map<String,Object> res = new HashMap<>();
+        res.put("code",0);
+        res.put("msg","");
+        Map<String,String> tmp = new HashMap<>();
+        tmp.put("src",resPath);
+        res.put("data", tmp);
+        res.put("fileName", fileName);
+
+        return res;
+    }
 }

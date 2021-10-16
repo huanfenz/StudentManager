@@ -222,12 +222,12 @@
 </div>
 
 <script>
-    layui.use(['layer', 'miniTab', 'form', 'table'], function () {
+    layui.use(['layer', 'miniTab', 'form', 'table','laydate'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
             miniTab = layui.miniTab,
             form = layui.form,
-            date = layui.date,
+            date = layui.laydate,
             table = layui.table;
 
         miniTab.listen();
@@ -250,7 +250,7 @@
         });
 
         date.render({
-            elem: '#date'
+            elem: '#search_date'
         });
 
         // 监听搜索操作

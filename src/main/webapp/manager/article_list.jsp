@@ -50,7 +50,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">上传文章</label>
             <div class="layui-input-block">
-                <button type="button" class="layui-btn" id="article_update"><i class="layui-icon"></i>上传压缩包</button>
+                <button type="button" class="layui-btn" id="article_update"><i class="layui-icon"></i>上传HTML格式文档</button>
                 <span id="fileName"></span>
             </div>
         </div>
@@ -117,6 +117,7 @@
             elem: '#article_update',
             url: 'update/updateArticle.do',
             accept: 'file', //普通文件
+            exts: 'html|htm', //只允许上传html和htm
             done: function(res){
                 layer.msg('上传成功');
                 console.log(res);
@@ -132,6 +133,7 @@
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print'],
             cols: [[
+                {type: "checkbox"},
                 {field: 'id', title: '序号', width: 100},
                 {field: 'title', width: 600, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
                 {field: 'people', title: '添加人'},
@@ -265,6 +267,20 @@
                         }
                     });
                 });
+            }
+        });
+
+        //监听单元格事件
+        table.on('tool(currentTableFilter)', function(obj){
+            if(obj.event === 'show') {
+                var mdata = obj.data;
+                layer.open({
+                    title: mdata.title,
+                    type: 2,    //iframe
+                    shadeClose: true,
+                    area: ['95%', '95%'],
+                    content: mdata.url
+                })
             }
         });
 
