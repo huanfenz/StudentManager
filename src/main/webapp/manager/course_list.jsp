@@ -92,11 +92,7 @@
             elem: '#currentTableId',
             url: 'course/queryCourses.do',
             toolbar: '#toolbarDemo',
-            defaultToolbar: ['filter', 'exports', 'print', {
-                title: '提示',
-                layEvent: 'LAYTABLE_TIPS',
-                icon: 'layui-icon-tips'
-            }],
+            defaultToolbar: ['filter', 'exports', 'print'],
             cols: [[
                 {type: "checkbox"},
                 {field: 'courseId', title: '序号', sort: true},

@@ -102,6 +102,12 @@
               "href": "manager/manager_list.jsp",
               "icon": "fa fa-cloud",
               "target": "_self"
+            },
+            {
+              "title": "公告管理",
+              "href": "manager/article_list.jsp",
+              "icon": "fa fa-bullhorn",
+              "target": "_self"
             }
           ]
         }

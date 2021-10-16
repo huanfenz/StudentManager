@@ -50,7 +50,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">上传文章</label>
             <div class="layui-input-block">
-                <button type="button" class="layui-btn" id="att_update"><i class="layui-icon"></i>上传压缩包</button>
+                <button type="button" class="layui-btn" id="article_update"><i class="layui-icon"></i>上传压缩包</button>
                 <span id="fileName"></span>
             </div>
         </div>
@@ -104,12 +104,33 @@
 </div>
 <%--js代码--%>
 <script>
-    layui.use(['form', 'table', 'date'], function () {
-        var $ = layui.jquery, form = layui.form, table = layui.table, date = layui.date;
+    layui.use(['form', 'table','laydate', "upload", "element", "layer"], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            date = layui.laydate,
+            upload = layui.upload,
+            layer = layui.layer;
+
+        //上传文章
+        upload.render({
+            elem: '#article_update',
+            url: 'update/updateArticle.do',
+            accept: 'file', //普通文件
+            done: function(res){
+                layer.msg('上传成功');
+                console.log(res);
+                $("#url").val(res.data.src);    //放url隐藏域
+                $("#fileName").html(res.fileName);  //放文件名显示
+            }
+        });
+
         //加载数据表格
         table.render({
             elem: '#currentTableId',
             url: 'article/queryArticles.do',
+            toolbar: '#toolbarDemo',
+            defaultToolbar: ['filter', 'exports', 'print'],
             cols: [[
                 {field: 'id', title: '序号', width: 100},
                 {field: 'title', width: 600, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
@@ -167,6 +188,17 @@
             return false;   //不跳转
         });
 
+        function getToday() {
+            var nowDate = new Date();
+            var year = nowDate.getFullYear();
+            var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1)
+                : nowDate.getMonth() + 1;
+            var day = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate
+                .getDate();
+            var dateStr = year + "-" + month + "-" + day;
+            return dateStr;
+        }
+
         //toolbar监听事件
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
@@ -179,12 +211,15 @@
                     btn: ['确定', '取消'],
                     content: $("#edit_window"),
                     success: function () {  //弹出框成功回调
+                        //文件名显示空白
+                        $("#fileName").html("");
                         //给表单赋值
                         form.val("editForm", {
-                            "mid": null,
-                            "mname": '美术学',
-                            "mdept": '美术学院',
-                            "mremark": '无',
+                            "id": null,
+                            "title": null,
+                            "people": null,
+                            "date": getToday(),
+                            "url": null
                         });
                     },
                     yes: function(index,layero){ //确认的回调
@@ -192,13 +227,13 @@
                         var mdata = form.val('editForm');
                         //向服务器请求
                         $.getJSON({
-                            url: 'major/addMajor.do',
+                            url: 'article/addArticle.do',
                             data: {json:JSON.stringify(mdata)},    //发json
                             success:function (res) {
                                 layer.msg("添加"+res+"行成功！",{time:800});
                                 //获得最后一页的页码并重载
                                 $.getJSON({
-                                    url: 'major/getAmount.do',
+                                    url: 'article/getAmount.do',
                                     success: function (res) {
                                         //数据长度
                                         var len = res;
@@ -221,7 +256,7 @@
                     layer.close(index); //关闭提示框
                     //向服务器请求
                     $.getJSON({
-                        url: 'major/deleteMajors.do',
+                        url: 'article/deleteArticles.do',
                         data: {json:JSON.stringify(data)},   //发json过去
                         success:function (res) {
                             layer.msg("删除"+res+"行成功！",{time:800});
