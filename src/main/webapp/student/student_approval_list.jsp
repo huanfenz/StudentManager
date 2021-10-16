@@ -129,11 +129,6 @@
             elem: '#currentTableId',
             url: 'approval/queryApprovalsBySid.do',
             toolbar: '#toolbarDemo',
-            defaultToolbar: ['filter', 'exports', 'print', {
-                title: '提示',
-                layEvent: 'LAYTABLE_TIPS',
-                icon: 'layui-icon-tips'
-            }],
             cols: [[
                 {type: "checkbox"},
                 /*{field: 'aid', title: '序号', sort: true},*/

@@ -219,7 +219,7 @@
                             <tr>
                                 <td>演示地址</td>
                                 <td>
-                                    在线演示：<a href="http://47.97.104.230:8080/StudentManager/index.jsp" target="_blank">点击查看</a><br>
+                                    在线演示：<a href="http://47.97.104.230:8098/StudentManager/index.jsp" target="_blank">点击查看</a><br>
                                     管理员账号：admin       密码：admin<br>
                                     教师端账号：15001       密码：123456<br>
                                     学生端账号：2020710001  密码：123456<br>

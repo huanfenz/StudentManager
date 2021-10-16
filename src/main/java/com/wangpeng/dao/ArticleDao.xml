@@ -23,7 +23,7 @@
     </update>
     <!--查询所有文章-->
     <select id="selectArticles" resultType="Article">
-        select id,title,people,date,url from article
+        select id,title,people,date,url from article ORDER BY date DESC
     </select>
     <!--根据id查询文章-->
     <select id="selectArticle" resultType="Article">
@@ -31,7 +31,7 @@
     </select>
     <!--分页查询文章-->
     <select id="selectArticlesByLimit" resultType="Article">
-        select id,title,people,date,url from article limit #{begin},#{size}
+        select id,title,people,date,url from article ORDER BY date DESC limit #{begin},#{size}
     </select>
     <!--获取文章数量-->
     <select id="getArticlesCount" resultType="int">
@@ -45,7 +45,7 @@
                 and title like concat('%',#{title},'%')
             </if>
             <if test="date != null and date != '' ">
-                and date = #{date}
+                and `date` = #{date}
             </if>
         </where>
         limit #{begin},#{size}

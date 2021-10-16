@@ -60,7 +60,7 @@
                                 <fieldset class="table-search-fieldset">
                                     <legend>搜索公告</legend>
                                     <div style="margin: 10px 10px 10px 10px">
-                                        <form class="layui-form layui-form-pane" action="">
+                                        <form class="layui-form layui-form-pane" action="" lay-filter="searchForm">
                                             <div class="layui-form-item">
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">文章名</label>
@@ -192,7 +192,7 @@
                             <tr>
                                 <td>演示地址</td>
                                 <td>
-                                    在线演示：<a href="http://47.97.104.230:8080/StudentManager/index.jsp" target="_blank">点击查看</a><br>
+                                    在线演示：<a href="http://47.97.104.230:8098/StudentManager/index.jsp" target="_blank">点击查看</a><br>
                                     管理员账号：admin       密码：admin<br>
                                     教师端账号：15001       密码：123456<br>
                                     学生端账号：2020710001  密码：123456<br>
@@ -236,7 +236,7 @@
             elem: '#currentTableId',
             url: 'article/queryArticles.do',
             cols: [[
-                {field: 'id', title: '序号', width: 100},
+                {field: 'id', title: '序号', width: 100, type: 'numbers'},
                 {field: 'title', width: 600, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
                 {field: 'people', title: '添加人'},
                 {field: 'date', title: '日期', sort: true}
@@ -274,9 +274,8 @@
         // 监听显示全部操作
         form.on('submit(data-all-btn)', function (data) {
             form.val("searchForm", {
-                'sname':null,
-                'snum':null,
-                'cid':null
+                'title':null,
+                'date':null
             });
             //执行搜索重载
             table.reload('currentTableId', {

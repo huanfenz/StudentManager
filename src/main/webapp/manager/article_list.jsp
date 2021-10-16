@@ -67,7 +67,7 @@
         <fieldset class="table-search-fieldset">
                 <legend>搜索公告</legend>
                 <div style="margin: 10px 10px 10px 10px">
-                    <form class="layui-form layui-form-pane" action="">
+                    <form class="layui-form layui-form-pane" action="" lay-filter="searchForm">
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <label class="layui-form-label">文章名</label>
@@ -176,9 +176,8 @@
         // 监听显示全部操作
         form.on('submit(data-all-btn)', function (data) {
             form.val("searchForm", {
-                'sname':null,
-                'snum':null,
-                'cid':null
+                'title':null,
+                'date':null
             });
             //执行搜索重载
             table.reload('currentTableId', {
@@ -233,20 +232,8 @@
                             data: {json:JSON.stringify(mdata)},    //发json
                             success:function (res) {
                                 layer.msg("添加"+res+"行成功！",{time:800});
-                                //获得最后一页的页码并重载
-                                $.getJSON({
-                                    url: 'article/getAmount.do',
-                                    success: function (res) {
-                                        //数据长度
-                                        var len = res;
-                                        //每页大小
-                                        var size = $('.layui-laypage-limits').find('select').val();
-                                        //页码: 上取整（len/size）
-                                        var pageNum = Math.ceil(len / size);
-                                        //重载页面
-                                        table.reload('currentTableId',{page : {curr : pageNum}});
-                                    }
-                                });
+                                //重载表格
+                                table.reload('currentTableId',{page:{curr:1}});
                             }
                         });
                     }
