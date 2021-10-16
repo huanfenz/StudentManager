@@ -302,7 +302,7 @@
                     type: 1,
                     maxmin:true,
                     shadeClose: true,
-                    area:['800px','100%'],
+                    area:['800px','90%'],
                     btn: ['确定', '取消'],
                     content: $("#edit_window"),
                     success: function () {  //弹出框成功回调
@@ -399,7 +399,7 @@
                     type: 1,    //界面层
                     maxmin:true,
                     shadeClose: true,
-                    area: ['800px', '100%'],
+                    area: ['800px', '90%'],
                     btn: ['确定', '取消'],
                     content: $("#edit_window"),
                     success: function () {
