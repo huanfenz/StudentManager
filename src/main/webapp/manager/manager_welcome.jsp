@@ -256,54 +256,19 @@
 
 <script>
 
-    layui.use(['layer', 'miniTab', 'echarts','form', 'table','laydate'], function () {
+    layui.use(['layer', 'miniTab', 'echarts', 'table'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
             miniTab = layui.miniTab,
             echarts = layui.echarts,
-            form = layui.form,
-            date = layui.laydate,
             table = layui.table;
 
         miniTab.listen();
 
-        table.render({
-            elem: '#currentTableId',
-            url: 'article/queryArticles.do',
-            cols: [[
-                {field: 'id', title: '序号', width: 100, type: 'numbers'},
-                {field: 'title', width: 600, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
-                {field: 'people', title: '添加人'},
-                {field: 'date', title: '日期', sort: true}
-            ]],
-            limits: [10, 15, 20, 25, 50, 100],
-            limit: 15,
-            page: {
-                prev: '上一页',
-                next: '下一页',
-            }
-        });
-
-        //监听单元格事件
-        table.on('tool(currentTableFilter)', function(obj){
-            if(obj.event === 'show') {
-                var mdata = obj.data;
-                layer.open({
-                    title: mdata.title,
-                    type: 2,    //iframe
-                    shadeClose: true,
-                    area: ['95%', '95%'],
-                    scrollbar: false,
-                    content: mdata.url
-                })
-            }
-        });
-
         /**
          * 玫瑰图表
          */
-        var echartsPies = echarts.init(document.getElementById('echarts-pies'), 'walden');
-
+        var echartsPies;
         $.ajax({
             url: 'welcome/getAllCount.do',
             type: 'post',
@@ -351,8 +316,8 @@
                         }
                     ]
                 };
+                echartsPies = echarts.init(document.getElementById('echarts-pies'), 'walden');
                 echartsPies.setOption(optionPies);
-
             }
         });
 
@@ -360,6 +325,38 @@
         window.onresize = function(){
             echartsPies.resize();
         }
+
+        table.render({
+            elem: '#currentTableId',
+            url: 'article/queryArticles.do',
+            cols: [[
+                {field: 'id', title: '序号', width: 100, type: 'numbers'},
+                {field: 'title', width: 600, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
+                {field: 'people', title: '添加人'},
+                {field: 'date', title: '日期', sort: true}
+            ]],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: {
+                prev: '上一页',
+                next: '下一页',
+            }
+        });
+
+        //监听单元格事件
+        table.on('tool(currentTableFilter)', function(obj){
+            if(obj.event === 'show') {
+                var mdata = obj.data;
+                layer.open({
+                    title: mdata.title,
+                    type: 2,    //iframe
+                    shadeClose: true,
+                    area: ['95%', '95%'],
+                    scrollbar: false,
+                    content: mdata.url
+                })
+            }
+        });
 
     });
 </script>
