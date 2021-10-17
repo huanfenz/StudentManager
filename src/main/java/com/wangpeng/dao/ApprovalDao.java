@@ -62,4 +62,6 @@ public interface ApprovalDao {
     int getApprovalsCountByWait();
 
     List<Approval> selectApprovalsByLimitByWait(@Param("begin") int begin, @Param("size")int size);
+
+    Integer getApprovalsCountUntreated();
 }

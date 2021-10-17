@@ -52,4 +52,8 @@
     <select id="selectApprovalsByLimitBySid" resultType="Approval">
         select aid,sid,title,reason,type,sDate,eDate,status,attName,att,msg from approval where sid=#{sid} limit #{begin},#{size}
     </select>
+    <!--获取未处理的审批数量-->
+    <select id="getApprovalsCountUntreated" resultType="int">
+        select count(*) from approval where status = '等待审批'
+    </select>
 </mapper>

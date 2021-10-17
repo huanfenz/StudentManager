@@ -10,7 +10,7 @@
 <head>
     <base href="<%=basePath%>" />
     <title>教师信息</title>
-    <link rel="stylesheet" href="layuimini/lib/layui-v2.6.8/css/layui.css" media="all">
+    <link rel="stylesheet" href="layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="layuimini/css/public.css" media="all">
     <script src="layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
     <script src="layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>

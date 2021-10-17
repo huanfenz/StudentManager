@@ -152,4 +152,14 @@ public class ApprovalController {
         return service.getApprovalsCount();
     }
 
+    /**
+     * 获取未处理的审批总数
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("getAmountUntreated.do")
+    @ResponseBody
+    public Integer getAmountUntreated() {
+        return service.getApprovalsCountUntreated();
+    }
 }

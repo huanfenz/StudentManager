@@ -65,8 +65,8 @@
                                                         <h5>学生统计</h5>
                                                     </div>
                                                     <div class="panel-content">
-                                                        <h1 class="no-margins">56</h1>
-                                                        <small>在校学生数量</small>
+                                                        <h1 class="no-margins" id="student_count">等待加载</h1>
+                                                        <small>当前学生数量</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -79,8 +79,8 @@
                                                         <h5>教师统计</h5>
                                                     </div>
                                                     <div class="panel-content">
-                                                        <h1 class="no-margins">17</h1>
-                                                        <small>在校教师数量</small>
+                                                        <h1 class="no-margins" id="teacher_count">等待加载</h1>
+                                                        <small>当前教师数量</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,7 +93,7 @@
                                                         <h5>开课统计</h5>
                                                     </div>
                                                     <div class="panel-content">
-                                                        <h1 class="no-margins">30</h1>
+                                                        <h1 class="no-margins" id="open_course_count">等待加载</h1>
                                                         <small>当前开课数量</small>
                                                     </div>
                                                 </div>
@@ -107,7 +107,7 @@
                                                         <h5>审批统计</h5>
                                                     </div>
                                                     <div class="panel-content">
-                                                        <h1 class="no-margins">5</h1>
+                                                        <h1 class="no-margins" id="approval_untreated_count">等待加载</h1>
                                                         <small>未处理的审批</small>
                                                     </div>
                                                 </div>
@@ -178,14 +178,20 @@
                         </div>
 
                     </div>
+
                     <div class="layui-col-md12">
-                        <div class="layui-card">
-                            <div class="layui-card-header"><i class="fa fa-line-chart icon"></i>报表统计</div>
-                            <div class="layui-card-body">
-                                <div id="echarts-records" style="width: 100%;min-height:500px"></div>
+                        <!-- 系统公告 -->
+                        <div class="layui-card" style="height: 730px;">
+                            <div class="layui-card-header"><i class="fa fa-bullhorn icon icon-tip"></i>系统公告</div>
+                            <div style="margin: 15px;">
+
+                                <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
 
@@ -249,115 +255,106 @@
 </div>
 
 <script>
-    layui.use(['layer', 'miniTab','echarts'], function () {
+
+    layui.use(['layer', 'miniTab', 'echarts','form', 'table','laydate'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
             miniTab = layui.miniTab,
-            echarts = layui.echarts;
+            echarts = layui.echarts,
+            form = layui.form,
+            date = layui.laydate,
+            table = layui.table;
 
         miniTab.listen();
 
-        /**
-         * 报表功能
-         */
-        var echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
-        var optionRecords = {
-            tooltip: {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['学生统计','教师统计','课程统计','开课统计']
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            toolbox: {
-                feature: {
-                    saveAsImage: {}
-                }
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: ['周一','周二','周三','周四','周五','周六','周日']
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [
-                {
-                    name:'学生统计',
-                    type:'line',
-                    data:[45, 43, 46, 47, 50, 55, 56]
-                },
-                {
-                    name:'教师统计',
-                    type:'line',
-                    data:[20, 19, 17, 15, 14, 21, 25]
-                },
-                {
-                    name:'课程统计',
-                    type:'line',
-                    data:[10, 12, 14, 13, 15, 17, 30]
-                },
-                {
-                    name:'开课统计',
-                    type:'line',
-                    data:[30, 25, 23, 11, 17, 16, 28]
-                }
-            ]
-        };
-        echartsRecords.setOption(optionRecords);
+        table.render({
+            elem: '#currentTableId',
+            url: 'article/queryArticles.do',
+            cols: [[
+                {field: 'id', title: '序号', width: 100, type: 'numbers'},
+                {field: 'title', width: 600, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
+                {field: 'people', title: '添加人'},
+                {field: 'date', title: '日期', sort: true}
+            ]],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: {
+                prev: '上一页',
+                next: '下一页',
+            }
+        });
 
-        // echarts 窗口缩放自适应
-        window.onresize = function(){
-            echartsRecords.resize();
-        }
+        //监听单元格事件
+        table.on('tool(currentTableFilter)', function(obj){
+            if(obj.event === 'show') {
+                var mdata = obj.data;
+                layer.open({
+                    title: mdata.title,
+                    type: 2,    //iframe
+                    shadeClose: true,
+                    area: ['95%', '95%'],
+                    scrollbar: false,
+                    content: mdata.url
+                })
+            }
+        });
 
         /**
          * 玫瑰图表
          */
         var echartsPies = echarts.init(document.getElementById('echarts-pies'), 'walden');
-        var optionPies = {
-            title: {
-                text: '人数统计',
-                left: 'center'
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: '{a} <br/>{b} : {c} ({d}%)'
-            },
-            legend: {
-                orient: 'vertical',
-                left: 'left',
-                data: ['学生数量', '教师数量', '管理员数量']
-            },
-            series: [
-                {
-                    name: '数量统计',
-                    type: 'pie',
-                    radius: '55%',
-                    center: ['50%', '60%'],
-                    roseType: 'radius',
-                    data: [
-                        {value: 17, name: '学生数量'},
-                        {value: 15, name: '教师数量'},
-                        {value: 5, name: '管理员数量'}
-                    ],
-                    emphasis: {
-                        itemStyle: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+
+        $.ajax({
+            url: 'welcome/getAllCount.do',
+            type: 'post',
+            datatype: 'json',
+            success: function (res) {
+                console.log(res);
+                $("#student_count").html(res.studentCount);
+                $("#teacher_count").html(res.teacherCount);
+                $("#open_course_count").html(res.openCourseCount);
+                $("#approval_untreated_count").html(res.approvalCount);
+
+                var optionPies = {
+                    title: {
+                        text: '人数统计',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        data: ['学生数量', '教师数量', '管理员数量']
+                    },
+                    series: [
+                        {
+                            name: '数量统计',
+                            type: 'pie',
+                            radius: '55%',
+                            center: ['50%', '60%'],
+                            roseType: 'radius',
+                            data: [
+                                {value: res.studentCount, name: '学生数量'},
+                                {value: res.teacherCount, name: '教师数量'},
+                                {value: res.managerCount, name: '管理员数量'}
+                            ],
+                            emphasis: {
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
                         }
-                    }
-                }
-            ]
-        };
-        echartsPies.setOption(optionPies);
+                    ]
+                };
+                echartsPies.setOption(optionPies);
+
+            }
+        });
 
         // echartsPies 窗口缩放自适应
         window.onresize = function(){

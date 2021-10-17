@@ -89,10 +89,15 @@
         where tid=#{tid}
         limit #{begin},#{size}
     </select>
-    <!--学生查-->
+    <!--查询学生的开课和成绩信息（自定义的结果集）-->
     <select id="selectOpenCoursesByStudent" resultType="OpenCourseAndScore">
         select year,term,tid,courseId,remark,score
         from open_course,course_grade
         where open_course.oid = course_grade.oid and sid = #{sid}
+    </select>
+    <!--获取某学生的开课数量-->
+    <select id="getOpenCoursesCountByStudent" resultType="int">
+        select count(*) from open_course
+        where cid = ( select cid from student where sid=#{sid} )
     </select>
 </mapper>

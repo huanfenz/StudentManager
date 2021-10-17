@@ -74,5 +74,16 @@ public interface OpenCourseDao {
 
     List<OpenCourse> selectOpenCoursesByLimitByTeacher(@Param("begin")int begin, @Param("size")Integer size, @Param("tid")Integer tid);
 
+    /**
+     * 查询学生的开课和成绩信息
+     * @param sid
+     * @return
+     */
     List<OpenCourseAndScore> selectOpenCoursesByStudent(Integer sid);
+
+    /**
+     * 获取某学生的开课数量
+     * @return
+     */
+    int getOpenCoursesCountByStudent(Integer sid);
 }

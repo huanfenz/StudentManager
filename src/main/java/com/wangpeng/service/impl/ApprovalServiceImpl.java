@@ -92,4 +92,9 @@ public class ApprovalServiceImpl implements ApprovalService {
         return res;
     }
 
+    @Override
+    public Integer getApprovalsCountUntreated() {
+        return approvalDao.getApprovalsCountUntreated();
+    }
+
 }

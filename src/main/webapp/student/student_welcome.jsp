@@ -109,8 +109,8 @@
                                                 <h5>开课统计</h5>
                                             </div>
                                             <div class="panel-content">
-                                                <h1 class="no-margins">17</h1>
-                                                <small>开课总数</small>
+                                                <h1 class="no-margins" id="open_course_count">等待加载</h1>
+                                                <small>当前开课总数</small>
                                             </div>
                                         </div>
                                     </div>
@@ -123,8 +123,8 @@
                                                 <h5>审批统计</h5>
                                             </div>
                                             <div class="panel-content">
-                                                <h1 class="no-margins">12</h1>
-                                                <small>审批总数</small>
+                                                <h1 class="no-margins" id="approval_count">等待加载</h1>
+                                                <small>当前审批总数</small>
                                             </div>
                                         </div>
                                     </div>
@@ -232,6 +232,18 @@
 
         miniTab.listen();
 
+        $.ajax({
+            url: 'welcome/getAllCountByStudent.do',
+            data: {sid: ${sessionScope.loginObj.sid}},
+            type: 'post',
+            datatype: 'json',
+            success: function (res) {
+                console.log(res);
+                $("#open_course_count").html(res.openCourseCount);
+                $("#approval_count").html(res.approvalCount);
+            }
+        });
+
         table.render({
             elem: '#currentTableId',
             url: 'article/queryArticles.do',
@@ -296,6 +308,7 @@
                     type: 2,    //iframe
                     shadeClose: true,
                     area: ['95%', '95%'],
+                    scrollbar: false,
                     content: mdata.url
                 })
             }

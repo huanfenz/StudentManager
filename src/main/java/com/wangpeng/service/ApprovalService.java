@@ -54,4 +54,6 @@ public interface ApprovalService {
     int getApprovalsCountByWait();
 
     List<Approval> findApprovalsByPageByWait(Integer page, Integer size);
+
+    Integer getApprovalsCountUntreated();
 }
