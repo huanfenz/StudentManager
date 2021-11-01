@@ -255,7 +255,6 @@
 </div>
 
 <script>
-
     layui.use(['layer', 'miniTab', 'echarts', 'table'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
@@ -269,69 +268,71 @@
          * 玫瑰图表
          */
         var echartsPies;
-        $.ajax({
-            url: 'welcome/getAllCount.do',
-            type: 'post',
-            datatype: 'json',
-            success: function (res) {
-                console.log(res);
-                $("#student_count").html(res.studentCount);
-                $("#teacher_count").html(res.teacherCount);
-                $("#open_course_count").html(res.openCourseCount);
-                $("#approval_untreated_count").html(res.approvalCount);
+        setTimeout(function () {
+            $.ajax({
+                url: 'welcome/getAllCount.do',
+                type: 'post',
+                datatype: 'json',
+                success: function (res) {
+                    console.log(res);
+                    $("#student_count").html(res.studentCount);
+                    $("#teacher_count").html(res.teacherCount);
+                    $("#open_course_count").html(res.openCourseCount);
+                    $("#approval_untreated_count").html(res.approvalCount);
 
-                var optionPies = {
-                    title: {
-                        text: '人数统计',
-                        left: 'center'
-                    },
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: '{a} <br/>{b} : {c} ({d}%)'
-                    },
-                    legend: {
-                        orient: 'vertical',
-                        left: 'left',
-                        data: ['学生数量', '教师数量', '管理员数量']
-                    },
-                    series: [
-                        {
-                            name: '数量统计',
-                            type: 'pie',
-                            radius: '55%',
-                            center: ['50%', '60%'],
-                            roseType: 'radius',
-                            data: [
-                                {value: res.studentCount, name: '学生数量'},
-                                {value: res.teacherCount, name: '教师数量'},
-                                {value: res.managerCount, name: '管理员数量'}
-                            ],
-                            emphasis: {
-                                itemStyle: {
-                                    shadowBlur: 10,
-                                    shadowOffsetX: 0,
-                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    var optionPies = {
+                        title: {
+                            text: '人数统计',
+                            left: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{a} <br/>{b} : {c} ({d}%)'
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            left: 'left',
+                            data: ['学生数量', '教师数量', '管理员数量']
+                        },
+                        series: [
+                            {
+                                name: '数量统计',
+                                type: 'pie',
+                                radius: '55%',
+                                center: ['50%', '60%'],
+                                roseType: 'radius',
+                                data: [
+                                    {value: res.studentCount, name: '学生数量'},
+                                    {value: res.teacherCount, name: '教师数量'},
+                                    {value: res.managerCount, name: '管理员数量'}
+                                ],
+                                emphasis: {
+                                    itemStyle: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
                                 }
                             }
-                        }
-                    ]
-                };
-                echartsPies = echarts.init(document.getElementById('echarts-pies'), 'walden');
-                echartsPies.setOption(optionPies);
-            }
-        });
+                        ]
+                    };
+                    echartsPies = echarts.init(document.getElementById('echarts-pies'), 'walden');
+                    echartsPies.setOption(optionPies);
 
-        // echartsPies 窗口缩放自适应
-        window.onresize = function(){
-            echartsPies.resize();
-        }
+                    // echartsPies 窗口缩放自适应
+                    window.onresize = function(){
+                        echartsPies.resize();
+                    }
+                }
+            });
+        }, 1000);
 
         table.render({
             elem: '#currentTableId',
             url: 'article/queryArticles.do',
             cols: [[
-                {field: 'id', title: '序号', width: 100, type: 'numbers'},
-                {field: 'title', width: 600, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
+                {field: 'id', width: 50, title: '序号', width: 100, type: 'numbers'},
+                {field: 'title', width: 500, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
                 {field: 'people', title: '添加人'},
                 {field: 'date', title: '日期', sort: true}
             ]],
