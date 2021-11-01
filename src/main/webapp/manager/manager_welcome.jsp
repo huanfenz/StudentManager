@@ -196,12 +196,6 @@
             </div>
 
             <div class="layui-col-md4">
-                <div class="layui-card">
-                    <div class="layui-card-header"><i class="fa fa-line-chart icon"></i>玫瑰图统计</div>
-                    <div class="layui-card-body">
-                        <div id="echarts-pies" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
-                    </div>
-                </div>
 
                 <div class="layui-card">
                     <div class="layui-card-header"><i class="fa fa-fire icon"></i>版本信息</div>
@@ -255,83 +249,34 @@
 </div>
 
 <script>
-    layui.use(['layer', 'miniTab', 'echarts', 'table'], function () {
+    layui.use(['layer', 'miniTab', 'table'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
             miniTab = layui.miniTab,
-            echarts = layui.echarts,
             table = layui.table;
 
         miniTab.listen();
 
-        /**
-         * 玫瑰图表
-         */
-        var echartsPies;
-        setTimeout(function () {
-            $.ajax({
-                url: 'welcome/getAllCount.do',
-                type: 'post',
-                datatype: 'json',
-                success: function (res) {
-                    console.log(res);
-                    $("#student_count").html(res.studentCount);
-                    $("#teacher_count").html(res.teacherCount);
-                    $("#open_course_count").html(res.openCourseCount);
-                    $("#approval_untreated_count").html(res.approvalCount);
+        // 获取数据
+        $.ajax({
+            url: 'welcome/getAllCount.do',
+            type: 'post',
+            datatype: 'json',
+            success: function (res) {
+                console.log(res);
+                $("#student_count").html(res.studentCount);
+                $("#teacher_count").html(res.teacherCount);
+                $("#open_course_count").html(res.openCourseCount);
+                $("#approval_untreated_count").html(res.approvalCount);
+            }
+        });
 
-                    var optionPies = {
-                        title: {
-                            text: '人数统计',
-                            left: 'center'
-                        },
-                        tooltip: {
-                            trigger: 'item',
-                            formatter: '{a} <br/>{b} : {c} ({d}%)'
-                        },
-                        legend: {
-                            orient: 'vertical',
-                            left: 'left',
-                            data: ['学生数量', '教师数量', '管理员数量']
-                        },
-                        series: [
-                            {
-                                name: '数量统计',
-                                type: 'pie',
-                                radius: '55%',
-                                center: ['50%', '60%'],
-                                roseType: 'radius',
-                                data: [
-                                    {value: res.studentCount, name: '学生数量'},
-                                    {value: res.teacherCount, name: '教师数量'},
-                                    {value: res.managerCount, name: '管理员数量'}
-                                ],
-                                emphasis: {
-                                    itemStyle: {
-                                        shadowBlur: 10,
-                                        shadowOffsetX: 0,
-                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                    }
-                                }
-                            }
-                        ]
-                    };
-                    echartsPies = echarts.init(document.getElementById('echarts-pies'), 'walden');
-                    echartsPies.setOption(optionPies);
-
-                    // echartsPies 窗口缩放自适应
-                    window.onresize = function(){
-                        echartsPies.resize();
-                    }
-                }
-            });
-        }, 1000);
-
+        // 加载数据表格
         table.render({
             elem: '#currentTableId',
             url: 'article/queryArticles.do',
             cols: [[
-                {field: 'id', width: 50, title: '序号', width: 100, type: 'numbers'},
+                {field: 'id', width: 30, title: '序号', type: 'numbers'},
                 {field: 'title', width: 500, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
                 {field: 'people', title: '添加人'},
                 {field: 'date', title: '日期', sort: true}
@@ -344,7 +289,7 @@
             }
         });
 
-        //监听单元格事件
+        // 监听单元格事件
         table.on('tool(currentTableFilter)', function(obj){
             if(obj.event === 'show') {
                 var mdata = obj.data;
