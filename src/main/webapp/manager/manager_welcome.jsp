@@ -51,13 +51,14 @@
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md8">
                 <div class="layui-row layui-col-space15">
-                    <div class="layui-col-md6">
+                    <div class="layui-col-md12">
+                        <%--数据统计--%>
                         <div class="layui-card">
                             <div class="layui-card-header"><i class="fa fa-warning icon"></i>数据统计</div>
                             <div class="layui-card-body">
-                                <div class="welcome-module">
+                                <div class="welcome-module" style="height: 105px">
                                     <div class="layui-row layui-col-space10">
-                                        <div class="layui-col-xs6">
+                                        <div class="layui-col-xs3">
                                             <div class="panel layui-bg-number">
                                                 <div class="panel-body">
                                                     <div class="panel-title">
@@ -71,7 +72,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="layui-col-xs6">
+                                        <div class="layui-col-xs3">
                                             <div class="panel layui-bg-number">
                                                 <div class="panel-body">
                                                     <div class="panel-title">
@@ -85,7 +86,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="layui-col-xs6">
+                                        <div class="layui-col-xs3">
                                             <div class="panel layui-bg-number">
                                                 <div class="panel-body">
                                                     <div class="panel-title">
@@ -99,7 +100,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="layui-col-xs6">
+                                        <div class="layui-col-xs3">
                                             <div class="panel layui-bg-number">
                                                 <div class="panel-body">
                                                     <div class="panel-title">
@@ -117,66 +118,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="layui-col-md6">
-                        <div class="layui-card">
-                            <div class="layui-card-header"><i class="fa fa-credit-card icon icon-blue"></i>快捷入口</div>
-                            <div class="layui-card-body">
-                                <div class="welcome-module">
-                                    <div class="layui-row layui-col-space10 layuimini-qiuck">
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="manager/student_list.jsp" data-title="学生管理" data-icon="fa fa-pencil">
-                                                <i class="fa fa-pencil"></i>
-                                                <cite>学生管理</cite>
-                                            </a>
-                                        </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="manager/teacher_list.jsp" data-title="教师管理" data-icon="fa fa-briefcase">
-                                                <i class="fa fa-briefcase"></i>
-                                                <cite>教师管理</cite>
-                                            </a>
-                                        </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="manager/clazz_list.jsp" data-title="班级管理" data-icon="fa fa-window-maximize">
-                                                <i class="fa fa-window-maximize"></i>
-                                                <cite>班级管理</cite>
-                                            </a>
-                                        </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="manager/room_list.jsp" data-title="教室管理" data-icon="fa fa-bank">
-                                                <i class="fa fa-bank"></i>
-                                                <cite>教室管理</cite>
-                                            </a>
-                                        </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="manager/open_course_list.jsp" data-title="开课管理" data-icon="fa fa-calendar">
-                                                <i class="fa fa-calendar"></i>
-                                                <cite>开课管理</cite>
-                                            </a>
-                                        </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="manager/approval_list.jsp" data-title="审批管理" data-icon="fa fa-book">
-                                                <i class="fa fa-book"></i>
-                                                <cite>审批管理</cite>
-                                            </a>
-                                        </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="manager/manager_list.jsp" data-title="管理员管理" data-icon="fa fa-cloud">
-                                                <i class="fa fa-cloud"></i>
-                                                <cite>管理员管理</cite>
-                                            </a>
-                                        </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="common/password.jsp" data-title="修改密码" data-icon="fa fa-key">
-                                                <i class="fa fa-key"></i>
-                                                <cite>修改密码</cite>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
                     <div class="layui-col-md12">
@@ -196,7 +137,65 @@
             </div>
 
             <div class="layui-col-md4">
-
+                <%--快捷入口--%>
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="fa fa-credit-card icon icon-blue"></i>快捷入口</div>
+                    <div class="layui-card-body">
+                        <div class="welcome-module">
+                            <div class="layui-row layui-col-space10 layuimini-qiuck">
+                                <div class="layui-col-xs3 layuimini-qiuck-module">
+                                    <a href="javascript:;" layuimini-content-href="manager/student_list.jsp" data-title="学生管理" data-icon="fa fa-pencil">
+                                        <i class="fa fa-pencil"></i>
+                                        <cite>学生管理</cite>
+                                    </a>
+                                </div>
+                                <div class="layui-col-xs3 layuimini-qiuck-module">
+                                    <a href="javascript:;" layuimini-content-href="manager/teacher_list.jsp" data-title="教师管理" data-icon="fa fa-briefcase">
+                                        <i class="fa fa-briefcase"></i>
+                                        <cite>教师管理</cite>
+                                    </a>
+                                </div>
+                                <div class="layui-col-xs3 layuimini-qiuck-module">
+                                    <a href="javascript:;" layuimini-content-href="manager/clazz_list.jsp" data-title="班级管理" data-icon="fa fa-window-maximize">
+                                        <i class="fa fa-window-maximize"></i>
+                                        <cite>班级管理</cite>
+                                    </a>
+                                </div>
+                                <div class="layui-col-xs3 layuimini-qiuck-module">
+                                    <a href="javascript:;" layuimini-content-href="manager/room_list.jsp" data-title="教室管理" data-icon="fa fa-bank">
+                                        <i class="fa fa-bank"></i>
+                                        <cite>教室管理</cite>
+                                    </a>
+                                </div>
+                                <div class="layui-col-xs3 layuimini-qiuck-module">
+                                    <a href="javascript:;" layuimini-content-href="manager/open_course_list.jsp" data-title="开课管理" data-icon="fa fa-calendar">
+                                        <i class="fa fa-calendar"></i>
+                                        <cite>开课管理</cite>
+                                    </a>
+                                </div>
+                                <div class="layui-col-xs3 layuimini-qiuck-module">
+                                    <a href="javascript:;" layuimini-content-href="manager/approval_list.jsp" data-title="审批管理" data-icon="fa fa-book">
+                                        <i class="fa fa-book"></i>
+                                        <cite>审批管理</cite>
+                                    </a>
+                                </div>
+                                <div class="layui-col-xs3 layuimini-qiuck-module">
+                                    <a href="javascript:;" layuimini-content-href="manager/manager_list.jsp" data-title="管理员管理" data-icon="fa fa-cloud">
+                                        <i class="fa fa-cloud"></i>
+                                        <cite>管理员管理</cite>
+                                    </a>
+                                </div>
+                                <div class="layui-col-xs3 layuimini-qiuck-module">
+                                    <a href="javascript:;" layuimini-content-href="common/password.jsp" data-title="修改密码" data-icon="fa fa-key">
+                                        <i class="fa fa-key"></i>
+                                        <cite>修改密码</cite>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%--版本信息--%>
                 <div class="layui-card">
                     <div class="layui-card-header"><i class="fa fa-fire icon"></i>版本信息</div>
                     <div class="layui-card-body layui-text">
