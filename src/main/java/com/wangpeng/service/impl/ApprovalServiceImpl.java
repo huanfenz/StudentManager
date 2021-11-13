@@ -29,15 +29,13 @@ public class ApprovalServiceImpl implements ApprovalService {
     public List<Approval> findApprovalsByPage(int page, int size) {
         int begin = (page - 1) * size;
         List<Approval> approvals = approvalDao.selectApprovalsByLimit(begin, size);
-        List<Approval> res = new ArrayList<>();
         //添加学生姓名信息
         for(Approval approval : approvals) {
             Integer sid = approval.getSid();
             Student student = studentDao.selectStudent(sid);
             approval.setSname(student.getSname());
-            res.add(approval);
         }
-        return res;
+        return approvals;
     }
 
     @Override
@@ -67,9 +65,7 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     @Override
     public List<Approval> findApprovalsByPageBySid(Integer page, Integer size, Integer sid) {
-        int begin = (page - 1) * size;
-        List<Approval> approvals = approvalDao.selectApprovalsByLimitBySid(begin, size, sid);
-        return approvals;
+        return approvalDao.selectApprovalsByLimitBySid((page - 1) * size, size, sid);
     }
 
     @Override
@@ -81,15 +77,13 @@ public class ApprovalServiceImpl implements ApprovalService {
     public List<Approval> findApprovalsByPageByWait(Integer page, Integer size) {
         int begin = (page - 1) * size;
         List<Approval> approvals = approvalDao.selectApprovalsByLimitByWait(begin, size);
-        List<Approval> res = new ArrayList<>();
         //添加学生姓名信息
         for(Approval approval : approvals) {
             Integer sid = approval.getSid();
             Student student = studentDao.selectStudent(sid);
             approval.setSname(student.getSname());
-            res.add(approval);
         }
-        return res;
+        return approvals;
     }
 
     @Override

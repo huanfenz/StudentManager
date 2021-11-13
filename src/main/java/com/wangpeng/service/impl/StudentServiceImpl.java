@@ -23,15 +23,13 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findStudentsByPage(int page, int size) {
         int begin = (page - 1) * size;
         List<Student> students = studentDao.selectStudentsByLimit(begin, size);
-        List<Student> res = new ArrayList<>();
         //放入班级名信息
         for(Student student : students) {
             int cid = student.getCid();
             Clazz clazz = clazzDao.selectClazz(cid);
             student.setCname(clazz.getCname());
-            res.add(student);
         }
-        return res;
+        return students;
     }
 
     @Override
@@ -62,15 +60,13 @@ public class StudentServiceImpl implements StudentService {
         map.put("begin", begin);
         map.put("size", size);
         List<Student> students = studentDao.searchStudentsByLimit(map);
-        List<Student> res = new ArrayList<>();
         //放入班级名信息
         for(Student student : students) {
             int cid = student.getCid();
             Clazz clazz = clazzDao.selectClazz(cid);
             student.setCname(clazz.getCname());
-            res.add(student);
         }
-        return res;
+        return students;
     }
 
     @Override
@@ -87,15 +83,13 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findStudentsByPageByTeacher(Integer page, Integer size, int tid) {
         int begin = (page - 1) * size;
         List<Student> students = studentDao.selectStudentsByLimitByTeacher(begin, size, tid);
-        List<Student> res = new ArrayList<>();
         //放入班级名信息
         for(Student student : students) {
             int cid = student.getCid();
             Clazz clazz = clazzDao.selectClazz(cid);
             student.setCname(clazz.getCname());
-            res.add(student);
         }
-        return res;
+        return students;
     }
 
     @Override

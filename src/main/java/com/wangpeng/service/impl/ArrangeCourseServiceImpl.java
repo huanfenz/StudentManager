@@ -27,15 +27,13 @@ public class ArrangeCourseServiceImpl implements ArrangeCourseService {
     public List<ArrangeCourse> findArrangeCoursesByPage(int page, int size) {
         int begin = (page - 1) * size;
         List<ArrangeCourse> arrangeCourses = arrangeCourseDao.selectArrangeCoursesByLimit(begin, size);
-        List<ArrangeCourse> res = new ArrayList<>();
         //放入班级名、教师名、课程名信息
         for(ArrangeCourse arrangeCourse : arrangeCourses) {
             int rid = arrangeCourse.getRid();
             Room room = roomDao.selectRoom(rid);
             arrangeCourse.setRname(room.getRname());
-            res.add(arrangeCourse);
         }
-        return res;
+        return arrangeCourses;
     }
 
     @Override
@@ -62,15 +60,13 @@ public class ArrangeCourseServiceImpl implements ArrangeCourseService {
     public List<ArrangeCourse> findArrangeCoursesByPageByOid(int page, int size, int oid) {
         int begin = (page - 1) * size;
         List<ArrangeCourse> arrangeCourses = arrangeCourseDao.selectArrangeCoursesByLimitByOid(begin, size, oid);
-        List<ArrangeCourse> res = new ArrayList<>();
         //放入班级名、教师名、课程名信息
         for(ArrangeCourse arrangeCourse : arrangeCourses) {
             int rid = arrangeCourse.getRid();
             Room room = roomDao.selectRoom(rid);
             arrangeCourse.setRname(room.getRname());
-            res.add(arrangeCourse);
         }
-        return res;
+        return arrangeCourses;
     }
 
 }

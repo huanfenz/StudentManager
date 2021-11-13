@@ -21,8 +21,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<Teacher> findTeachersByPage(int page, int size) {
         int begin = (page - 1) * size;
-        List<Teacher> teachers = teacherDao.selectTeachersByLimit(begin, size);
-        return teachers;
+        return teacherDao.selectTeachersByLimit(begin, size);
     }
 
     @Override

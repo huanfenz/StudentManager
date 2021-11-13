@@ -24,15 +24,13 @@ public class ClazzServiceImpl implements ClazzService {
     public List<Clazz> queryClazzs(int page, int size) {
         int begin = (page - 1) * size;
         List<Clazz> clazzes = clazzDao.selectClazzsByLimit(begin, size);
-        List<Clazz> res = new ArrayList<>();
         //添加专业名信息
         for(Clazz clazz : clazzes) {
             int mid = clazz.getMid();
             Major major = majorDao.selectMajor(mid);
             clazz.setMname(major.getMname());
-            res.add(clazz);
         }
-        return res;
+        return clazzes;
     }
 
     @Override
@@ -63,15 +61,13 @@ public class ClazzServiceImpl implements ClazzService {
         map.put("begin", begin);
         map.put("size", size);
         List<Clazz> clazzes = clazzDao.searchClazzsByLimit(map);
-        List<Clazz> res = new ArrayList<>();
         //添加专业名信息
         for(Clazz clazz : clazzes) {
             int mid = clazz.getMid();
             Major major = majorDao.selectMajor(mid);
             clazz.setMname(major.getMname());
-            res.add(clazz);
         }
-        return res;
+        return clazzes;
     }
 
     @Override

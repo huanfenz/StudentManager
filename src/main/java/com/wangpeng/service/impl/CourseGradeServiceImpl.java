@@ -32,7 +32,6 @@ public class CourseGradeServiceImpl implements CourseGradeService {
         int res = 0;
         if(cgTmp == null) res = courseGradeDao.insertCourseGrade(courseGrade);
         else res = courseGradeDao.updateCourseGradeByOidAndSid(courseGrade);
-
         return res;
     }
 }

@@ -23,7 +23,7 @@ public class TableShowServiceImpl implements TableShowService {
         for (CourseDetail courseDetail : courseDetails) {
             String weeknoStr = courseDetail.getWeekno();
 
-            Boolean weekFLag[] = new Boolean[21];   //有的周数置真，否则置假
+            Boolean[] weekFLag = new Boolean[21];   //有的周数置真，否则置假
             for(int i = 0; i < 21; i++) weekFLag[i] = false;    //初始化
 
             int tmp = 0;
@@ -37,7 +37,7 @@ public class TableShowServiceImpl implements TableShowService {
             }
             weekFLag[tmp] = true;   //扫尾
 
-            if(weekFLag[weekno] == false) continue; //如果当前周不在该排课周数集合里，那么跳过
+            if(!weekFLag[weekno]) continue; //如果当前周不在该排课周数集合里，那么跳过
 
             int week = courseDetail.getWeek();  //星期几
             int start = courseDetail.getStart();    //第几节课

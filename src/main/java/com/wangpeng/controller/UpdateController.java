@@ -74,7 +74,6 @@ public class UpdateController {
     @RequestMapping("updateImg.do")
     @ResponseBody
     public Map<String,Object> updateImg(HttpServletRequest req, HttpServletResponse resp){
-
         String resPath = myUpdate(req, resp, "pictures").get("resPath");
 
         Map<String,Object> res = new HashMap<>();

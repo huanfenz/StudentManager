@@ -48,13 +48,10 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> searchCourses(Integer page, Integer size, Map<String, Object> searchParam) {
-        int begin = (page - 1) * size;
         //在搜索的基础上添加2个参数
-        Map<String,Object> map = searchParam;
-        map.put("begin", begin);
-        map.put("size", size);
-        List<Course> courses = courseDao.searchCoursesByLimit(map);
-        return courses;
+        searchParam.put("begin", (page - 1) * size);
+        searchParam.put("size", size);
+        return courseDao.searchCoursesByLimit(searchParam);
     }
 
     @Override

@@ -36,7 +36,6 @@ public class OpenCourseServiceImpl implements OpenCourseService {
     public List<OpenCourse> findOpenCoursesByPage(int page, int size) {
         int begin = (page - 1) * size;
         List<OpenCourse> openCourses = openCourseDao.selectOpenCoursesByLimit(begin, size);
-        List<OpenCourse> res = new ArrayList<>();
         //放入班级名、教师名、课程名信息
         for(OpenCourse openCourse : openCourses) {
             int cid = openCourse.getCid();
@@ -50,10 +49,8 @@ public class OpenCourseServiceImpl implements OpenCourseService {
             int courseId = openCourse.getCourseId();
             Course course = courseDao.selectCourse(courseId);
             openCourse.setCourseName(course.getCourseName());
-
-            res.add(openCourse);
         }
-        return res;
+        return openCourses;
     }
 
     @Override
@@ -84,7 +81,6 @@ public class OpenCourseServiceImpl implements OpenCourseService {
         map.put("begin", begin);
         map.put("size", size);
         List<OpenCourse> openCourses = openCourseDao.searchOpenCoursesByLimit(map);
-        List<OpenCourse> res = new ArrayList<>();
         //放入班级名、教师名、课程名信息
         for(OpenCourse openCourse : openCourses) {
             int cid = openCourse.getCid();
@@ -98,10 +94,8 @@ public class OpenCourseServiceImpl implements OpenCourseService {
             int courseId = openCourse.getCourseId();
             Course course = courseDao.selectCourse(courseId);
             openCourse.setCourseName(course.getCourseName());
-
-            res.add(openCourse);
         }
-        return res;
+        return openCourses;
     }
 
     @Override
@@ -118,8 +112,6 @@ public class OpenCourseServiceImpl implements OpenCourseService {
     public List<OpenCourse> findOpenCoursesByPageByTeacher(Integer page, Integer size, Integer tid) {
         int begin = (page - 1) * size;
         List<OpenCourse> openCourses = openCourseDao.selectOpenCoursesByLimitByTeacher(begin, size, tid);
-
-        List<OpenCourse> res = new ArrayList<>();
         //放入班级名、教师名、课程名信息
         for(OpenCourse openCourse : openCourses) {
             int cid = openCourse.getCid();
@@ -133,18 +125,14 @@ public class OpenCourseServiceImpl implements OpenCourseService {
             int courseId = openCourse.getCourseId();
             Course course = courseDao.selectCourse(courseId);
             openCourse.setCourseName(course.getCourseName());
-
-            res.add(openCourse);
         }
-        return res;
+        return openCourses;
     }
 
     @Override
     public List<OpenCourseAndScore> findOpenCoursesByStudent(Integer sid) {
         List<OpenCourseAndScore> openCourseAndScores = openCourseDao.selectOpenCoursesByStudent(sid);
-        //添加信息
-        List<OpenCourseAndScore> res = new ArrayList<>();
-        //放入教师名、课程名信息
+        //添加教师名、课程名信息
         for(OpenCourseAndScore openCourseAndScore : openCourseAndScores) {
             int tid = openCourseAndScore.getTid();
             Teacher teacher = teacherDao.selectTeacher(tid);
@@ -153,10 +141,8 @@ public class OpenCourseServiceImpl implements OpenCourseService {
             int courseId = openCourseAndScore.getCourseId();
             Course course = courseDao.selectCourse(courseId);
             openCourseAndScore.setCourseName(course.getCourseName());
-
-            res.add(openCourseAndScore);
         }
-        return res;
+        return openCourseAndScores;
     }
 
 }

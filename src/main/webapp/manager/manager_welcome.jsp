@@ -275,7 +275,7 @@
             elem: '#currentTableId',
             url: 'article/queryArticles.do',
             cols: [[
-                {field: 'id', width: 30, title: '序号', type: 'numbers'},
+                {field: 'id', width: 50, title: '序号', type: 'numbers'},
                 {field: 'title', width: 500, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
                 {field: 'people', title: '添加人'},
                 {field: 'date', title: '日期', sort: true}

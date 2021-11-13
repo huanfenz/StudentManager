@@ -126,11 +126,9 @@
                 <p id="demoText"></p>
             </div>
             <div style="width: 95px">
-                <div
-                        class="layui-progress layui-progress-big"
+                <div class="layui-progress layui-progress-big"
                         lay-showpercent="yes"
-                        lay-filter="demo"
-                >
+                        lay-filter="demo">
                     <div class="layui-progress-bar" lay-percent=""></div>
                 </div>
             </div>
