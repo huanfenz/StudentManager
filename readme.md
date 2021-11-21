@@ -82,10 +82,6 @@
 
 ## 项目描述
 
-### 功能概述
-
-![功能概述](http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/202111211909529.png)
-
 ### 数据库结构
 
 ![image-20211121190533286](http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/202111211905354.png)
