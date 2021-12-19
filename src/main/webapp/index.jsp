@@ -139,13 +139,13 @@
         form.on('submit(login)', function (data) {
             data = data.field;
             console.log(data);
-            if (data.username == '') {
+            if (data.username === '') {
                 layer.msg('用户名不能为空',{time:1000});
                 return false;
-            } else if (data.password == '') {
+            } else if (data.password === '') {
                 layer.msg('密码不能为空',{time:1000});
                 return false;
-            } else if (data.captcha == '') {
+            } else if (data.captcha === '') {
                 layer.msg('验证码不能为空',{time:1000});
                 return false;
             }
@@ -199,11 +199,11 @@
                             }
 
                             layer.msg("登录成功",{time:1000},function () {
-                                if(data.authority == "manager") {
+                                if(data.authority === "manager") {
                                     location.href="manager/manager_index.jsp";
-                                } else if(data.authority == "teacher") {
+                                } else if(data.authority === "teacher") {
                                     location.href="teacher/teacher_index.jsp";
-                                } else if(data.authority == "student") {
+                                } else if(data.authority === "student") {
                                     location.href="student/student_index.jsp";
                                 }
                             });

@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.wangpeng</groupId>
-  <artifactId>StudentCRUD</artifactId>
+  <artifactId>StudentManager</artifactId>
   <version>1.0.1</version>
   <packaging>war</packaging>
 

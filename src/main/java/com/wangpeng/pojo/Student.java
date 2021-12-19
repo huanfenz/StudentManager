@@ -1,7 +1,5 @@
 package com.wangpeng.pojo;
 
-import java.util.Date;
-
 public class Student {
     private Integer sid;
     private String sname;
