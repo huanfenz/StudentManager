@@ -138,7 +138,7 @@
                         //给表单赋值
                         form.val("editForm", {
                             "ctid": null,
-                            "oid": 1,
+                            "oid": ${param.oid},
                             "rid": 5,
                             "weekno": '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16',
                             "week": 1,
@@ -155,20 +155,8 @@
                             data: {json:JSON.stringify(mdata)},    //发json
                             success:function (res) {
                                 layer.msg("添加"+res+"行成功！",{time:800});
-                                //获得最后一页的页码并重载
-                                $.getJSON({
-                                    url: 'arrangeCourse/getAmount.do',
-                                    success: function (res) {
-                                        //数据长度
-                                        var len = res;
-                                        //每页大小
-                                        var size = $('.layui-laypage-limits').find('select').val();
-                                        //页码: 上取整（len/size）
-                                        var pageNum = Math.ceil(len / size);
-                                        //重载页面
-                                        table.reload('currentTableId',{page : {curr : pageNum}});
-                                    }
-                                });
+                                //重载表格
+                                table.reload('currentTableId',{page : 1});
                             }
                         });
                     }
