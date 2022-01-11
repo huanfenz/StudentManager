@@ -49,7 +49,7 @@
           "child": [
             {
               "title": "修改密码",
-              "href": "common/fa-key",
+              "href": "common/password.jsp",
               "icon": "fa fa-key",
               "target": "_self"
             }
