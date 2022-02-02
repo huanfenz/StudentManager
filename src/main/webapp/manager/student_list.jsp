@@ -181,6 +181,7 @@
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加学生 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除选中行 </button>
                 <button class="layui-btn layui-btn-sm data-plan-btn" lay-event="seeInfo"> 查看学生信息 </button>
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-plan-btn" lay-event="outputStudentInformation"> 导出所有学生信息 </button>
             </div>
         </script>
         <%--表格容器--%>
@@ -431,6 +432,19 @@
                         layer.close(index); //关闭弹出框
                     }
                 })
+            } else if (obj.event === 'outputStudentInformation') {
+                console.log("nihao");
+                $.getJSON({
+                    url: 'student/printStudentInformation.do',
+                    success:function (res) {
+                        if(res.code === 200) {
+                            // 输出提示信息
+                            layer.msg("导出信息成功!", {time: 2000});
+                            // 跳转路径
+                            location.href = res.url;
+                        }
+                    }
+                });
             }
         });
 

@@ -8,6 +8,11 @@ import com.wangpeng.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -106,5 +111,64 @@ public class StudentServiceImpl implements StudentService {
         Clazz clazz = clazzDao.selectClazz(cid);
         student.setCname(clazz.getCname());
         return student;
+    }
+
+    @Override
+    public String print(HttpServletRequest req){
+        // 获取全部学生信息
+        List<Student> students = studentDao.selectStudents();
+
+        FileWriter fw = null;
+        String fileName = null;
+        try {
+            // 获取地址
+            String path = req.getSession().getServletContext().getRealPath("report");
+            File pathFile = new File(path);
+            if (!pathFile.exists()) {
+                boolean flag = pathFile.mkdirs();
+                if (!flag) throw new RuntimeException("创建文件夹失败");
+            }
+            // 文件地址，文件名是当前时间戳
+            long curTime = System.currentTimeMillis();
+            fileName = curTime + ".csv";
+            String filePath = path + "/" + fileName;
+            // 创建文件
+            File file = new File(filePath);
+            if (!file.exists()) {
+                boolean flag = file.createNewFile();
+                if (!flag) throw new RuntimeException("创建文件失败");
+            }
+            // 写文件
+            fw = new FileWriter(file, true);
+            fw.write("序号,姓名,学号,性别,年龄,班级,状态,备注,身份证号,电话,地址,进校时间,密码,照片\n");
+            // 遍历学生信息
+            for (Student student : students) {
+                fw.write(student.getSid() + ",");
+                fw.write(student.getSname() + ",");
+                fw.write(student.getSnum() + ",");
+                fw.write(student.getSsex() + ",");
+                fw.write(student.getSage() + ",");
+                fw.write(student.getCname() + ",");
+                fw.write(student.getSstatus() + ",");
+                fw.write(student.getSremark() + ",");
+                fw.write(student.getIdcard() + ",");
+                fw.write(student.getPhone() + ",");
+                fw.write(student.getAddress() + ",");
+                fw.write(student.getEntime() + ",");
+                fw.write(student.getPswd() + ",");
+                fw.write(student.getPic() + "\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fw != null) {
+                try {
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "http://localhost:8080/StudentManager/report/" + fileName;
     }
 }

@@ -89,4 +89,8 @@
         from student
         where cid in (select cid from open_course where oid=#{oid})
     </select>
+    <select id="selectStudents" resultType="student">
+        select sid,sname,snum,ssex,sage,sstatus,sremark,idcard,phone,address,entime,pswd,pic,cname
+        from student inner join clazz on student.cid = clazz.cid
+    </select>
 </mapper>

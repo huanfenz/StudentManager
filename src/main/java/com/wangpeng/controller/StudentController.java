@@ -179,4 +179,16 @@ public class StudentController {
         res.put("data", students);
         return res;
     }
+
+    @RequestMapping("printStudentInformation.do")
+    @ResponseBody
+    public Map<String, Object> printStudentInformation(HttpServletRequest req) {
+        String url = service.print(req);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 200);
+        map.put("url", url);
+
+        return map;
+    }
 }

@@ -2,6 +2,8 @@ package com.wangpeng.service;
 
 import com.wangpeng.pojo.Student;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -63,4 +65,6 @@ public interface StudentService {
     List<Student> findStudentsByOid(int oid);
 
     Student findStudentBySid(Integer sid);
+
+    String print(HttpServletRequest req);
 }
