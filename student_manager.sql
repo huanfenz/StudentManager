@@ -14,6 +14,9 @@
  Date: 21/11/2021 18:27:51
 */
 
+CREATE DATABASE student_manager;
+USE student_manager;
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
