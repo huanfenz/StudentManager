@@ -1,7 +1,6 @@
 package com.wangpeng.service.impl;
 
 import com.wangpeng.dao.*;
-import com.wangpeng.pojo.*;
 import com.wangpeng.service.WelcomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

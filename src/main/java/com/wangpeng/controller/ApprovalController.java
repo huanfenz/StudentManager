@@ -5,9 +5,8 @@ import com.wangpeng.pojo.Student;
 import com.wangpeng.service.ApprovalService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -15,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/approval")
 public class ApprovalController {
 
@@ -29,7 +28,6 @@ public class ApprovalController {
      * @return 数据
      */
     @RequestMapping("queryApprovals.do")
-    @ResponseBody
     public Map<String,Object> queryApprovals(Integer page, Integer limit){
         //获取审批数量
         int count = service.getApprovalsCount();
@@ -52,7 +50,6 @@ public class ApprovalController {
      * @return 数据
      */
     @RequestMapping("queryApprovalsByWait.do")
-    @ResponseBody
     public Map<String,Object> queryApprovalsByWait(Integer page, Integer limit){
         //获取审批数量
         int count = service.getApprovalsCountByWait();
@@ -75,7 +72,6 @@ public class ApprovalController {
      * @return 数据
      */
     @RequestMapping("queryApprovalsBySid.do")
-    @ResponseBody
     public Map<String,Object> queryApprovalsBySid(Integer page, Integer limit, HttpServletRequest req){
         //获取当前账号信息
         Student loginStudent =  (Student) req.getSession().getAttribute("loginObj");
@@ -99,7 +95,6 @@ public class ApprovalController {
      * @return
      */
     @RequestMapping("queryAllApprovals.do")
-    @ResponseBody
     public List<Approval> queryAllApprovals(){
         return service.findAllApprovals();
     }
@@ -110,7 +105,6 @@ public class ApprovalController {
      * @return 返回成功的行数
      */
     @RequestMapping("deleteApprovals.do")
-    @ResponseBody
     public Integer deleteApprovals(String json){
         if(json.charAt(0) != '[') json = '[' + json + ']';  //如果不是数组形式，变成数组形式
         List<Approval> approvals = JsonUtil.parseList(json, Approval.class);
@@ -123,7 +117,6 @@ public class ApprovalController {
      * @return 成功标志1
      */
     @RequestMapping("addApproval.do")
-    @ResponseBody
     public Integer addApproval(String json){
         Approval approval = JsonUtil.parseObject(json, Approval.class);
         return service.addApproval(approval);
@@ -135,7 +128,6 @@ public class ApprovalController {
      * @return 成功标志1
      */
     @RequestMapping("updateApproval.do")
-    @ResponseBody
     public Integer updateApproval(String json){
         Approval approval = JsonUtil.parseObject(json, Approval.class);
         return service.updateApproval(approval);
@@ -147,7 +139,6 @@ public class ApprovalController {
      * @throws IOException
      */
     @RequestMapping("getAmount.do")
-    @ResponseBody
     public Integer getAmount() {
         return service.getApprovalsCount();
     }
@@ -158,7 +149,6 @@ public class ApprovalController {
      * @throws IOException
      */
     @RequestMapping("getAmountUntreated.do")
-    @ResponseBody
     public Integer getAmountUntreated() {
         return service.getApprovalsCountUntreated();
     }

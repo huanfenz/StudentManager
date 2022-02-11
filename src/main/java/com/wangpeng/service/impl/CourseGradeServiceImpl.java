@@ -1,17 +1,10 @@
 package com.wangpeng.service.impl;
 
 import com.wangpeng.dao.CourseGradeDao;
-import com.wangpeng.dao.StudentDao;
-import com.wangpeng.pojo.Clazz;
 import com.wangpeng.pojo.CourseGrade;
-import com.wangpeng.pojo.Student;
 import com.wangpeng.service.CourseGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class CourseGradeServiceImpl implements CourseGradeService {

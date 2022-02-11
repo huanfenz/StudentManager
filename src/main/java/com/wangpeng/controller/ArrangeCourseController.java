@@ -4,16 +4,15 @@ import com.wangpeng.pojo.ArrangeCourse;
 import com.wangpeng.service.ArrangeCourseService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/arrangeCourse")
 public class ArrangeCourseController {
 
@@ -27,7 +26,6 @@ public class ArrangeCourseController {
      * @return 数据
      */
     @RequestMapping("queryArrangeCourses.do")
-    @ResponseBody
     public Map<String,Object> queryArrangeCourses(Integer page, Integer limit){
         //获取课表数量
         int count = service.getArrangeCoursesCount();
@@ -48,7 +46,6 @@ public class ArrangeCourseController {
      * @return
      */
     @RequestMapping("queryAllArrangeCourses.do")
-    @ResponseBody
     public List<ArrangeCourse> queryAllArrangeCourses(){
         return service.findAllArrangeCourses();
     }
@@ -59,7 +56,6 @@ public class ArrangeCourseController {
      * @return 返回成功的行数
      */
     @RequestMapping("deleteArrangeCourses.do")
-    @ResponseBody
     public Integer deleteArrangeCourses(String json){
         if(json.charAt(0) != '[') json = '[' + json + ']';  //如果不是数组形式，变成数组形式
         List<ArrangeCourse> arrangeCourses = JsonUtil.parseList(json, ArrangeCourse.class);
@@ -73,7 +69,6 @@ public class ArrangeCourseController {
      * @return 成功标志1
      */
     @RequestMapping("addArrangeCourse.do")
-    @ResponseBody
     public Integer addArrangeCourse(String json){
         ArrangeCourse arrangeCourse = JsonUtil.parseObject(json, ArrangeCourse.class);
         return service.addArrangeCourse(arrangeCourse);
@@ -85,7 +80,6 @@ public class ArrangeCourseController {
      * @return 成功标志1
      */
     @RequestMapping("updateArrangeCourse.do")
-    @ResponseBody
     public Integer updateArrangeCourse(String json){
         ArrangeCourse arrangeCourse = JsonUtil.parseObject(json, ArrangeCourse.class);
         return service.updateArrangeCourse(arrangeCourse);
@@ -97,7 +91,6 @@ public class ArrangeCourseController {
      * @throws IOException
      */
     @RequestMapping("getAmount.do")
-    @ResponseBody
     public Integer getAmount() {
         return service.getArrangeCoursesCount();
     }
@@ -109,7 +102,6 @@ public class ArrangeCourseController {
      * @return 数据
      */
     @RequestMapping("queryArrangeCoursesByOid.do")
-    @ResponseBody
     public Map<String,Object> queryArrangeCoursesByOid(Integer page, Integer limit, Integer oid){
         //获取数据
         List<ArrangeCourse> arrangeCourses = service.findArrangeCoursesByPageByOid(page,limit,oid);

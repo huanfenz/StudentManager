@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/room")
 public class RoomController {
 
@@ -27,7 +28,6 @@ public class RoomController {
      * @return 数据
      */
     @RequestMapping("queryRooms.do")
-    @ResponseBody
     public Map<String,Object> queryRooms(Integer page, Integer limit){
         //获取班级数量
         int count = service.getRoomsCount();
@@ -48,7 +48,6 @@ public class RoomController {
      * @return
      */
     @RequestMapping("queryAllRooms.do")
-    @ResponseBody
     public List<Room> queryAllRooms(){
         return service.findAllRooms();
     }
@@ -59,7 +58,6 @@ public class RoomController {
      * @return 返回成功的行数
      */
     @RequestMapping("deleteRooms.do")
-    @ResponseBody
     public Integer deleteRooms(String json){
         if(json.charAt(0) != '[') json = '[' + json + ']';  //如果不是数组形式，变成数组形式
         List<Room> rooms = JsonUtil.parseList(json, Room.class);
@@ -72,7 +70,6 @@ public class RoomController {
      * @return 成功标志1
      */
     @RequestMapping("addRoom.do")
-    @ResponseBody
     public Integer addRoom(String json){
         Room room = JsonUtil.parseObject(json, Room.class);
         return service.addRoom(room);
@@ -84,7 +81,6 @@ public class RoomController {
      * @return 成功标志1
      */
     @RequestMapping("updateRoom.do")
-    @ResponseBody
     public Integer updateRoom(String json){
         Room room = JsonUtil.parseObject(json, Room.class);
         return service.updateRoom(room);
@@ -96,13 +92,11 @@ public class RoomController {
      * @throws IOException
      */
     @RequestMapping("getAmount.do")
-    @ResponseBody
     public Integer getAmount() {
         return service.getRoomsCount();
     }
 
     @RequestMapping("searchRooms.do")
-    @ResponseBody
     public Map<String,Object> searchRooms(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);

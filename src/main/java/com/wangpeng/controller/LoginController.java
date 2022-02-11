@@ -5,14 +5,13 @@ import com.wangpeng.pojo.Student;
 import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Controller
+@RestController
 @RequestMapping("/login")
 public class LoginController {
 
@@ -20,7 +19,6 @@ public class LoginController {
     LoginService service;
 
     @RequestMapping("login.do")
-    @ResponseBody
     public int login(String username, String password, String authority, String captcha, HttpServletRequest req, HttpServletResponse resp){
         //  status: 0验证码错误，1账号密码错误，2成功，3验证码失效
 
@@ -57,7 +55,6 @@ public class LoginController {
     }
 
     @RequestMapping("alterPassword.do")
-    @ResponseBody
     public int alterPassword(String oldPassword, String newPassword,HttpServletRequest req){
         //获取当前登录的权限
         String authority = (String) req.getSession().getAttribute("authority");
@@ -106,7 +103,6 @@ public class LoginController {
     }
 
     @RequestMapping("exitLogin.do")
-    @ResponseBody
     public void exitLogin(HttpServletRequest req){
         req.getSession().setAttribute("authority", null);
         req.getSession().setAttribute("loginObj", null);

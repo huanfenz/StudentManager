@@ -1,8 +1,6 @@
 package com.wangpeng.service;
 
 import com.wangpeng.pojo.Clazz;
-import com.wangpeng.pojo.Clazz;
-import com.wangpeng.pojo.Major;
 
 import java.util.List;
 import java.util.Map;

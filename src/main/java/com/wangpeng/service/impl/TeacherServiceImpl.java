@@ -2,7 +2,6 @@ package com.wangpeng.service.impl;
 
 import com.wangpeng.dao.ClazzDao;
 import com.wangpeng.dao.TeacherDao;
-import com.wangpeng.pojo.Course;
 import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;

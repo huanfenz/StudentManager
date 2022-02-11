@@ -3,13 +3,12 @@ package com.wangpeng.controller;
 import com.wangpeng.service.TableShowService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/tableShow")
 public class TableShowController {
 
@@ -17,7 +16,6 @@ public class TableShowController {
     TableShowService service;
 
     @RequestMapping("queryTable.do")
-    @ResponseBody
     public String[][] queryTable(String json) {
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);

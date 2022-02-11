@@ -1,22 +1,16 @@
 package com.wangpeng.controller;
 
 import com.wangpeng.pojo.CourseGrade;
-import com.wangpeng.pojo.Major;
 import com.wangpeng.service.CourseGradeService;
-import com.wangpeng.service.MajorService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/courseGrade")
 public class CourseGradeController {
 
@@ -24,7 +18,6 @@ public class CourseGradeController {
     CourseGradeService service;
 
     @RequestMapping("saveScore.do")
-    @ResponseBody
     public Integer saveScore(String json, Integer oid){
         Map<Integer, BigDecimal> paramMap = JsonUtil.parseMap(json,Integer.class,BigDecimal.class);
         //sid:score

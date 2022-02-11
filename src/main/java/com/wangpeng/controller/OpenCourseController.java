@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/openCourse")
 public class OpenCourseController {
 
@@ -31,7 +32,6 @@ public class OpenCourseController {
      * @return 数据
      */
     @RequestMapping("queryOpenCourses.do")
-    @ResponseBody
     public Map<String,Object> queryOpenCourses(Integer page, Integer limit){
         //获取开课数量
         int count = service.getOpenCoursesCount();
@@ -54,7 +54,6 @@ public class OpenCourseController {
      * @return 数据
      */
     @RequestMapping("queryOpenCoursesByTeacher.do")
-    @ResponseBody
     public Map<String,Object> queryOpenCoursesByTeacher(Integer page, Integer limit, HttpServletRequest req){
         //获取当前账号信息
         Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
@@ -78,7 +77,6 @@ public class OpenCourseController {
      * @return 数据
      */
     @RequestMapping("queryOpenCoursesByStudent.do")
-    @ResponseBody
     public Map<String,Object> queryOpenCoursesByStudent(Integer oid, HttpServletRequest req){
         //获取当前账号信息
         Student loginStudent =  (Student) req.getSession().getAttribute("loginObj");
@@ -98,7 +96,6 @@ public class OpenCourseController {
      * @return
      */
     @RequestMapping("queryAllOpenCourses.do")
-    @ResponseBody
     public List<OpenCourse> queryAllOpenCourses(){
         return service.findAllOpenCourses();
     }
@@ -109,7 +106,6 @@ public class OpenCourseController {
      * @return 返回成功的行数
      */
     @RequestMapping("deleteOpenCourses.do")
-    @ResponseBody
     public Integer deleteOpenCourses(String json){
         if(json.charAt(0) != '[') json = '[' + json + ']';  //如果不是数组形式，变成数组形式
         List<OpenCourse> openCourses = JsonUtil.parseList(json, OpenCourse.class);
@@ -122,7 +118,6 @@ public class OpenCourseController {
      * @return 成功标志1
      */
     @RequestMapping("addOpenCourse.do")
-    @ResponseBody
     public Integer addOpenCourse(String json){
         OpenCourse openCourse = JsonUtil.parseObject(json, OpenCourse.class);
         return service.addOpenCourse(openCourse);
@@ -134,7 +129,6 @@ public class OpenCourseController {
      * @return 成功标志1
      */
     @RequestMapping("updateOpenCourse.do")
-    @ResponseBody
     public Integer updateOpenCourse(String json){
         OpenCourse openCourse = JsonUtil.parseObject(json, OpenCourse.class);
         return service.updateOpenCourse(openCourse);
@@ -146,13 +140,11 @@ public class OpenCourseController {
      * @throws IOException
      */
     @RequestMapping("getAmount.do")
-    @ResponseBody
     public Integer getAmount() {
         return service.getOpenCoursesCount();
     }
 
     @RequestMapping("searchOpenCourses.do")
-    @ResponseBody
     public Map<String,Object> searchOpenCourses(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);

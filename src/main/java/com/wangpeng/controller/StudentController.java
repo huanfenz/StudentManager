@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/student")
 public class StudentController {
 
@@ -34,7 +35,6 @@ public class StudentController {
      * @return 数据
      */
     @RequestMapping("queryStudents.do")
-    @ResponseBody
     public Map<String,Object> queryStudents(Integer page, Integer limit){
         //获取学生数量
         int count = service.getStudentsCount();
@@ -55,7 +55,6 @@ public class StudentController {
      * @return 数据
      */
     @RequestMapping("queryStudent.do")
-    @ResponseBody
     public Student queryStudent(Integer sid){
         //获取数据
         Student student = service.findStudentBySid(sid);
@@ -69,7 +68,6 @@ public class StudentController {
      * @return 数据
      */
     @RequestMapping("queryStudentsByTeacher.do")
-    @ResponseBody
     public Map<String,Object> queryStudentsByTeacher(Integer page, Integer limit, HttpServletRequest req){
         //获取当前账号信息
         Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
@@ -92,7 +90,6 @@ public class StudentController {
      * 查询所有学生通过oid
      */
     @RequestMapping("queryStudentsByOid.do")
-    @ResponseBody
     public List<Map<String,Object>> queryStudentsByOid(int oid){
         //获取学生数据
         List<Student> students = service.findStudentsByOid(oid);
@@ -120,7 +117,6 @@ public class StudentController {
      * @return 返回成功的行数
      */
     @RequestMapping("deleteStudents.do")
-    @ResponseBody
     public Integer deleteStudents(String json){
         if(json.charAt(0) != '[') json = '[' + json + ']';  //如果不是数组形式，变成数组形式
         List<Student> students = JsonUtil.parseList(json, Student.class);
@@ -133,7 +129,6 @@ public class StudentController {
      * @return 成功标志1
      */
     @RequestMapping("addStudent.do")
-    @ResponseBody
     public Integer addStudent(String json){
         Student student = JsonUtil.parseObject(json, Student.class);
         return service.addStudent(student);
@@ -145,7 +140,6 @@ public class StudentController {
      * @return 成功标志1
      */
     @RequestMapping("updateStudent.do")
-    @ResponseBody
     public Integer updateStudent(String json){
         Student student = JsonUtil.parseObject(json, Student.class);
         return service.updateStudent(student);
@@ -157,13 +151,11 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping("getAmount.do")
-    @ResponseBody
     public Integer getAmount() {
         return service.getStudentsCount();
     }
 
     @RequestMapping("searchStudents.do")
-    @ResponseBody
     public Map<String,Object> searchStudents(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
@@ -181,7 +173,6 @@ public class StudentController {
     }
 
     @RequestMapping("printStudentInformation.do")
-    @ResponseBody
     public Map<String, Object> printStudentInformation(HttpServletRequest req) {
         String url = service.print(req);
 

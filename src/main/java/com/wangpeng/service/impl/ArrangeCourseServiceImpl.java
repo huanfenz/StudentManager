@@ -2,12 +2,12 @@ package com.wangpeng.service.impl;
 
 import com.wangpeng.dao.ArrangeCourseDao;
 import com.wangpeng.dao.RoomDao;
-import com.wangpeng.pojo.*;
+import com.wangpeng.pojo.ArrangeCourse;
+import com.wangpeng.pojo.Room;
 import com.wangpeng.service.ArrangeCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

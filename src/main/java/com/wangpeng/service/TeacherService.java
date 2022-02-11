@@ -1,6 +1,5 @@
 package com.wangpeng.service;
 
-import com.wangpeng.pojo.Course;
 import com.wangpeng.pojo.Teacher;
 
 import java.util.List;

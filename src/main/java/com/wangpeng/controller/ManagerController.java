@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/manager")
 public class ManagerController {
 
@@ -27,7 +28,6 @@ public class ManagerController {
      * @return 数据
      */
     @RequestMapping("queryManagers.do")
-    @ResponseBody
     public Map<String,Object> queryManagers(Integer page, Integer limit){
         //获取用户数量
         int count = service.getManagersCount();
@@ -48,7 +48,6 @@ public class ManagerController {
      * @return
      */
     @RequestMapping("queryAllManagers.do")
-    @ResponseBody
     public List<Manager> queryAllManagers(){
         return service.findAllManagers();
     }
@@ -59,7 +58,6 @@ public class ManagerController {
      * @return 返回成功的行数
      */
     @RequestMapping("deleteManagers.do")
-    @ResponseBody
     public Integer deleteManagers(String json){
         if(json.charAt(0) != '[') json = '[' + json + ']';  //如果不是数组形式，变成数组形式
         List<Manager> managers = JsonUtil.parseList(json, Manager.class);
@@ -72,7 +70,6 @@ public class ManagerController {
      * @return 成功标志1
      */
     @RequestMapping("addManager.do")
-    @ResponseBody
     public Integer addManager(String json){
         Manager manager = JsonUtil.parseObject(json, Manager.class);
         return service.addManager(manager);
@@ -84,7 +81,6 @@ public class ManagerController {
      * @return 成功标志1
      */
     @RequestMapping("updateManager.do")
-    @ResponseBody
     public Integer updateManager(String json){
         Manager manager = JsonUtil.parseObject(json, Manager.class);
         return service.updateManager(manager);
@@ -96,13 +92,11 @@ public class ManagerController {
      * @throws IOException
      */
     @RequestMapping("getAmount.do")
-    @ResponseBody
     public Integer getAmount() {
         return service.getManagersCount();
     }
 
     @RequestMapping("searchManagers.do")
-    @ResponseBody
     public Map<String,Object> searchManagers(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
