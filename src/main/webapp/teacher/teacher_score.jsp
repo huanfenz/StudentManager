@@ -9,7 +9,8 @@
 <html>
 <head>
     <base href="<%=basePath%>" />
-    <title>Title</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>教师打分</title>
     <link rel="stylesheet" href="layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="layuimini/css/public.css" media="all">
     <script src="layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>

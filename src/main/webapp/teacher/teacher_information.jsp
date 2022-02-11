@@ -9,6 +9,7 @@
 <html>
 <head>
     <base href="<%=basePath%>" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>教师信息</title>
     <link rel="stylesheet" href="layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="layuimini/css/public.css" media="all">

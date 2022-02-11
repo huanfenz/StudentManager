@@ -10,13 +10,14 @@ String basePath = request.getScheme() + "://"
 <head>
     <base href="<%=basePath%>" />
     <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <link rel="stylesheet" href="layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="layuimini/css/public.css" media="all">
     <script src="layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
     <script src="layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
     <script src="lib/Timetables.min.js"></script>
-    <title>大学课表</title>
+    <title>课表展示</title>
     <style>
         #coursesTable {
             padding: 15px 10px;
