@@ -7,9 +7,7 @@ import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.OpenCourseService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +29,7 @@ public class OpenCourseController {
      * @param limit 每页大小
      * @return 数据
      */
-    @RequestMapping("queryOpenCourses.do")
+    @RequestMapping({"queryOpenCourses.do", "teacher/queryOpenCourses.do"})
     public Map<String,Object> queryOpenCourses(Integer page, Integer limit){
         //获取开课数量
         int count = service.getOpenCoursesCount();
@@ -53,7 +51,7 @@ public class OpenCourseController {
      * @param limit 每页大小
      * @return 数据
      */
-    @RequestMapping("queryOpenCoursesByTeacher.do")
+    @RequestMapping("teacher/queryOpenCoursesByTeacher.do")
     public Map<String,Object> queryOpenCoursesByTeacher(Integer page, Integer limit, HttpServletRequest req){
         //获取当前账号信息
         Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
@@ -76,7 +74,7 @@ public class OpenCourseController {
      * 查询(学生权限)
      * @return 数据
      */
-    @RequestMapping("queryOpenCoursesByStudent.do")
+    @RequestMapping("student/queryOpenCoursesByStudent.do")
     public Map<String,Object> queryOpenCoursesByStudent(Integer oid, HttpServletRequest req){
         //获取当前账号信息
         Student loginStudent =  (Student) req.getSession().getAttribute("loginObj");
@@ -144,7 +142,7 @@ public class OpenCourseController {
         return service.getOpenCoursesCount();
     }
 
-    @RequestMapping("searchOpenCourses.do")
+    @RequestMapping({"searchOpenCourses.do", "student/searchOpenCourses.do", "teacher/searchOpenCourses.do"})
     public Map<String,Object> searchOpenCourses(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);

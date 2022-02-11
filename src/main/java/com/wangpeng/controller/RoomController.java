@@ -4,9 +4,7 @@ import com.wangpeng.pojo.Room;
 import com.wangpeng.service.RoomService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -47,7 +45,7 @@ public class RoomController {
      * 查询所有班级
      * @return
      */
-    @RequestMapping("queryAllRooms.do")
+    @RequestMapping({"queryAllRooms.do", "teacher/queryAllRooms.do"})
     public List<Room> queryAllRooms(){
         return service.findAllRooms();
     }

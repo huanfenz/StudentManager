@@ -7,9 +7,7 @@ import com.wangpeng.service.CourseGradeService;
 import com.wangpeng.service.StudentService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +52,7 @@ public class StudentController {
      * 查询学生
      * @return 数据
      */
-    @RequestMapping("queryStudent.do")
+    @RequestMapping({"queryStudent.do", "teacher/queryStudent.do"})
     public Student queryStudent(Integer sid){
         //获取数据
         Student student = service.findStudentBySid(sid);
@@ -67,7 +65,7 @@ public class StudentController {
      * @param limit 每页大小
      * @return 数据
      */
-    @RequestMapping("queryStudentsByTeacher.do")
+    @RequestMapping("teacher/queryStudentsByTeacher.do")
     public Map<String,Object> queryStudentsByTeacher(Integer page, Integer limit, HttpServletRequest req){
         //获取当前账号信息
         Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
@@ -89,7 +87,7 @@ public class StudentController {
     /**
      * 查询所有学生通过oid
      */
-    @RequestMapping("queryStudentsByOid.do")
+    @RequestMapping({"queryStudentsByOid.do", "teacher/queryStudentsByOid.do"})
     public List<Map<String,Object>> queryStudentsByOid(int oid){
         //获取学生数据
         List<Student> students = service.findStudentsByOid(oid);
@@ -163,6 +161,28 @@ public class StudentController {
         int count = service.getSearchCount(searchParam);
         //查询数据
         List<Student> students = service.searchStudents(page, limit, searchParam);
+        //结果map
+        Map<String,Object> res = new HashMap<String,Object>();
+        res.put("code", 0);
+        res.put("msg", "");
+        res.put("count", count);
+        res.put("data", students);
+        return res;
+    }
+
+    @RequestMapping("teacher/searchStudentsByTeacher.do")
+    public Map<String,Object> searchStudentsByTeacher(Integer page, Integer limit, String json, HttpServletRequest req){
+        //获取当前账号信息
+        Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
+
+        //获得搜索的参数
+        Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
+        searchParam.put("tid", loginTeacher.getTid());
+
+        //获取查询个数
+        int count = service.getSearchCountByTeacher(searchParam);
+        //查询数据
+        List<Student> students = service.searchStudentsByTeacher(page, limit, searchParam);
         //结果map
         Map<String,Object> res = new HashMap<String,Object>();
         res.put("code", 0);

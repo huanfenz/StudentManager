@@ -102,7 +102,7 @@ public class LoginController {
         return 0;
     }
 
-    @RequestMapping("exitLogin.do")
+    @RequestMapping({"exitLogin.do", "student/exitLogin.do", "teacher/exitLogin.do"})
     public void exitLogin(HttpServletRequest req){
         req.getSession().setAttribute("authority", null);
         req.getSession().setAttribute("loginObj", null);

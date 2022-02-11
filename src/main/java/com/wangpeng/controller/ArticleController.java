@@ -25,7 +25,7 @@ public class ArticleController {
      * @param limit 每页大小
      * @return 数据
      */
-    @RequestMapping("queryArticles.do")
+    @RequestMapping({"queryArticles.do", "student/queryArticles.do", "teacher/queryArticles.do"})
     public Map<String,Object> queryArticles(Integer page, Integer limit){
         //获取文章数量
         int count = service.getArticlesCount();
@@ -94,7 +94,7 @@ public class ArticleController {
         return service.getArticlesCount();
     }
 
-    @RequestMapping("searchArticles.do")
+    @RequestMapping({"searchArticles.do", "student/searchArticles.do", "teacher/searchArticles.do"})
     public Map<String,Object> searchArticles(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);

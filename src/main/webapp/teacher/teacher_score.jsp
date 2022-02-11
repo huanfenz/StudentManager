@@ -53,7 +53,7 @@
     <script type="text/javascript">
 
         $.ajax({
-            url: 'student/queryStudentsByOid.do',
+            url: 'student/teacher/queryStudentsByOid.do',
             data: {oid:${param.get('oid')}},
             type: 'post',
             datatype: 'json',
@@ -77,7 +77,7 @@
 
                 //保存信息
                 $.ajax({
-                    url: 'courseGrade/saveScore.do',
+                    url: 'courseGrade/teacher/saveScore.do',
                     data: {json:result, oid: ${param.get('oid')}},
                     type: 'post',
                     datatype: 'json',

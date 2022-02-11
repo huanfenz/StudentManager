@@ -234,7 +234,7 @@
         miniTab.listen();
 
         $.ajax({
-            url: 'welcome/getAllCountByTeacher.do',
+            url: 'welcome/teacher/getAllCountByTeacher.do',
             data: {tid: ${sessionScope.loginObj.tid}},
             type: 'post',
             datatype: 'json',
@@ -247,7 +247,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: 'article/queryArticles.do',
+            url: 'article/teacher/queryArticles.do',
             cols: [[
                 {field: 'id', width: 50, title: '序号', type: 'numbers'},
                 {field: 'title', width: 500, title: '文章标题', event: 'show', style:'cursor: pointer;'}, /*手形状*/
@@ -272,7 +272,7 @@
             console.log(result);
             //执行搜索重载
             table.reload('currentTableId', {
-                url: 'article/searchArticles.do',
+                url: 'article/teacher/searchArticles.do',
                 where: {json:result},   //把json传过去
                 page: {curr: 1}, //重新从第 1 页开始
                 done: function (res) {
@@ -292,7 +292,7 @@
             });
             //执行搜索重载
             table.reload('currentTableId', {
-                url: 'article/queryArticles.do',
+                url: 'article/teacher/queryArticles.do',
                 page: {curr: 1}, //重新从第 1 页开始
                 done: null
             });

@@ -35,7 +35,7 @@
 
         $(function () {
             $.getJSON({
-                url: 'room/queryAllRooms.do',
+                url: 'room/teacher/queryAllRooms.do',
                 success: function (data) {
                     $("#edit_rid").html();
                     $.each(data,function (i,n) {
@@ -50,7 +50,7 @@
         //加载数据表格
         table.render({
             elem: '#currentTableId',
-            url: 'arrangeCourse/queryArrangeCoursesByOid.do?oid=' + ${param.oid},
+            url: 'arrangeCourse/teacher/queryArrangeCoursesByOid.do?oid=' + ${param.oid},
             cols: [[
                 {type: "checkbox"},
                 {field: 'rname', title: '教室'},

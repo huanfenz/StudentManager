@@ -50,12 +50,16 @@ public interface StudentService {
      */
     List<Student> searchStudents(Integer page, Integer size, Map<String, Object> searchParam);
 
+    List<Student> searchStudentsByTeacher(Integer page, Integer size, Map<String, Object> searchParam);
+
     /**
      * 获取搜索的数量
      * @param searchParam
      * @return
      */
     int getSearchCount(Map<String, Object> searchParam);
+
+    int getSearchCountByTeacher(Map<String, Object> searchParam);
 
     int getStudentsCountByTeacher(int tid);
 

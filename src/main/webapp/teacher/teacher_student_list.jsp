@@ -78,7 +78,7 @@
         $(function () {
             //获取所有的班级信息
             $.getJSON({
-                url: 'clazz/queryAllClazzsByTeacher.do',
+                url: 'clazz/teacher/queryAllClazzsByTeacher.do',
                 success: function (data) {
                     $("#search_cid").html();
                     $.each(data,function (i,n) {
@@ -103,7 +103,7 @@
         //加载数据表格
         table.render({
             elem: '#currentTableId',
-            url: 'student/queryStudentsByTeacher.do',
+            url: 'student/teacher/queryStudentsByTeacher.do',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -135,7 +135,7 @@
             console.log(result);
             //执行搜索重载
             table.reload('currentTableId', {
-                url: 'student/searchStudents.do',
+                url: 'student/teacher/searchStudentsByTeacher.do',
                 where: {json:result},   //把json传过去
                 page: {curr: 1}, //重新从第 1 页开始
                 done: function (res) {
@@ -156,7 +156,7 @@
             });
             //执行搜索重载
             table.reload('currentTableId', {
-                url: 'student/queryStudents.do',
+                url: 'student/teacher/queryStudentsByTeacher.do',
                 page: {curr: 1}, //重新从第 1 页开始
                 done: null
             });

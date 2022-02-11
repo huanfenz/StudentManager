@@ -20,13 +20,13 @@ public class WelcomeController {
         return map;
     }
 
-    @RequestMapping("getAllCountByStudent.do")
+    @RequestMapping("student/getAllCountByStudent.do")
     public Map<String, Integer> getAllCountByStudent(Integer sid) {
         Map<String, Integer> map = service.getAllCountByStudent(sid);
         return map;
     }
 
-    @RequestMapping("getAllCountByTeacher.do")
+    @RequestMapping("teacher/getAllCountByTeacher.do")
     public Map<String, Integer> getAllCountByTeacher(Integer tid) {
         Map<String, Integer> map = service.getAllCountByTeacher(tid);
         return map;

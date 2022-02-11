@@ -38,7 +38,7 @@
 
     <script type="text/javascript">
         $.ajax({
-            url: 'student/queryStudent.do',
+            url: 'student/teacher/queryStudent.do',
             data: {sid:${param.sid}},
             type: 'post',
             datatype: 'json',

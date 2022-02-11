@@ -1,12 +1,11 @@
 package com.wangpeng.controller;
 
-import com.wangpeng.pojo.*;
 import com.wangpeng.pojo.Clazz;
+import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.ClazzService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,13 +36,13 @@ public class ClazzController {
         return res;
     }
 
-    @RequestMapping("queryAllClazzs.do")
+    @RequestMapping({"queryAllClazzs.do", "student/queryAllClazzs.do"})
     public List<Clazz> queryAllClazzs(){
         List<Clazz> clazzes = service.queryAllClazzs();
         return clazzes;
     }
 
-    @RequestMapping("queryAllClazzsByTeacher.do")
+    @RequestMapping("teacher/queryAllClazzsByTeacher.do")
     public List<Clazz> queryAllClazzsByTeacher(HttpServletRequest req){
         //获取当前账号信息
         Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");

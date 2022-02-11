@@ -4,9 +4,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,7 +84,7 @@ public class UpdateController {
         return res;
     }
 
-    @RequestMapping("updateAttachment.do")
+    @RequestMapping({"updateAttachment.do", "student/updateAttachment.do"})
     public Map<String,Object> updateAttachment(HttpServletRequest req, HttpServletResponse resp){
 
         Map<String, String> map = myUpdate(req, resp, "attachment");

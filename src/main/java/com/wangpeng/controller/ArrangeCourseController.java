@@ -101,7 +101,7 @@ public class ArrangeCourseController {
      * @param limit 每页大小
      * @return 数据
      */
-    @RequestMapping("queryArrangeCoursesByOid.do")
+    @RequestMapping({"queryArrangeCoursesByOid.do", "teacher/queryArrangeCoursesByOid.do"})
     public Map<String,Object> queryArrangeCoursesByOid(Integer page, Integer limit, Integer oid){
         //获取数据
         List<ArrangeCourse> arrangeCourses = service.findArrangeCoursesByPageByOid(page,limit,oid);

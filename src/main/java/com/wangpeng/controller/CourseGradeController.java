@@ -17,7 +17,7 @@ public class CourseGradeController {
     @Autowired
     CourseGradeService service;
 
-    @RequestMapping("saveScore.do")
+    @RequestMapping({"saveScore.do", "teacher/saveScore.do"})
     public Integer saveScore(String json, Integer oid){
         Map<Integer, BigDecimal> paramMap = JsonUtil.parseMap(json,Integer.class,BigDecimal.class);
         //sid:score

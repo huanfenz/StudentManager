@@ -15,7 +15,7 @@ public class TableShowController {
     @Autowired
     TableShowService service;
 
-    @RequestMapping("queryTable.do")
+    @RequestMapping({"queryTable.do", "student/queryTable.do"})
     public String[][] queryTable(String json) {
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);

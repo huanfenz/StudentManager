@@ -56,7 +56,7 @@ public class CourseController {
      * 查询所有班级
      * @return
      */
-    @RequestMapping("queryAllCoursesByTeacher.do")
+    @RequestMapping("teacher/queryAllCoursesByTeacher.do")
     public List<Course> queryAllCoursesByTeacher(HttpServletRequest req){
         //获取当前账号信息
         Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");

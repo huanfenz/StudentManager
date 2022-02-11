@@ -71,7 +71,7 @@ public class ApprovalController {
      * @param limit 每页大小
      * @return 数据
      */
-    @RequestMapping("queryApprovalsBySid.do")
+    @RequestMapping({"queryApprovalsBySid.do", "student/queryApprovalsBySid.do"})
     public Map<String,Object> queryApprovalsBySid(Integer page, Integer limit, HttpServletRequest req){
         //获取当前账号信息
         Student loginStudent =  (Student) req.getSession().getAttribute("loginObj");
@@ -104,7 +104,7 @@ public class ApprovalController {
      * @param json
      * @return 返回成功的行数
      */
-    @RequestMapping("deleteApprovals.do")
+    @RequestMapping({"deleteApprovals.do", "student/deleteApprovals.do"})
     public Integer deleteApprovals(String json){
         if(json.charAt(0) != '[') json = '[' + json + ']';  //如果不是数组形式，变成数组形式
         List<Approval> approvals = JsonUtil.parseList(json, Approval.class);
@@ -116,7 +116,7 @@ public class ApprovalController {
      * @param json
      * @return 成功标志1
      */
-    @RequestMapping("addApproval.do")
+    @RequestMapping({"addApproval.do", "student/addApproval.do"})
     public Integer addApproval(String json){
         Approval approval = JsonUtil.parseObject(json, Approval.class);
         return service.addApproval(approval);
@@ -138,7 +138,7 @@ public class ApprovalController {
      * @return
      * @throws IOException
      */
-    @RequestMapping("getAmount.do")
+    @RequestMapping({"getAmount.do", "student/getAmount.do"})
     public Integer getAmount() {
         return service.getApprovalsCount();
     }

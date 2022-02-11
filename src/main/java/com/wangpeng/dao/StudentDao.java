@@ -56,12 +56,16 @@ public interface StudentDao {
      */
     List<Student> searchStudentsByLimit(Map<String,Object> map);
 
+    List<Student> searchStudentsByLimitByTeacher(Map<String, Object> map);
+
     /**
      * 获取搜索的数量
      * @param map 3个参数，sname,snum,sclass
      * @return
      */
     int getSearchCount(Map<String,Object> map);
+
+    int getSearchCountByTeacher(Map<String, Object> searchParam);
 
     /**
      * 检查登录
@@ -75,7 +79,6 @@ public interface StudentDao {
      * @return
      */
     int getStudentsCountByTeacher(int tid);
-
 
     List<Student> selectStudentsByLimitByTeacher(@Param("begin")int begin, @Param("size")int size, @Param("tid")int tid);
 

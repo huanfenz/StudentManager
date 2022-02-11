@@ -149,7 +149,7 @@ String basePath = request.getScheme() + "://"
         function my_search(data) {
             var result = JSON.stringify(data);
             $.getJSON({
-                url: 'tableShow/queryTable.do',
+                url: 'tableShow/student/queryTable.do',
                 data: {json: result},
                 success: function (res) {
                     console.log(res);
@@ -170,7 +170,7 @@ String basePath = request.getScheme() + "://"
         }
 
         $.getJSON({
-            url: 'clazz/queryAllClazzs.do',
+            url: 'clazz/student/queryAllClazzs.do',
             success: function (data) {
                 console.log(data);
                 $("#search_cid").html();

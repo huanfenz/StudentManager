@@ -143,7 +143,7 @@
 
         $('.login-out').on("click", function () {
             $.ajax({
-                url: 'login/exitLogin.do',
+                url: 'login/teacher/exitLogin.do',
                 type: 'get',
                 success: function (res) {
                     layer.msg('退出登录成功', {time:1000}, function () {

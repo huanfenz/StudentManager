@@ -51,6 +51,23 @@
         </where>
         limit #{begin},#{size}
     </select>
+    <!--分页搜索学生(教师)-->
+    <select id="searchStudentsByLimitByTeacher" resultType="Student">
+        select sid,sname,snum,ssex,sage,cid,sstatus,sremark,idcard,phone,address,entime,pswd,pic from student
+        <where>
+            <if test="sname != null and sname != '' ">
+                and sname like concat('%',#{sname},'%')
+            </if>
+            <if test="snum != null and snum != '' ">
+                and snum like concat('%',#{snum},'%')
+            </if>
+            <if test="cid != null and cid != '' ">
+                and cid=#{cid}
+            </if>
+            and cid in (select distinct cid from open_course where tid=#{tid})
+        </where>
+        limit #{begin},#{size}
+    </select>
     <!--获取搜索的数量-->
     <select id="getSearchCount" resultType="int">
         select count(*) from student
@@ -64,6 +81,22 @@
             <if test="cid != null and cid != '' ">
                 and cid=#{cid}
             </if>
+        </where>
+    </select>
+    <!--获取搜索的数量（教师）-->
+    <select id="getSearchCountByTeacher" resultType="int">
+        select count(*) from student
+        <where>
+            <if test="sname != null and sname != '' ">
+                and sname like concat('%',#{sname},'%')
+            </if>
+            <if test="snum != null and snum != '' ">
+                and snum like concat('%',#{snum},'%')
+            </if>
+            <if test="cid != null and cid != '' ">
+                and cid=#{cid}
+            </if>
+            and cid in (select distinct cid from open_course where tid=#{tid})
         </where>
     </select>
     <!--检查用户名和密码-->
