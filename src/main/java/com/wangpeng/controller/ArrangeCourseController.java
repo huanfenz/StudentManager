@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,14 +19,14 @@ public class ArrangeCourseController {
     ArrangeCourseService service;
 
     /**
-     * 查询课表
+     * 查询排课
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 排课信息
      */
     @RequestMapping("queryArrangeCourses.do")
     public Map<String,Object> queryArrangeCourses(Integer page, Integer limit){
-        //获取课表数量
+        //获取排课数量
         int count = service.getArrangeCoursesCount();
         //获取数据
         List<ArrangeCourse> arrangeCourses = service.findArrangeCoursesByPage(page,limit);
@@ -42,8 +41,8 @@ public class ArrangeCourseController {
     }
 
     /**
-     * 查询所有课表
-     * @return
+     * 查询所有排课
+     * @return 所有排课信息
      */
     @RequestMapping("queryAllArrangeCourses.do")
     public List<ArrangeCourse> queryAllArrangeCourses(){
@@ -51,9 +50,9 @@ public class ArrangeCourseController {
     }
 
     /**
-     * 删除课表
-     * @param json
-     * @return 返回成功的行数
+     * 删除排课
+     * @param json 排课对象的json
+     * @return 成功行数
      */
     @RequestMapping("deleteArrangeCourses.do")
     public Integer deleteArrangeCourses(String json){
@@ -64,8 +63,8 @@ public class ArrangeCourseController {
     }
 
     /**
-     * 添加一个课表
-     * @param json
+     * 添加一个排课
+     * @param json 排课对象的json
      * @return 成功标志1
      */
     @RequestMapping("addArrangeCourse.do")
@@ -75,8 +74,8 @@ public class ArrangeCourseController {
     }
 
     /**
-     * 修改一个课表
-     * @param json
+     * 修改一个排课
+     * @param json 排课对象的json
      * @return 成功标志1
      */
     @RequestMapping("updateArrangeCourse.do")
@@ -86,9 +85,8 @@ public class ArrangeCourseController {
     }
 
     /**
-     * 获取课表总数
-     * @return
-     * @throws IOException
+     * 获取排课总数
+     * @return 排课总数
      */
     @RequestMapping("getAmount.do")
     public Integer getAmount() {
@@ -96,10 +94,10 @@ public class ArrangeCourseController {
     }
 
     /**
-     * 查询课表根据oid
+     * 根据oid查询排课
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 排课信息
      */
     @RequestMapping({"queryArrangeCoursesByOid.do", "teacher/queryArrangeCoursesByOid.do"})
     public Map<String,Object> queryArrangeCoursesByOid(Integer page, Integer limit, Integer oid){

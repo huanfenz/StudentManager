@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,14 +21,14 @@ public class CourseController {
     CourseService service;
 
     /**
-     * 查询班级
+     * 查询课程
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 课程信息
      */
     @RequestMapping("queryCourses.do")
     public Map<String,Object> queryCourses(Integer page, Integer limit){
-        //获取班级数量
+        //获取课程数量
         int count = service.getCoursesCount();
         //获取数据
         List<Course> courses = service.findCoursesByPage(page,limit);
@@ -44,8 +43,8 @@ public class CourseController {
     }
 
     /**
-     * 查询所有班级
-     * @return
+     * 查询所有课程
+     * @return 课程信息
      */
     @RequestMapping("queryAllCourses.do")
     public List<Course> queryAllCourses(){
@@ -53,8 +52,8 @@ public class CourseController {
     }
 
     /**
-     * 查询所有班级
-     * @return
+     * 查询所有课程
+     * @return 课程信息
      */
     @RequestMapping("teacher/queryAllCoursesByTeacher.do")
     public List<Course> queryAllCoursesByTeacher(HttpServletRequest req){
@@ -64,9 +63,9 @@ public class CourseController {
     }
 
     /**
-     * 删除班级
-     * @param json
-     * @return 返回成功的行数
+     * 删除课程
+     * @param json 课程对象的json
+     * @return 成功行数
      */
     @RequestMapping("deleteCourses.do")
     public Integer deleteCourses(String json){
@@ -76,8 +75,8 @@ public class CourseController {
     }
 
     /**
-     * 添加一个班级
-     * @param json
+     * 添加一个课程
+     * @param json 课程对象的json
      * @return 成功标志1
      */
     @RequestMapping("addCourse.do")
@@ -87,8 +86,8 @@ public class CourseController {
     }
 
     /**
-     * 修改一个班级
-     * @param json
+     * 修改一个课程
+     * @param json 课程对象的json
      * @return 成功标志1
      */
     @RequestMapping("updateCourse.do")
@@ -98,15 +97,22 @@ public class CourseController {
     }
 
     /**
-     * 获取班级总数
-     * @return
-     * @throws IOException
+     * 获取课程总数
+     * @return 课程总数
      */
     @RequestMapping("getAmount.do")
     public Integer getAmount() {
         return service.getCoursesCount();
     }
 
+    /**
+     * 搜索课程
+     * @param page 当前页码
+     * @param limit 每页大小
+     * @param json 搜索参数的json
+     *             {{"courseName": 课程名}}
+     * @return 课程信息
+     */
     @RequestMapping("searchCourses.do")
     public Map<String,Object> searchCourses(Integer page, Integer limit, String json){
         //获得搜索的参数

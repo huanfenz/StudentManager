@@ -19,10 +19,10 @@ import java.util.Map;
 public class UpdateController {
 
     /**
-     *
-     * @param req
-     * @param resp
-     * @param dirName exp:"pictures"
+     * 我的上传
+     * @param req HttpServletResponse
+     * @param resp HttpServletResponse
+     * @param dirName 文件夹名
      * @return
      */
     private Map<String,String> myUpdate(HttpServletRequest req, HttpServletResponse resp, String dirName) {
@@ -70,6 +70,12 @@ public class UpdateController {
         return resMap;
     }
 
+    /**
+     * 上传图片
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @return 按要求
+     */
     @RequestMapping("updateImg.do")
     public Map<String,Object> updateImg(HttpServletRequest req, HttpServletResponse resp){
         String resPath = myUpdate(req, resp, "pictures").get("resPath");
@@ -84,6 +90,12 @@ public class UpdateController {
         return res;
     }
 
+    /**
+     * 上传附件
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @return 按要求
+     */
     @RequestMapping({"updateAttachment.do", "student/updateAttachment.do"})
     public Map<String,Object> updateAttachment(HttpServletRequest req, HttpServletResponse resp){
 
@@ -102,6 +114,12 @@ public class UpdateController {
         return res;
     }
 
+    /**
+     * 上传文章
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @return 按要求
+     */
     @RequestMapping("updateArticle.do")
     public Map<String,Object> updateArticle(HttpServletRequest req, HttpServletResponse resp){
 

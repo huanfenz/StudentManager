@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class OpenCourseController {
      * 查询开课
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 开课信息
      */
     @RequestMapping({"queryOpenCourses.do", "teacher/queryOpenCourses.do"})
     public Map<String,Object> queryOpenCourses(Integer page, Integer limit){
@@ -49,7 +48,7 @@ public class OpenCourseController {
      * 查询开课(教师权限)
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 开课信息
      */
     @RequestMapping("teacher/queryOpenCoursesByTeacher.do")
     public Map<String,Object> queryOpenCoursesByTeacher(Integer page, Integer limit, HttpServletRequest req){
@@ -72,7 +71,7 @@ public class OpenCourseController {
 
     /**
      * 查询(学生权限)
-     * @return 数据
+     * @return 开课信息
      */
     @RequestMapping("student/queryOpenCoursesByStudent.do")
     public Map<String,Object> queryOpenCoursesByStudent(Integer oid, HttpServletRequest req){
@@ -91,7 +90,7 @@ public class OpenCourseController {
 
     /**
      * 查询所有开课
-     * @return
+     * @return 开课信息
      */
     @RequestMapping("queryAllOpenCourses.do")
     public List<OpenCourse> queryAllOpenCourses(){
@@ -100,8 +99,8 @@ public class OpenCourseController {
 
     /**
      * 删除开课
-     * @param json
-     * @return 返回成功的行数
+     * @param json 开课对象的json
+     * @return 成功行数
      */
     @RequestMapping("deleteOpenCourses.do")
     public Integer deleteOpenCourses(String json){
@@ -112,7 +111,7 @@ public class OpenCourseController {
 
     /**
      * 添加一个开课
-     * @param json
+     * @param json 开课对象的json
      * @return 成功标志1
      */
     @RequestMapping("addOpenCourse.do")
@@ -123,7 +122,7 @@ public class OpenCourseController {
 
     /**
      * 修改一个开课
-     * @param json
+     * @param json 开课对象的json
      * @return 成功标志1
      */
     @RequestMapping("updateOpenCourse.do")
@@ -134,14 +133,21 @@ public class OpenCourseController {
 
     /**
      * 获取开课总数
-     * @return
-     * @throws IOException
+     * @return 开课总数
      */
     @RequestMapping("getAmount.do")
     public Integer getAmount() {
         return service.getOpenCoursesCount();
     }
 
+    /**
+     * 搜索开课
+     * @param page 当前页码
+     * @param limit 每页大小
+     * @param json 搜索参数的json
+     *             {"year":学年,"term":学期,"cid":班级id,"tid":教师id,"courseId":课程id}
+     * @return 开课信息
+     */
     @RequestMapping({"searchOpenCourses.do", "student/searchOpenCourses.do", "teacher/searchOpenCourses.do"})
     public Map<String,Object> searchOpenCourses(Integer page, Integer limit, String json){
         //获得搜索的参数

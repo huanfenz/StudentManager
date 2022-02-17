@@ -2,6 +2,7 @@ package com.wangpeng.controller;
 
 import com.wangpeng.service.WelcomeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,22 +17,9 @@ public class WelcomeController {
 
     /**
      * 管理员获取首页数量
-     * @return {
-     * 	"studentCount": 学生数量,
-     * 	"managerCount": 管理员数量,
-     * 	"openCourseCount": 开课数量,
-     * 	"teacherCount": 教师数量,
-     * 	"approvalCount": 未处理的审批数量
-     * }
-     * @response {
-     * 	"studentCount": 15,
-     * 	"managerCount": 6,
-     * 	"openCourseCount": 14,
-     * 	"teacherCount": 14,
-     * 	"approvalCount": 3
-     * }
+     * @return 数量信息
      */
-    @RequestMapping("getAllCount.do")
+    @GetMapping("getAllCount.do")
     public Map<String, Integer> getAllCount() {
         Map<String, Integer> map = service.getAllCount();
         return map;
@@ -40,15 +28,20 @@ public class WelcomeController {
     /**
      * 学生获取首页数量
      * @param sid 学生id
-     * @return
+     * @return 数量信息
      */
-    @RequestMapping("student/getAllCountByStudent.do")
+    @GetMapping("student/getAllCountByStudent.do")
     public Map<String, Integer> getAllCountByStudent(Integer sid) {
         Map<String, Integer> map = service.getAllCountByStudent(sid);
         return map;
     }
 
-    @RequestMapping("teacher/getAllCountByTeacher.do")
+    /**
+     * 教师获取首页数量
+     * @param tid 教师id
+     * @return 数量信息
+     */
+    @GetMapping("teacher/getAllCountByTeacher.do")
     public Map<String, Integer> getAllCountByTeacher(Integer tid) {
         Map<String, Integer> map = service.getAllCountByTeacher(tid);
         return map;

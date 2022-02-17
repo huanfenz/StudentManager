@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,7 @@ public class ApprovalController {
      * 查询审批
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 审批信息
      */
     @RequestMapping("queryApprovals.do")
     public Map<String,Object> queryApprovals(Integer page, Integer limit){
@@ -44,10 +43,10 @@ public class ApprovalController {
     }
 
     /**
-     * 查询审批（等待审批的）
+     * 查询审批（未审批的）
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 审批信息
      */
     @RequestMapping("queryApprovalsByWait.do")
     public Map<String,Object> queryApprovalsByWait(Integer page, Integer limit){
@@ -66,10 +65,10 @@ public class ApprovalController {
     }
 
     /**
-     * 查询审批
+     * 根据学生id查询审批
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 审批信息
      */
     @RequestMapping({"queryApprovalsBySid.do", "student/queryApprovalsBySid.do"})
     public Map<String,Object> queryApprovalsBySid(Integer page, Integer limit, HttpServletRequest req){
@@ -92,7 +91,7 @@ public class ApprovalController {
 
     /**
      * 查询所有审批
-     * @return
+     * @return 审批信息
      */
     @RequestMapping("queryAllApprovals.do")
     public List<Approval> queryAllApprovals(){
@@ -101,8 +100,8 @@ public class ApprovalController {
 
     /**
      * 删除审批
-     * @param json
-     * @return 返回成功的行数
+     * @param json 审批对象的json
+     * @return 成功行数
      */
     @RequestMapping({"deleteApprovals.do", "student/deleteApprovals.do"})
     public Integer deleteApprovals(String json){
@@ -113,7 +112,7 @@ public class ApprovalController {
 
     /**
      * 添加一个审批
-     * @param json
+     * @param json 审批对象的json
      * @return 成功标志1
      */
     @RequestMapping({"addApproval.do", "student/addApproval.do"})
@@ -124,7 +123,7 @@ public class ApprovalController {
 
     /**
      * 修改一个审批
-     * @param json
+     * @param json 审批对象的json
      * @return 成功标志1
      */
     @RequestMapping("updateApproval.do")
@@ -135,8 +134,7 @@ public class ApprovalController {
 
     /**
      * 获取审批总数
-     * @return
-     * @throws IOException
+     * @return 审批总数
      */
     @RequestMapping({"getAmount.do", "student/getAmount.do"})
     public Integer getAmount() {
@@ -145,8 +143,7 @@ public class ApprovalController {
 
     /**
      * 获取未处理的审批总数
-     * @return
-     * @throws IOException
+     * @return 未处理的审批总数
      */
     @RequestMapping("getAmountUntreated.do")
     public Integer getAmountUntreated() {

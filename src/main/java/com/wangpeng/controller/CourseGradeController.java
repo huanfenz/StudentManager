@@ -17,6 +17,12 @@ public class CourseGradeController {
     @Autowired
     CourseGradeService service;
 
+    /**
+     * 保存分数
+     * @param json [{sid:score},...]
+     * @param oid 开课id
+     * @return 成功的数量
+     */
     @RequestMapping({"saveScore.do", "teacher/saveScore.do"})
     public Integer saveScore(String json, Integer oid){
         Map<Integer, BigDecimal> paramMap = JsonUtil.parseMap(json,Integer.class,BigDecimal.class);

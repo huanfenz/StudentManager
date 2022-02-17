@@ -18,6 +18,16 @@ public class LoginController {
     @Autowired
     LoginService service;
 
+    /**
+     * 登录
+     * @param username 用户名
+     * @param password 密码
+     * @param authority 身份
+     * @param captcha 验证码
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @return
+     */
     @RequestMapping("login.do")
     public int login(String username, String password, String authority, String captcha, HttpServletRequest req, HttpServletResponse resp){
         //  status: 0验证码错误，1账号密码错误，2成功，3验证码失效
@@ -54,6 +64,13 @@ public class LoginController {
         }
     }
 
+    /**
+     * 修改密码
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     * @param req HttpServletRequest
+     * @return 成功标志1
+     */
     @RequestMapping("alterPassword.do")
     public int alterPassword(String oldPassword, String newPassword,HttpServletRequest req){
         //获取当前登录的权限
@@ -102,6 +119,10 @@ public class LoginController {
         return 0;
     }
 
+    /**
+     * 退出登录
+     * @param req HttpServletRequest
+     */
     @RequestMapping({"exitLogin.do", "student/exitLogin.do", "teacher/exitLogin.do"})
     public void exitLogin(HttpServletRequest req){
         req.getSession().setAttribute("authority", null);

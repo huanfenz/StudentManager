@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,13 +29,13 @@ public class StudentController {
      * 查询所有学生
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 学生信息
      */
     @RequestMapping("queryStudents.do")
     public Map<String,Object> queryStudents(Integer page, Integer limit){
         //获取学生数量
         int count = service.getStudentsCount();
-        //获取数据
+        //获取学生信息
         List<Student> students = service.findStudentsByPage(page,limit);
         //结果map
         Map<String,Object> res = new HashMap<String,Object>();
@@ -50,11 +49,11 @@ public class StudentController {
 
     /**
      * 查询学生
-     * @return 数据
+     * @return 学生信息
      */
     @RequestMapping({"queryStudent.do", "teacher/queryStudent.do"})
     public Student queryStudent(Integer sid){
-        //获取数据
+        //获取学生信息
         Student student = service.findStudentBySid(sid);
         return student;
     }
@@ -63,7 +62,7 @@ public class StudentController {
      * 查询所有学生（教师权限）
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 学生信息
      */
     @RequestMapping("teacher/queryStudentsByTeacher.do")
     public Map<String,Object> queryStudentsByTeacher(Integer page, Integer limit, HttpServletRequest req){
@@ -72,7 +71,7 @@ public class StudentController {
 
         //获取学生数量
         int count = service.getStudentsCountByTeacher(loginTeacher.getTid());
-        //获取数据
+        //获取学生信息
         List<Student> students = service.findStudentsByPageByTeacher(page,limit,loginTeacher.getTid());
         //结果map
         Map<String,Object> res = new HashMap<String,Object>();
@@ -85,11 +84,11 @@ public class StudentController {
     }
 
     /**
-     * 查询所有学生通过oid
+     * 通过oid查询所有学生
      */
     @RequestMapping({"queryStudentsByOid.do", "teacher/queryStudentsByOid.do"})
     public List<Map<String,Object>> queryStudentsByOid(int oid){
-        //获取学生数据
+        //获取学生学生信息
         List<Student> students = service.findStudentsByOid(oid);
 
         List<Map<String,Object>> res = new ArrayList<>();
@@ -111,8 +110,8 @@ public class StudentController {
 
     /**
      * 删除学生
-     * @param json
-     * @return 返回成功的行数
+     * @param json 学生对象的json
+     * @return 成功行数
      */
     @RequestMapping("deleteStudents.do")
     public Integer deleteStudents(String json){
@@ -123,7 +122,7 @@ public class StudentController {
 
     /**
      * 添加一个学生
-     * @param json
+     * @param json 学生对象的json
      * @return 成功标志1
      */
     @RequestMapping("addStudent.do")
@@ -134,7 +133,7 @@ public class StudentController {
 
     /**
      * 修改一个学生
-     * @param json
+     * @param json 学生对象的json
      * @return 成功标志1
      */
     @RequestMapping("updateStudent.do")
@@ -145,21 +144,28 @@ public class StudentController {
 
     /**
      * 获取学生总数
-     * @return
-     * @throws IOException
+     * @return 学生总数
      */
     @RequestMapping("getAmount.do")
     public Integer getAmount() {
         return service.getStudentsCount();
     }
 
+    /**
+     * 搜索学生
+     * @param page 当前页码
+     * @param limit 每页大小
+     * @param json 搜索参数的json
+     *             {"sname":学生姓名,"snum":学号,"cid":班级id}
+     * @return 学生信息
+     */
     @RequestMapping("searchStudents.do")
     public Map<String,Object> searchStudents(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
         //获取查询个数
         int count = service.getSearchCount(searchParam);
-        //查询数据
+        //查询学生信息
         List<Student> students = service.searchStudents(page, limit, searchParam);
         //结果map
         Map<String,Object> res = new HashMap<String,Object>();
@@ -181,7 +187,7 @@ public class StudentController {
 
         //获取查询个数
         int count = service.getSearchCountByTeacher(searchParam);
-        //查询数据
+        //查询学生信息
         List<Student> students = service.searchStudentsByTeacher(page, limit, searchParam);
         //结果map
         Map<String,Object> res = new HashMap<String,Object>();

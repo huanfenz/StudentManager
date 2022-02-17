@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +20,12 @@ public class ClazzController {
     @Autowired
     ClazzService service;
 
+    /**
+     * 查询班级
+     * @param page 当前页码
+     * @param limit 每页大小
+     * @return 班级信息
+     */
     @RequestMapping("queryClazzs.do")
     public Map<String,Object> queryClazzs(Integer page, Integer limit){
         //获取数量
@@ -36,12 +41,21 @@ public class ClazzController {
         return res;
     }
 
+    /**
+     * 查询所有班级
+     * @return 班级信息
+     */
     @RequestMapping({"queryAllClazzs.do", "student/queryAllClazzs.do"})
     public List<Clazz> queryAllClazzs(){
         List<Clazz> clazzes = service.queryAllClazzs();
         return clazzes;
     }
 
+    /**
+     * 根据教师查询所有班级
+     * @param req HttpServletRequest
+     * @return
+     */
     @RequestMapping("teacher/queryAllClazzsByTeacher.do")
     public List<Clazz> queryAllClazzsByTeacher(HttpServletRequest req){
         //获取当前账号信息
@@ -53,8 +67,8 @@ public class ClazzController {
 
     /**
      * 删除班级
-     * @param json
-     * @return 返回成功的行数
+     * @param json 班级对象的json
+     * @return 成功行数
      */
     @RequestMapping("deleteClazzs.do")
     public Integer deleteClazzs(String json){
@@ -66,7 +80,7 @@ public class ClazzController {
 
     /**
      * 添加一个班级
-     * @param json
+     * @param json 班级对象的json
      * @return 成功标志1
      */
     @RequestMapping("addClazz.do")
@@ -78,7 +92,7 @@ public class ClazzController {
 
     /**
      * 修改一个班级
-     * @param json
+     * @param json 班级对象的json
      * @return 成功标志1
      */
     @RequestMapping("updateClazz.do")
@@ -90,8 +104,7 @@ public class ClazzController {
 
     /**
      * 获取班级总数
-     * @return
-     * @throws IOException
+     * @return 班级总数
      */
     @RequestMapping("getAmount.do")
     public Integer getAmount() {
@@ -99,6 +112,14 @@ public class ClazzController {
         return res;
     }
 
+    /**
+     * 搜索班级
+     * @param page 当前页码
+     * @param limit 每页大小
+     * @param json 搜索参数的json
+     *             {"cname": 班级名, "mid": 专业id}
+     * @return 班级信息
+     */
     @RequestMapping("searchClazzs.do")
     public Map<String,Object> searchClazzs(Integer page, Integer limit, String json){
         //获得搜索的参数

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,7 @@ public class MajorController {
      * 查询专业
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 专业信息
      */
     @RequestMapping("queryMajors.do")
     public Map<String,Object> queryMajors(Integer page, Integer limit){
@@ -43,7 +42,7 @@ public class MajorController {
 
     /**
      * 查询所有专业
-     * @return
+     * @return 专业信息
      */
     @RequestMapping("queryAllMajors.do")
     public List<Major> queryAllMajors(){
@@ -52,8 +51,8 @@ public class MajorController {
 
     /**
      * 删除专业
-     * @param json
-     * @return 返回成功的行数
+     * @param json 专业对象的json
+     * @return 成功行数
      */
     @RequestMapping("deleteMajors.do")
     public Integer deleteMajors(String json){
@@ -64,7 +63,7 @@ public class MajorController {
 
     /**
      * 添加一个专业
-     * @param json
+     * @param json 专业对象的json
      * @return 成功标志1
      */
     @RequestMapping("addMajor.do")
@@ -75,7 +74,7 @@ public class MajorController {
 
     /**
      * 修改一个专业
-     * @param json
+     * @param json 专业对象的json
      * @return 成功标志1
      */
     @RequestMapping("updateMajor.do")
@@ -86,14 +85,21 @@ public class MajorController {
 
     /**
      * 获取专业总数
-     * @return
-     * @throws IOException
+     * @return 专业总数
      */
     @RequestMapping("getAmount.do")
     public Integer getAmount() {
         return service.getMajorsCount();
     }
 
+    /**
+     * 搜索专业
+     * @param page 当前页码
+     * @param limit 每页大小
+     * @param json 搜索参数的json
+     *             {"mname": 专业名, "mdept": 学院名}
+     * @return 专业信息
+     */
     @RequestMapping("searchMajors.do")
     public Map<String,Object> searchMajors(Integer page, Integer limit, String json){
         //获得搜索的参数

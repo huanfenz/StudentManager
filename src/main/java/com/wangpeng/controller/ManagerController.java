@@ -4,12 +4,9 @@ import com.wangpeng.pojo.Manager;
 import com.wangpeng.service.ManagerService;
 import com.wangpeng.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,14 +19,14 @@ public class ManagerController {
     ManagerService service;
 
     /**
-     * 查询用户
+     * 查询管理员
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 管理员信息
      */
     @RequestMapping("queryManagers.do")
     public Map<String,Object> queryManagers(Integer page, Integer limit){
-        //获取用户数量
+        //获取管理员数量
         int count = service.getManagersCount();
         //获取数据
         List<Manager> managers = service.findManagersByPage(page,limit);
@@ -44,8 +41,8 @@ public class ManagerController {
     }
 
     /**
-     * 查询所有用户
-     * @return
+     * 查询所有管理员
+     * @return 管理员信息
      */
     @RequestMapping("queryAllManagers.do")
     public List<Manager> queryAllManagers(){
@@ -53,9 +50,9 @@ public class ManagerController {
     }
 
     /**
-     * 删除用户
-     * @param json
-     * @return 返回成功的行数
+     * 删除管理员
+     * @param json 管理员对象的json
+     * @return 成功行数
      */
     @RequestMapping("deleteManagers.do")
     public Integer deleteManagers(String json){
@@ -65,8 +62,8 @@ public class ManagerController {
     }
 
     /**
-     * 添加一个用户
-     * @param json
+     * 添加一个管理员
+     * @param json 管理员对象的json
      * @return 成功标志1
      */
     @RequestMapping("addManager.do")
@@ -76,8 +73,8 @@ public class ManagerController {
     }
 
     /**
-     * 修改一个用户
-     * @param json
+     * 修改一个管理员
+     * @param json 管理员对象的json
      * @return 成功标志1
      */
     @RequestMapping("updateManager.do")
@@ -87,15 +84,22 @@ public class ManagerController {
     }
 
     /**
-     * 获取用户总数
-     * @return
-     * @throws IOException
+     * 获取管理员总数
+     * @return 管理员总数
      */
     @RequestMapping("getAmount.do")
     public Integer getAmount() {
         return service.getManagersCount();
     }
 
+    /**
+     * 搜索管理员
+     * @param page 当前页码
+     * @param limit 每页大小
+     * @param json 搜索的参数
+     *             {"username":用户名,"name":姓名}
+     * @return 管理员信息
+     */
     @RequestMapping("searchManagers.do")
     public Map<String,Object> searchManagers(Integer page, Integer limit, String json){
         //获得搜索的参数

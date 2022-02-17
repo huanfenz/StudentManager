@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,16 +19,16 @@ public class RoomController {
     RoomService service;
 
     /**
-     * 查询班级
+     * 查询教室
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 教室信息
      */
     @RequestMapping("queryRooms.do")
     public Map<String,Object> queryRooms(Integer page, Integer limit){
-        //获取班级数量
+        //获取教室数量
         int count = service.getRoomsCount();
-        //获取数据
+        //获取教室信息
         List<Room> rooms = service.findRoomsByPage(page,limit);
         //结果map
         Map<String,Object> res = new HashMap<String,Object>();
@@ -42,8 +41,8 @@ public class RoomController {
     }
 
     /**
-     * 查询所有班级
-     * @return
+     * 查询所有教室
+     * @return 教室信息
      */
     @RequestMapping({"queryAllRooms.do", "teacher/queryAllRooms.do"})
     public List<Room> queryAllRooms(){
@@ -51,9 +50,9 @@ public class RoomController {
     }
 
     /**
-     * 删除班级
-     * @param json
-     * @return 返回成功的行数
+     * 删除教室
+     * @param json 教室对象的json
+     * @return 成功行数
      */
     @RequestMapping("deleteRooms.do")
     public Integer deleteRooms(String json){
@@ -63,8 +62,8 @@ public class RoomController {
     }
 
     /**
-     * 添加一个班级
-     * @param json
+     * 添加一个教室
+     * @param json 教室对象的json
      * @return 成功标志1
      */
     @RequestMapping("addRoom.do")
@@ -74,8 +73,8 @@ public class RoomController {
     }
 
     /**
-     * 修改一个班级
-     * @param json
+     * 修改一个教室
+     * @param json 教室对象的json
      * @return 成功标志1
      */
     @RequestMapping("updateRoom.do")
@@ -85,22 +84,29 @@ public class RoomController {
     }
 
     /**
-     * 获取班级总数
-     * @return
-     * @throws IOException
+     * 获取教室总数
+     * @return 教室总数
      */
     @RequestMapping("getAmount.do")
     public Integer getAmount() {
         return service.getRoomsCount();
     }
 
+    /**
+     * 搜索教室
+     * @param page 当前页码
+     * @param limit 每页大小
+     * @param json 搜索参数的json
+     *             {"rname":教室名,"capacity":容量}
+     * @return 教室信息
+     */
     @RequestMapping("searchRooms.do")
     public Map<String,Object> searchRooms(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
         //获取查询个数
         int count = service.getSearchCount(searchParam);
-        //查询数据
+        //查询教室信息
         List<Room> rooms = service.searchRooms(page, limit, searchParam);
         //结果map
         Map<String,Object> res = new HashMap<String,Object>();

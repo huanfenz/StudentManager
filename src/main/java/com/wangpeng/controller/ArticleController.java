@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,7 @@ public class ArticleController {
      * 查询文章
      * @param page  当前页码
      * @param limit 每页大小
-     * @return 数据
+     * @return 文章信息
      */
     @RequestMapping({"queryArticles.do", "student/queryArticles.do", "teacher/queryArticles.do"})
     public Map<String,Object> queryArticles(Integer page, Integer limit){
@@ -43,7 +42,7 @@ public class ArticleController {
 
     /**
      * 查询所有文章
-     * @return
+     * @return 文章信息
      */
     @RequestMapping("queryAllArticles.do")
     public List<Article> queryAllArticles(){
@@ -52,8 +51,8 @@ public class ArticleController {
 
     /**
      * 删除文章
-     * @param json
-     * @return 返回成功的行数
+     * @param json 文章对象的json
+     * @return 成功行数
      */
     @RequestMapping("deleteArticles.do")
     public Integer deleteArticles(String json){
@@ -64,7 +63,7 @@ public class ArticleController {
 
     /**
      * 添加一个文章
-     * @param json
+     * @param json 文章对象的json
      * @return 成功标志1
      */
     @RequestMapping("addArticle.do")
@@ -75,7 +74,7 @@ public class ArticleController {
 
     /**
      * 修改一个文章
-     * @param json
+     * @param json 文章对象的json
      * @return 成功标志1
      */
     @RequestMapping("updateArticle.do")
@@ -86,14 +85,21 @@ public class ArticleController {
 
     /**
      * 获取文章总数
-     * @return
-     * @throws IOException
+     * @return 文章总数
      */
     @RequestMapping("getAmount.do")
     public Integer getAmount() {
         return service.getArticlesCount();
     }
 
+    /**
+     * 搜索文章
+     * @param page 当前页码
+     * @param limit 每页大小
+     * @param json 搜索参数的json
+     *             {"title":文章标题,"date":日期}
+     * @return 文章信息
+     */
     @RequestMapping({"searchArticles.do", "student/searchArticles.do", "teacher/searchArticles.do"})
     public Map<String,Object> searchArticles(Integer page, Integer limit, String json){
         //获得搜索的参数

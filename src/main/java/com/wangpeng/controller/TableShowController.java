@@ -15,6 +15,12 @@ public class TableShowController {
     @Autowired
     TableShowService service;
 
+    /**
+     * 获取课程表
+     * @param json 搜索参数的json
+     *             {"cid":班级id,"weekno":第几周}
+     * @return 课程表的数组
+     */
     @RequestMapping({"queryTable.do", "student/queryTable.do"})
     public String[][] queryTable(String json) {
         //获得搜索的参数
