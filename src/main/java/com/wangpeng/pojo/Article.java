@@ -1,10 +1,25 @@
 package com.wangpeng.pojo;
 
 public class Article {
+    /**
+     * 文章id
+     */
     private Integer id;
+    /**
+     * 标题
+     */
     private String title;
+    /**
+     * 发起人
+     */
     private String people;
+    /**
+     * 日期
+     */
     private String date;
+    /**
+     * 地址
+     */
     private String url;
 
     public Article() {

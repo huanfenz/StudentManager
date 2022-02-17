@@ -1,24 +1,38 @@
 package com.wangpeng.pojo;
 
 public class CourseDetail {
-    //唯一排课id
+    /**
+     * 唯一排课id
+     */
     private Integer ctid;
-
-    //哪几周上课
+    /**
+     * 哪几周上课
+     */
     private String weekno;
-
-    //星期几
+    /**
+     * 星期几
+     */
     private Integer week;
-    //第几节课
+    /**
+     * 第几节课
+     */
     private Integer start;
-    //课长
+    /**
+     * 课长
+     *
+     */
     private Integer size;
-
-    //课程名
+    /**
+     * 课程名
+     */
     private String courseName;
-    //教室名
+    /**
+     * 教室名
+     */
     private String rname;
-    //教师名
+    /**
+     * 教师名
+     */
     private String tname;
 
     public CourseDetail() {

@@ -1,10 +1,25 @@
 package com.wangpeng.pojo;
 
 public class Manager {
+    /**
+     * 管理员id
+     */
     private Integer id;
+    /**
+     * 用户名
+     */
     private String username;
+    /**
+     * 密码
+     */
     private String password;
+    /**
+     * 管理员姓名
+     */
     private String name;
+    /**
+     * 备注
+     */
     private String remark;
 
     public Manager() {

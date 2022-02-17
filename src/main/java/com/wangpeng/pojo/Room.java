@@ -1,9 +1,21 @@
 package com.wangpeng.pojo;
 
 public class Room {
+    /**
+     * 教室id
+     */
     private Integer rid;
+    /**
+     * 教室名
+     */
     private String rname;
+    /**
+     * 容量
+     */
     private Integer capacity;
+    /**
+     * 备注
+     */
     private String remark;
 
     public Room() {

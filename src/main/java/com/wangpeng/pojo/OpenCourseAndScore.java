@@ -1,13 +1,37 @@
 package com.wangpeng.pojo;
 
 public class OpenCourseAndScore {
+    /**
+     * 学年
+     */
     private String year;
+    /**
+     * 学期
+     */
     private String term;
+    /**
+     * 教师id
+     */
     private Integer tid;
+    /**
+     * 教师名
+     */
     private String tname;
+    /**
+     * 课程id
+     */
     private Integer courseId;
+    /**
+     * 课程名
+     */
     private String courseName;
+    /**
+     * 备注
+     */
     private String remark;
+    /**
+     * 分数
+     */
     private Integer score;
 
     public OpenCourseAndScore() {

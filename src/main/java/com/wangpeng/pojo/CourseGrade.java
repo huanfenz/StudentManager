@@ -3,9 +3,21 @@ package com.wangpeng.pojo;
 import java.math.BigDecimal;
 
 public class CourseGrade {
+    /**
+     * 成绩id
+     */
     private Integer cgid;
+    /**
+     * 开课id
+     */
     private Integer oid;
+    /**
+     * 学生id
+     */
     private Integer sid;
+    /**
+     * 分数
+     */
     private BigDecimal score;
 
     public CourseGrade() {

@@ -1,9 +1,21 @@
 package com.wangpeng.pojo;
 
 public class Major {
+    /**
+     * 专业id
+     */
     private Integer mid;
+    /**
+     * 专业名
+     */
     private String mname;
+    /**
+     * 专业所属院系
+     */
     private String mdept;
+    /**
+     * 备注
+     */
     private String mremark;
 
     public Major() {

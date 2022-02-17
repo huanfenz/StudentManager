@@ -1,8 +1,17 @@
 package com.wangpeng.pojo;
 
 public class Course {
+    /**
+     * 课程id
+     */
     private Integer courseId;
+    /**
+     * 课程名
+     */
     private String courseName;
+    /**
+     * 备注
+     */
     private String courseRemark;
 
     public Course() {

@@ -1,13 +1,37 @@
 package com.wangpeng.pojo;
 
 public class ArrangeCourse {
+    /**
+     * 排课id
+     */
     private Integer ctid;
+    /**
+     * 开课id
+     */
     private Integer oid;
+    /**
+     * 教室id
+     */
     private Integer rid;
+    /**
+     * 教师名
+     */
     private String rname;
+    /**
+     * 星期几
+     */
     private String weekno;
+    /**
+     * 周数
+     */
     private Integer week;
+    /**
+     * 开始节数
+     */
     private Integer start;
+    /**
+     * 课程长度
+     */
     private Integer size;
 
     public ArrangeCourse() {

@@ -1,17 +1,53 @@
 package com.wangpeng.pojo;
 
 public class Approval {
+    /**
+     * 审批id
+     */
     private Integer aid;
+    /**
+     * 学生id
+     */
     private Integer sid;
+    /**
+     * 学生姓名
+     */
     private String sname;
+    /**
+     * 标题
+     */
     private String title;
+    /**
+     * 理由
+     */
     private String reason;
+    /**
+     * 请假类型
+     */
     private String type;
+    /**
+     * 开始日期
+     */
     private String sDate;
+    /**
+     * 结束日期
+     */
     private String eDate;
+    /**
+     * 状态
+     */
     private String status;
+    /**
+     * 附件名
+     */
     private String attName;
+    /**
+     * 附件地址
+     */
     private String att;
+    /**
+     * 回复消息
+     */
     private String msg;
 
     public Approval() {
