@@ -189,6 +189,6 @@ public class StudentServiceImpl implements StudentService {
                 }
             }
         }
-        return "http://localhost:8080/StudentManager/report/" + fileName;
+        return "report/" + fileName;
     }
 }
