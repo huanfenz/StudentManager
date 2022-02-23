@@ -236,7 +236,7 @@
         $.ajax({
             url: 'welcome/student/getAllCountByStudent.do',
             data: {sid: ${sessionScope.loginObj.sid}},
-            type: 'post',
+            type: 'get',
             datatype: 'json',
             success: function (res) {
                 console.log(res);

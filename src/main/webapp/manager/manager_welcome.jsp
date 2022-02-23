@@ -260,7 +260,7 @@
         // 获取数据
         $.ajax({
             url: 'welcome/getAllCount.do',
-            type: 'post',
+            type: 'get',
             datatype: 'json',
             success: function (res) {
                 console.log(res);
