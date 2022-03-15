@@ -10,7 +10,7 @@
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
     <title>教师首页</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">

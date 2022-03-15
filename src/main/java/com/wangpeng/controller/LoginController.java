@@ -32,7 +32,7 @@ public class LoginController {
     public int login(String username, String password, String authority, String captcha, HttpServletRequest req, HttpServletResponse resp){
         //  status: 0验证码错误，1账号密码错误，2成功，3验证码失效
 
-        //获取Session中的验证码
+        // 获取Session中的验证码
         String token = (String) req.getSession().getAttribute("KAPTCHA_SESSION_KEY");
         // 删除Session中的验证码
         req.getSession().removeAttribute("KAPTCHA_SESSION_KEY");

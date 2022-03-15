@@ -10,7 +10,6 @@
 <head>
     <base href="<%=basePath%>" />
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <title>学生信息管理系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -201,6 +200,9 @@
                                     location.href="student/student_index.jsp";
                                 }
                             });
+                            break;
+                        case 4:
+                            layer.msg("该学号不唯一，请联系管理员",{time:1000});
                             break;
                     }
                 }

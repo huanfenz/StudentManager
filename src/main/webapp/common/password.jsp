@@ -70,7 +70,7 @@
         form.on('submit(saveBtn)', function (data) {
             var mdata = data.field;
             console.log(mdata);
-            if(mdata.new_password == mdata.again_password) {
+            if(mdata.new_password === mdata.again_password) {
                 $.ajax({
                     url: "login/alterPassword.do",
                     data: {
@@ -80,7 +80,7 @@
                     type: "post",
                     datatype: "json",
                     success: function (res) {
-                        if(res == 0) {
+                        if(res === 0) {
                             layer.msg("修改失败，请检查原密码是否正确！",{time:2000});
                         } else {
                             layer.msg("修改成功",{time:2000});
