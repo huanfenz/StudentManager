@@ -23,16 +23,28 @@ public class ApprovalServiceImpl implements ApprovalService {
         return approvalDao.selectApprovals();
     }
 
+    /**
+     * 为专业列表添加学生姓名
+     * @param approvals
+     */
+    private void addStudentNameForMajors(List<Approval> approvals) {
+        for(Approval approval : approvals) {
+            Integer sid = approval.getSid();
+            if (sid != null) {
+                Student student = studentDao.selectStudent(sid);
+                if (student != null) {
+                    approval.setSname(student.getSname());
+                }
+            }
+        }
+    }
+
     @Override
     public List<Approval> findApprovalsByPage(int page, int size) {
         int begin = (page - 1) * size;
         List<Approval> approvals = approvalDao.selectApprovalsByLimit(begin, size);
         //添加学生姓名信息
-        for(Approval approval : approvals) {
-            Integer sid = approval.getSid();
-            Student student = studentDao.selectStudent(sid);
-            approval.setSname(student.getSname());
-        }
+        addStudentNameForMajors(approvals);
         return approvals;
     }
 
@@ -76,11 +88,7 @@ public class ApprovalServiceImpl implements ApprovalService {
         int begin = (page - 1) * size;
         List<Approval> approvals = approvalDao.selectApprovalsByLimitByWait(begin, size);
         //添加学生姓名信息
-        for(Approval approval : approvals) {
-            Integer sid = approval.getSid();
-            Student student = studentDao.selectStudent(sid);
-            approval.setSname(student.getSname());
-        }
+        addStudentNameForMajors(approvals);
         return approvals;
     }
 

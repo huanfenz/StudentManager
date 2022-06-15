@@ -52,9 +52,13 @@ public class LoginServiceImpl implements LoginService {
 
         //添加班级名信息
         if(student != null) {
-            int cid = student.getCid();
-            Clazz clazz = clazzDao.selectClazz(cid);
-            student.setCname(clazz.getCname());
+            Integer cid = student.getCid();
+            if (cid != null) {
+                Clazz clazz = clazzDao.selectClazz(cid);
+                if (clazz != null) {
+                    student.setCname(clazz.getCname());
+                }
+            }
         }
         return student;
     }

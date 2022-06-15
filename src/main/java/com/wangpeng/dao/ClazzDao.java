@@ -74,5 +74,4 @@ public interface ClazzDao {
      */
     int getSearchCount(Map<String,Object> map);
 
-
 }

@@ -7,8 +7,18 @@ import java.util.Map;
 
 public interface ClazzService {
 
+    /**
+     * 分页查询所有班级
+     * @param page
+     * @param size
+     * @return
+     */
     List<Clazz> queryClazzs(int page, int size);
 
+    /**
+     * 获得班级数量
+     * @return 班级数量
+     */
     int getAmount();
 
     /**
@@ -46,7 +56,16 @@ public interface ClazzService {
      */
     int getSearchCount(Map<String, Object> searchParam);
 
+    /**
+     * 查询所有班级
+     * @return
+     */
     List<Clazz> queryAllClazzs();
 
+    /**
+     * 教师查询所有班级
+     * @param tid
+     * @return
+     */
     List<Clazz> queryAllClazzsByTeacher(int tid);
 }

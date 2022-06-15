@@ -31,24 +31,44 @@ public class OpenCourseServiceImpl implements OpenCourseService {
         return openCourseDao.selectOpenCourses();
     }
 
+    /**
+     * 为开课列表添加信息
+     * @param openCourses
+     */
+    private void addInfoForOpenCourses(List<OpenCourse> openCourses) {
+        for(OpenCourse openCourse : openCourses) {
+            Integer cid = openCourse.getCid();
+            if (cid != null) {
+                Clazz clazz = clazzDao.selectClazz(cid);
+                if (clazz != null) {
+                    openCourse.setCname(clazz.getCname());
+                }
+            }
+
+            Integer tid = openCourse.getTid();
+            if (tid != null) {
+                Teacher teacher = teacherDao.selectTeacher(tid);
+                if (teacher != null) {
+                    openCourse.setTname(teacher.getTname());
+                }
+            }
+
+            Integer courseId = openCourse.getCourseId();
+            if (courseId != null) {
+                Course course = courseDao.selectCourse(courseId);
+                if (course != null) {
+                    openCourse.setCourseName(course.getCourseName());
+                }
+            }
+        }
+    }
+
     @Override
     public List<OpenCourse> findOpenCoursesByPage(int page, int size) {
         int begin = (page - 1) * size;
         List<OpenCourse> openCourses = openCourseDao.selectOpenCoursesByLimit(begin, size);
         //放入班级名、教师名、课程名信息
-        for(OpenCourse openCourse : openCourses) {
-            int cid = openCourse.getCid();
-            Clazz clazz = clazzDao.selectClazz(cid);
-            openCourse.setCname(clazz.getCname());
-
-            int tid = openCourse.getTid();
-            Teacher teacher = teacherDao.selectTeacher(tid);
-            openCourse.setTname(teacher.getTname());
-
-            int courseId = openCourse.getCourseId();
-            Course course = courseDao.selectCourse(courseId);
-            openCourse.setCourseName(course.getCourseName());
-        }
+        addInfoForOpenCourses(openCourses);
         return openCourses;
     }
 
@@ -81,19 +101,7 @@ public class OpenCourseServiceImpl implements OpenCourseService {
         map.put("size", size);
         List<OpenCourse> openCourses = openCourseDao.searchOpenCoursesByLimit(map);
         //放入班级名、教师名、课程名信息
-        for(OpenCourse openCourse : openCourses) {
-            int cid = openCourse.getCid();
-            Clazz clazz = clazzDao.selectClazz(cid);
-            openCourse.setCname(clazz.getCname());
-
-            int tid = openCourse.getTid();
-            Teacher teacher = teacherDao.selectTeacher(tid);
-            openCourse.setTname(teacher.getTname());
-
-            int courseId = openCourse.getCourseId();
-            Course course = courseDao.selectCourse(courseId);
-            openCourse.setCourseName(course.getCourseName());
-        }
+        addInfoForOpenCourses(openCourses);
         return openCourses;
     }
 
@@ -112,19 +120,7 @@ public class OpenCourseServiceImpl implements OpenCourseService {
         int begin = (page - 1) * size;
         List<OpenCourse> openCourses = openCourseDao.selectOpenCoursesByLimitByTeacher(begin, size, tid);
         //放入班级名、教师名、课程名信息
-        for(OpenCourse openCourse : openCourses) {
-            int cid = openCourse.getCid();
-            Clazz clazz = clazzDao.selectClazz(cid);
-            openCourse.setCname(clazz.getCname());
-
-            //int tid = openCourse.getTid();
-            Teacher teacher = teacherDao.selectTeacher(tid);
-            openCourse.setTname(teacher.getTname());
-
-            int courseId = openCourse.getCourseId();
-            Course course = courseDao.selectCourse(courseId);
-            openCourse.setCourseName(course.getCourseName());
-        }
+        addInfoForOpenCourses(openCourses);
         return openCourses;
     }
 
@@ -133,13 +129,17 @@ public class OpenCourseServiceImpl implements OpenCourseService {
         List<OpenCourseAndScore> openCourseAndScores = openCourseDao.selectOpenCoursesByStudent(sid);
         //添加教师名、课程名信息
         for(OpenCourseAndScore openCourseAndScore : openCourseAndScores) {
-            int tid = openCourseAndScore.getTid();
-            Teacher teacher = teacherDao.selectTeacher(tid);
-            openCourseAndScore.setTname(teacher.getTname());
+            Integer tid = openCourseAndScore.getTid();
+            if (tid != null) {
+                Teacher teacher = teacherDao.selectTeacher(tid);
+                openCourseAndScore.setTname(teacher.getTname());
+            }
 
-            int courseId = openCourseAndScore.getCourseId();
-            Course course = courseDao.selectCourse(courseId);
-            openCourseAndScore.setCourseName(course.getCourseName());
+            Integer courseId = openCourseAndScore.getCourseId();
+            if (courseId != null) {
+                Course course = courseDao.selectCourse(courseId);
+                openCourseAndScore.setCourseName(course.getCourseName());
+            }
         }
         return openCourseAndScores;
     }

@@ -22,16 +22,37 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     ClazzDao clazzDao;
 
+    /**
+     * 为学生添加班级名
+     * @param student
+     */
+    private void addClazzNameForStudent(Student student) {
+        Integer cid = student.getCid();
+        if (cid != null) {
+            Clazz clazz = clazzDao.selectClazz(cid);
+            if (clazz != null) {
+                student.setCname(clazz.getCname());
+            }
+        }
+
+    }
+
+    /**
+     * 为学生列表添加班级名
+     * @param students
+     */
+    private void addClazzNameForStudents(List<Student> students) {
+        for(Student student : students) {
+            addClazzNameForStudent(student);
+        }
+    }
+
     @Override
     public List<Student> findStudentsByPage(int page, int size) {
         int begin = (page - 1) * size;
         List<Student> students = studentDao.selectStudentsByLimit(begin, size);
         //放入班级名信息
-        for(Student student : students) {
-            int cid = student.getCid();
-            Clazz clazz = clazzDao.selectClazz(cid);
-            student.setCname(clazz.getCname());
-        }
+        addClazzNameForStudents(students);
         return students;
     }
 
@@ -64,11 +85,7 @@ public class StudentServiceImpl implements StudentService {
         map.put("size", size);
         List<Student> students = studentDao.searchStudentsByLimit(map);
         //放入班级名信息
-        for(Student student : students) {
-            int cid = student.getCid();
-            Clazz clazz = clazzDao.selectClazz(cid);
-            student.setCname(clazz.getCname());
-        }
+        addClazzNameForStudents(students);
         return students;
     }
 
@@ -81,11 +98,7 @@ public class StudentServiceImpl implements StudentService {
         map.put("size", size);
         List<Student> students = studentDao.searchStudentsByLimitByTeacher(map);
         //放入班级名信息
-        for(Student student : students) {
-            int cid = student.getCid();
-            Clazz clazz = clazzDao.selectClazz(cid);
-            student.setCname(clazz.getCname());
-        }
+        addClazzNameForStudents(students);
         return students;
     }
 
@@ -109,11 +122,7 @@ public class StudentServiceImpl implements StudentService {
         int begin = (page - 1) * size;
         List<Student> students = studentDao.selectStudentsByLimitByTeacher(begin, size, tid);
         //放入班级名信息
-        for(Student student : students) {
-            int cid = student.getCid();
-            Clazz clazz = clazzDao.selectClazz(cid);
-            student.setCname(clazz.getCname());
-        }
+        addClazzNameForStudents(students);
         return students;
     }
 
@@ -127,9 +136,7 @@ public class StudentServiceImpl implements StudentService {
     public Student findStudentBySid(Integer sid) {
         Student student = studentDao.selectStudent(sid);
         //添加班级名信息
-        int cid = student.getCid();
-        Clazz clazz = clazzDao.selectClazz(cid);
-        student.setCname(clazz.getCname());
+        addClazzNameForStudent(student);
         return student;
     }
 

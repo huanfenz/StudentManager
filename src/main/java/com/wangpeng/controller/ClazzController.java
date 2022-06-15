@@ -4,12 +4,12 @@ import com.wangpeng.pojo.Clazz;
 import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.ClazzService;
 import com.wangpeng.utils.JsonUtil;
+import com.wangpeng.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,18 +27,13 @@ public class ClazzController {
      * @return 班级信息
      */
     @RequestMapping("queryClazzs.do")
-    public Map<String,Object> queryClazzs(Integer page, Integer limit){
+    public PageResult queryClazzs(Integer page, Integer limit){
         //获取数量
         int count = service.getAmount();
         //获取数据
-        List<Clazz> clazzs = service.queryClazzs(page, limit);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", clazzs);
-        return res;
+        List<Clazz> clazzes = service.queryClazzs(page, limit);
+        //返回结果
+        return PageResult.success(count, clazzes);
     }
 
     /**
@@ -47,8 +42,7 @@ public class ClazzController {
      */
     @RequestMapping({"queryAllClazzs.do", "student/queryAllClazzs.do"})
     public List<Clazz> queryAllClazzs(){
-        List<Clazz> clazzes = service.queryAllClazzs();
-        return clazzes;
+        return service.queryAllClazzs();
     }
 
     /**
@@ -61,8 +55,7 @@ public class ClazzController {
         //获取当前账号信息
         Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
 
-        List<Clazz> clazzes = service.queryAllClazzsByTeacher(loginTeacher.getTid());
-        return clazzes;
+        return service.queryAllClazzsByTeacher(loginTeacher.getTid());
     }
 
     /**
@@ -74,8 +67,7 @@ public class ClazzController {
     public Integer deleteClazzs(String json){
         if(json.charAt(0) != '[') json = '[' + json + ']';  //如果不是数组形式，变成数组形式
         List<Clazz> clazzs = JsonUtil.parseList(json, Clazz.class);
-        int count = service.deleteClazzs(clazzs);   //得到删除成功的数量
-        return count;
+        return service.deleteClazzs(clazzs);
     }
 
     /**
@@ -86,8 +78,7 @@ public class ClazzController {
     @RequestMapping("addClazz.do")
     public Integer addClazz(String json){
         Clazz clazz = JsonUtil.parseObject(json, Clazz.class);
-        int num = service.addClazz(clazz);
-        return num;
+        return service.addClazz(clazz);
     }
 
     /**
@@ -98,8 +89,7 @@ public class ClazzController {
     @RequestMapping("updateClazz.do")
     public Integer updateClazz(String json){
         Clazz clazz = JsonUtil.parseObject(json, Clazz.class);
-        int num = service.updateClazz(clazz);
-        return num;
+        return service.updateClazz(clazz);
     }
 
     /**
@@ -108,8 +98,7 @@ public class ClazzController {
      */
     @RequestMapping("getAmount.do")
     public Integer getAmount() {
-        int res = service.getAmount();
-        return res;
+        return service.getAmount();
     }
 
     /**
@@ -121,19 +110,14 @@ public class ClazzController {
      * @return 班级信息
      */
     @RequestMapping("searchClazzs.do")
-    public Map<String,Object> searchClazzs(Integer page, Integer limit, String json){
+    public PageResult searchClazzs(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
         //获取查询个数
         int count = service.getSearchCount(searchParam);
         //查询数据
         List<Clazz> clazzes = service.searchClazzs(page, limit, searchParam);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", clazzes);
-        return res;
+        //返回结果
+        return PageResult.success(count, clazzes);
     }
 }

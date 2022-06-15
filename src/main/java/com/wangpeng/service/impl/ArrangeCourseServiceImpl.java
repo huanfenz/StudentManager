@@ -23,16 +23,24 @@ public class ArrangeCourseServiceImpl implements ArrangeCourseService {
         return arrangeCourseDao.selectArrangeCourses();
     }
 
-    @Override
-    public List<ArrangeCourse> findArrangeCoursesByPage(int page, int size) {
-        int begin = (page - 1) * size;
-        List<ArrangeCourse> arrangeCourses = arrangeCourseDao.selectArrangeCoursesByLimit(begin, size);
-        //放入班级名、教师名、课程名信息
+    /**
+     * 为排课列表添加教室名
+     * @param arrangeCourses
+     */
+    private void addRoomNameForArrangeCourses(List<ArrangeCourse> arrangeCourses) {
         for(ArrangeCourse arrangeCourse : arrangeCourses) {
             int rid = arrangeCourse.getRid();
             Room room = roomDao.selectRoom(rid);
             arrangeCourse.setRname(room.getRname());
         }
+    }
+
+    @Override
+    public List<ArrangeCourse> findArrangeCoursesByPage(int page, int size) {
+        int begin = (page - 1) * size;
+        List<ArrangeCourse> arrangeCourses = arrangeCourseDao.selectArrangeCoursesByLimit(begin, size);
+        //放入教室名
+        addRoomNameForArrangeCourses(arrangeCourses);
         return arrangeCourses;
     }
 
@@ -60,12 +68,8 @@ public class ArrangeCourseServiceImpl implements ArrangeCourseService {
     public List<ArrangeCourse> findArrangeCoursesByPageByOid(int page, int size, int oid) {
         int begin = (page - 1) * size;
         List<ArrangeCourse> arrangeCourses = arrangeCourseDao.selectArrangeCoursesByLimitByOid(begin, size, oid);
-        //放入班级名、教师名、课程名信息
-        for(ArrangeCourse arrangeCourse : arrangeCourses) {
-            int rid = arrangeCourse.getRid();
-            Room room = roomDao.selectRoom(rid);
-            arrangeCourse.setRname(room.getRname());
-        }
+        //放入教室名
+        addRoomNameForArrangeCourses(arrangeCourses);
         return arrangeCourses;
     }
 

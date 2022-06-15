@@ -16,19 +16,32 @@ public class ClazzServiceImpl implements ClazzService {
 
     @Autowired
     ClazzDao clazzDao;
+
     @Autowired
     MajorDao majorDao;
+
+    /**
+     * 为班级列表添加专业名
+     * @param clazzes
+     */
+    private void addMajorNameForClazzes(List<Clazz> clazzes) {
+        for(Clazz clazz : clazzes) {
+            Integer mid = clazz.getMid();
+            if (mid != null) {
+                Major major = majorDao.selectMajor(mid);
+                if (major != null) {
+                    clazz.setMname(major.getMname());
+                }
+            }
+        }
+    }
 
     @Override
     public List<Clazz> queryClazzs(int page, int size) {
         int begin = (page - 1) * size;
         List<Clazz> clazzes = clazzDao.selectClazzsByLimit(begin, size);
         //添加专业名信息
-        for(Clazz clazz : clazzes) {
-            int mid = clazz.getMid();
-            Major major = majorDao.selectMajor(mid);
-            clazz.setMname(major.getMname());
-        }
+        addMajorNameForClazzes(clazzes);
         return clazzes;
     }
 
@@ -61,11 +74,7 @@ public class ClazzServiceImpl implements ClazzService {
         map.put("size", size);
         List<Clazz> clazzes = clazzDao.searchClazzsByLimit(map);
         //添加专业名信息
-        for(Clazz clazz : clazzes) {
-            int mid = clazz.getMid();
-            Major major = majorDao.selectMajor(mid);
-            clazz.setMname(major.getMname());
-        }
+        addMajorNameForClazzes(clazzes);
         return clazzes;
     }
 

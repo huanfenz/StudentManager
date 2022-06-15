@@ -138,7 +138,7 @@
                 }
             });
 
-            return false;   //不跳转
+            return false;
         });
 
         // 监听显示全部操作
@@ -264,7 +264,6 @@
             } else if (obj.event === 'delete') {    //监听删除按钮
                 layer.confirm('确定要删除该行吗？', function (index) {
                     var mdata = obj.data;    //获取该行的数据
-                    obj.del();  //删除对应行（tr）的DOM结构，并更新缓存
                     layer.close(index); //关闭窗口
                     //向服务器请求
                     $.getJSON({
@@ -272,6 +271,7 @@
                         data: {json:JSON.stringify(mdata)},   //发json过去
                         success:function (res) {
                             layer.msg("删除"+res+"行成功！",{time:800});
+                            obj.del();  //删除对应行（tr）的DOM结构，并更新缓存
                         }
                     });
                 });
