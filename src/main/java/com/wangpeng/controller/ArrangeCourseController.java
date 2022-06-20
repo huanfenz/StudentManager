@@ -3,13 +3,12 @@ package com.wangpeng.controller;
 import com.wangpeng.pojo.ArrangeCourse;
 import com.wangpeng.service.ArrangeCourseService;
 import com.wangpeng.utils.JsonUtil;
+import com.wangpeng.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/arrangeCourse")
@@ -25,19 +24,13 @@ public class ArrangeCourseController {
      * @return 排课信息
      */
     @RequestMapping("queryArrangeCourses.do")
-    public Map<String,Object> queryArrangeCourses(Integer page, Integer limit){
+    public PageResult queryArrangeCourses(Integer page, Integer limit){
         //获取排课数量
         int count = service.getArrangeCoursesCount();
         //获取数据
         List<ArrangeCourse> arrangeCourses = service.findArrangeCoursesByPage(page,limit);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", arrangeCourses);
-
-        return res;
+        //返回结果
+        return PageResult.success(count, arrangeCourses);
     }
 
     /**
@@ -58,8 +51,7 @@ public class ArrangeCourseController {
     public Integer deleteArrangeCourses(String json){
         if(json.charAt(0) != '[') json = '[' + json + ']';  //如果不是数组形式，变成数组形式
         List<ArrangeCourse> arrangeCourses = JsonUtil.parseList(json, ArrangeCourse.class);
-        int res = service.deleteArrangeCourses(arrangeCourses);
-        return res;
+        return service.deleteArrangeCourses(arrangeCourses);
     }
 
     /**
@@ -100,17 +92,11 @@ public class ArrangeCourseController {
      * @return 排课信息
      */
     @RequestMapping({"queryArrangeCoursesByOid.do", "teacher/queryArrangeCoursesByOid.do"})
-    public Map<String,Object> queryArrangeCoursesByOid(Integer page, Integer limit, Integer oid){
+    public PageResult queryArrangeCoursesByOid(Integer page, Integer limit, Integer oid){
         //获取数据
         List<ArrangeCourse> arrangeCourses = service.findArrangeCoursesByPageByOid(page,limit,oid);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", arrangeCourses.size());
-        res.put("data", arrangeCourses);
-
-        return res;
+        //返回结果
+        return PageResult.success(arrangeCourses.size(), arrangeCourses);
     }
 
 }

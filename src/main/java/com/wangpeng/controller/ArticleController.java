@@ -3,11 +3,11 @@ package com.wangpeng.controller;
 import com.wangpeng.pojo.Article;
 import com.wangpeng.service.ArticleService;
 import com.wangpeng.utils.JsonUtil;
+import com.wangpeng.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,19 +25,13 @@ public class ArticleController {
      * @return 文章信息
      */
     @RequestMapping({"queryArticles.do", "student/queryArticles.do", "teacher/queryArticles.do"})
-    public Map<String,Object> queryArticles(Integer page, Integer limit){
+    public PageResult queryArticles(Integer page, Integer limit){
         //获取文章数量
         int count = service.getArticlesCount();
         //获取数据
         List<Article> articles = service.findArticlesByPage(page,limit);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", articles);
-
-        return res;
+        //返回结果
+        return PageResult.success(count, articles);
     }
 
     /**
@@ -101,20 +95,15 @@ public class ArticleController {
      * @return 文章信息
      */
     @RequestMapping({"searchArticles.do", "student/searchArticles.do", "teacher/searchArticles.do"})
-    public Map<String,Object> searchArticles(Integer page, Integer limit, String json){
+    public PageResult searchArticles(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
         //获取查询个数
         int count = service.getSearchCount(searchParam);
         //查询数据
         List<Article> articles = service.searchArticles(page, limit, searchParam);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", articles);
-        return res;
+        //返回结果
+        return PageResult.success(count, articles);
     }
 
 }

@@ -4,14 +4,13 @@ import com.wangpeng.pojo.Approval;
 import com.wangpeng.pojo.Student;
 import com.wangpeng.service.ApprovalService;
 import com.wangpeng.utils.JsonUtil;
+import com.wangpeng.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/approval")
@@ -27,19 +26,13 @@ public class ApprovalController {
      * @return 审批信息
      */
     @RequestMapping("queryApprovals.do")
-    public Map<String,Object> queryApprovals(Integer page, Integer limit){
+    public PageResult queryApprovals(Integer page, Integer limit){
         //获取审批数量
         int count = service.getApprovalsCount();
         //获取数据
         List<Approval> approvals = service.findApprovalsByPage(page,limit);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", approvals);
-
-        return res;
+        //返回结果
+        return PageResult.success(count, approvals);
     }
 
     /**
@@ -49,19 +42,13 @@ public class ApprovalController {
      * @return 审批信息
      */
     @RequestMapping("queryApprovalsByWait.do")
-    public Map<String,Object> queryApprovalsByWait(Integer page, Integer limit){
+    public PageResult queryApprovalsByWait(Integer page, Integer limit){
         //获取审批数量
         int count = service.getApprovalsCountByWait();
         //获取数据
         List<Approval> approvals = service.findApprovalsByPageByWait(page,limit);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", approvals);
-
-        return res;
+        //返回结果
+        return PageResult.success(count, approvals);
     }
 
     /**
@@ -71,7 +58,7 @@ public class ApprovalController {
      * @return 审批信息
      */
     @RequestMapping({"queryApprovalsBySid.do", "student/queryApprovalsBySid.do"})
-    public Map<String,Object> queryApprovalsBySid(Integer page, Integer limit, HttpServletRequest req){
+    public PageResult queryApprovalsBySid(Integer page, Integer limit, HttpServletRequest req){
         //获取当前账号信息
         Student loginStudent =  (Student) req.getSession().getAttribute("loginObj");
         Integer sid = loginStudent.getSid();
@@ -79,14 +66,8 @@ public class ApprovalController {
         int count = service.getApprovalsCountBySid(sid);
         //获取数据
         List<Approval> approvals = service.findApprovalsByPageBySid(page,limit,sid);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", approvals);
-
-        return res;
+        //返回结果
+        return PageResult.success(count, approvals);
     }
 
     /**

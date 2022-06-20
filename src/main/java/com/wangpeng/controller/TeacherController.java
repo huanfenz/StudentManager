@@ -3,11 +3,11 @@ package com.wangpeng.controller;
 import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.TeacherService;
 import com.wangpeng.utils.JsonUtil;
+import com.wangpeng.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,19 +25,13 @@ public class TeacherController {
      * @return 教师信息
      */
     @RequestMapping("queryTeachers.do")
-    public Map<String,Object> queryTeachers(Integer page, Integer limit){
+    public PageResult queryTeachers(Integer page, Integer limit){
         //获取教师数量
         int count = service.getTeachersCount();
         //获取教师信息
         List<Teacher> teachers = service.findTeachersByPage(page,limit);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", teachers);
-
-        return res;
+        //返回结果
+        return PageResult.success(count, teachers);
     }
 
     /**
@@ -111,20 +105,15 @@ public class TeacherController {
      * @return 教师信息
      */
     @RequestMapping("searchTeachers.do")
-    public Map<String,Object> searchTeachers(Integer page, Integer limit, String json){
+    public PageResult searchTeachers(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
         //获取查询个数
         int count = service.getSearchCount(searchParam);
         //查询教师信息
         List<Teacher> teachers = service.searchTeachers(page, limit, searchParam);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", teachers);
-        return res;
+        //返回结果
+        return PageResult.success(count, teachers);
     }
 
 }

@@ -3,11 +3,11 @@ package com.wangpeng.controller;
 import com.wangpeng.pojo.Manager;
 import com.wangpeng.service.ManagerService;
 import com.wangpeng.utils.JsonUtil;
+import com.wangpeng.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,19 +25,13 @@ public class ManagerController {
      * @return 管理员信息
      */
     @RequestMapping("queryManagers.do")
-    public Map<String,Object> queryManagers(Integer page, Integer limit){
+    public PageResult queryManagers(Integer page, Integer limit){
         //获取管理员数量
         int count = service.getManagersCount();
         //获取数据
         List<Manager> managers = service.findManagersByPage(page,limit);
-        //结果map
-        Map<String,Object> res = new HashMap<>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", managers);
-
-        return res;
+        //返回结果
+        return PageResult.success(count, managers);
     }
 
     /**
@@ -101,20 +95,15 @@ public class ManagerController {
      * @return 管理员信息
      */
     @RequestMapping("searchManagers.do")
-    public Map<String,Object> searchManagers(Integer page, Integer limit, String json){
+    public PageResult searchManagers(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
         //获取查询个数
         int count = service.getSearchCount(searchParam);
         //查询数据
         List<Manager> managers = service.searchManagers(page, limit, searchParam);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", managers);
-        return res;
+        //返回结果
+        return PageResult.success(count, managers);
     }
 
 }

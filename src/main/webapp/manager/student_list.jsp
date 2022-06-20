@@ -1,10 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>   <%--jsp--%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    <%--jstl--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>   <!--jsp-->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    <!--jstl-->
 <%
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + request.getContextPath() + "/";
-%>  <%--取base--%>
+%>  <!--取base-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,12 +21,12 @@
     <script src="layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 </head>
 <body>
-<%--编辑弹出框--%>
+<!--编辑弹出框-->
 <div class="site-text" style="margin: 5%; display: none" id="edit_window">
     <div class="layui-form" style="width: 400px; float: left" lay-filter="editForm">
-        <%--隐藏域，sid--%>
+        <!--隐藏域，sid-->
         <input type="hidden" id="sid" name="sid" class="layui-input" value="null">
-        <%--隐藏域，pic（头像地址）--%>
+        <!--隐藏域，pic（头像地址）-->
         <input type="hidden" id="pic" name="pic" class="layui-input" value="null">
         <!--姓名-->
         <div class="layui-form-item">
@@ -137,10 +137,10 @@
     </div>
 
 </div>
-<%--数据表格布局--%>
+<!--数据表格布局-->
 <div class="layuimini-container">
     <div class="layuimini-main">
-        <%--搜索信息--%>
+        <!--搜索信息-->
         <fieldset class="table-search-fieldset">
             <legend>搜索信息</legend>
             <div style="margin: 10px 10px 10px 10px">
@@ -176,7 +176,7 @@
                 </form>
             </div>
         </fieldset>
-        <%--头部工具栏--%>
+        <!--头部工具栏-->
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加学生 </button>
@@ -185,16 +185,16 @@
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-plan-btn" lay-event="outputStudentInformation"> 导出所有学生信息 </button>
             </div>
         </script>
-        <%--表格容器--%>
+        <!--表格容器-->
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
-        <%--行工具栏--%>
+        <!--行工具栏-->
         <script type="text/html" id="currentTableBar">
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
         </script>
     </div>
 </div>
-<%--js代码--%>
+<!--js代码-->
 <script>
     layui.use(['form', 'table','laydate', "upload", "element", "layer"], function () {
         var $ = layui.jquery,
@@ -208,7 +208,7 @@
         //上传图片
         var uploadInst = upload.render({
             elem: "#test1",
-            url: "update/updateImg.do", //此处用的是第三方的 http 请求演示，实际使用时改成您自己的上传接口即可。
+            url: "upload/uploadImg.do", // 自己的上传接口
             before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
@@ -229,8 +229,8 @@
                 $("#pic").val(res.data.src);
                 //图片链接替换
                 $("#demo1").attr("src", res.data.src);
-
-                $("#demoText").html(""); //置空上传失败的状态
+                //置空上传失败的状态
+                $("#demoText").html("");
             },
             error: function () {
                 //演示失败状态，并实现重传

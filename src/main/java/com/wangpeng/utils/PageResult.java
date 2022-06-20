@@ -1,42 +1,11 @@
 package com.wangpeng.utils;
 
-public class PageResult {
-
-    /**
-     * 状态码
-     */
-    private Integer code;
-
-    /**
-     * 消息
-     */
-    private String msg;
+public class PageResult extends BaseResult {
 
     /**
      * 数量
      */
     private Integer count;
-
-    /**
-     * 数据
-     */
-    private Object data;
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public Integer getCount() {
         return count;
@@ -44,14 +13,6 @@ public class PageResult {
 
     public void setCount(Integer count) {
         this.count = count;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
     }
 
     /**

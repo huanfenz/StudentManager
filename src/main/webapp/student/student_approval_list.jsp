@@ -74,7 +74,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">附件</label>
             <div class="layui-input-block">
-                <button type="button" class="layui-btn" id="att_update"><i class="layui-icon"></i>上传文件</button>
+                <button type="button" class="layui-btn" id="att_upload"><i class="layui-icon"></i>上传文件</button>
                 <span id="fileName"></span>
             </div>
         </div>
@@ -113,15 +113,15 @@
 
         //上传附件
         upload.render({
-            elem: '#att_update',
-            url: 'update/student/updateAttachment.do',
+            elem: '#att_upload',
+            url: 'upload/student/uploadAttachment.do',
             accept: 'file', //普通文件
             done: function(res){
                 layer.msg('上传成功');
                 console.log(res);
                 $("#att").val(res.data.src);
-                $("#attName").val(res.fileName);
-                $("#fileName").html(res.fileName);
+                $("#attName").val(res.data.fileName);
+                $("#fileName").html(res.data.fileName);
             }
         });
 

@@ -6,6 +6,7 @@ import com.wangpeng.pojo.Teacher;
 import com.wangpeng.service.CourseGradeService;
 import com.wangpeng.service.StudentService;
 import com.wangpeng.utils.JsonUtil;
+import com.wangpeng.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,19 +33,13 @@ public class StudentController {
      * @return 学生信息
      */
     @RequestMapping("queryStudents.do")
-    public Map<String,Object> queryStudents(Integer page, Integer limit){
+    public PageResult queryStudents(Integer page, Integer limit){
         //获取学生数量
         int count = service.getStudentsCount();
         //获取学生信息
         List<Student> students = service.findStudentsByPage(page,limit);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", students);
-
-        return res;
+        //返回结果
+        return PageResult.success(count, students);
     }
 
     /**
@@ -65,7 +60,7 @@ public class StudentController {
      * @return 学生信息
      */
     @RequestMapping("teacher/queryStudentsByTeacher.do")
-    public Map<String,Object> queryStudentsByTeacher(Integer page, Integer limit, HttpServletRequest req){
+    public PageResult queryStudentsByTeacher(Integer page, Integer limit, HttpServletRequest req){
         //获取当前账号信息
         Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
 
@@ -73,14 +68,8 @@ public class StudentController {
         int count = service.getStudentsCountByTeacher(loginTeacher.getTid());
         //获取学生信息
         List<Student> students = service.findStudentsByPageByTeacher(page,limit,loginTeacher.getTid());
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", students);
-
-        return res;
+        //返回结果
+        return PageResult.success(count, students);
     }
 
     /**
@@ -160,24 +149,27 @@ public class StudentController {
      * @return 学生信息
      */
     @RequestMapping("searchStudents.do")
-    public Map<String,Object> searchStudents(Integer page, Integer limit, String json){
+    public PageResult searchStudents(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
         //获取查询个数
         int count = service.getSearchCount(searchParam);
         //查询学生信息
         List<Student> students = service.searchStudents(page, limit, searchParam);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", students);
-        return res;
+        //返回结果
+        return PageResult.success(count, students);
     }
 
+    /**
+     * 教师搜索学生
+     * @param page
+     * @param limit
+     * @param json
+     * @param req
+     * @return
+     */
     @RequestMapping("teacher/searchStudentsByTeacher.do")
-    public Map<String,Object> searchStudentsByTeacher(Integer page, Integer limit, String json, HttpServletRequest req){
+    public PageResult searchStudentsByTeacher(Integer page, Integer limit, String json, HttpServletRequest req){
         //获取当前账号信息
         Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
 
@@ -189,15 +181,15 @@ public class StudentController {
         int count = service.getSearchCountByTeacher(searchParam);
         //查询学生信息
         List<Student> students = service.searchStudentsByTeacher(page, limit, searchParam);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", students);
-        return res;
+        //返回结果
+        return PageResult.success(count, students);
     }
 
+    /**
+     * 打印学生信息
+     * @param req
+     * @return
+     */
     @RequestMapping("printStudentInformation.do")
     public Map<String, Object> printStudentInformation(HttpServletRequest req) {
         String url = service.print(req);

@@ -3,11 +3,11 @@ package com.wangpeng.controller;
 import com.wangpeng.pojo.Room;
 import com.wangpeng.service.RoomService;
 import com.wangpeng.utils.JsonUtil;
+import com.wangpeng.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,19 +25,13 @@ public class RoomController {
      * @return 教室信息
      */
     @RequestMapping("queryRooms.do")
-    public Map<String,Object> queryRooms(Integer page, Integer limit){
+    public PageResult queryRooms(Integer page, Integer limit){
         //获取教室数量
         int count = service.getRoomsCount();
         //获取教室信息
         List<Room> rooms = service.findRoomsByPage(page,limit);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", rooms);
-
-        return res;
+        //返回结果
+        return PageResult.success(count, rooms);
     }
 
     /**
@@ -101,20 +95,15 @@ public class RoomController {
      * @return 教室信息
      */
     @RequestMapping("searchRooms.do")
-    public Map<String,Object> searchRooms(Integer page, Integer limit, String json){
+    public PageResult searchRooms(Integer page, Integer limit, String json){
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
         //获取查询个数
         int count = service.getSearchCount(searchParam);
         //查询教室信息
         List<Room> rooms = service.searchRooms(page, limit, searchParam);
-        //结果map
-        Map<String,Object> res = new HashMap<String,Object>();
-        res.put("code", 0);
-        res.put("msg", "");
-        res.put("count", count);
-        res.put("data", rooms);
-        return res;
+        //返回结果
+        return PageResult.success(count, rooms);
     }
 
 }

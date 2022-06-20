@@ -21,8 +21,7 @@ public class WelcomeController {
      */
     @GetMapping("getAllCount.do")
     public Map<String, Integer> getAllCount() {
-        Map<String, Integer> map = service.getAllCount();
-        return map;
+        return service.getAllCount();
     }
 
     /**
@@ -32,8 +31,7 @@ public class WelcomeController {
      */
     @GetMapping("student/getAllCountByStudent.do")
     public Map<String, Integer> getAllCountByStudent(Integer sid) {
-        Map<String, Integer> map = service.getAllCountByStudent(sid);
-        return map;
+        return service.getAllCountByStudent(sid);
     }
 
     /**
@@ -43,8 +41,7 @@ public class WelcomeController {
      */
     @GetMapping("teacher/getAllCountByTeacher.do")
     public Map<String, Integer> getAllCountByTeacher(Integer tid) {
-        Map<String, Integer> map = service.getAllCountByTeacher(tid);
-        return map;
+        return service.getAllCountByTeacher(tid);
     }
 
 }

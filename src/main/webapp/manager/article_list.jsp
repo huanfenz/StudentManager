@@ -51,7 +51,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">上传文章</label>
             <div class="layui-input-block">
-                <button type="button" class="layui-btn" id="article_update"><i class="layui-icon"></i>上传HTML格式文档</button>
+                <button type="button" class="layui-btn" id="article_upload"><i class="layui-icon"></i>上传HTML格式文档</button>
                 <span id="fileName"></span>
             </div>
         </div>
@@ -115,8 +115,8 @@
 
         //上传文章
         upload.render({
-            elem: '#article_update',
-            url: 'update/updateArticle.do',
+            elem: '#article_upload',
+            url: 'upload/uploadArticle.do',
             accept: 'file', //普通文件
             exts: 'html|htm', //只允许上传html和htm
             done: function(res){
