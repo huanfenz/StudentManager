@@ -7,10 +7,10 @@
 
     <select id="selectCourseDetail" resultType="CourseDetail">
         select ct.ctid,weekno,week,start,size,
-               (select courseName from course where course.courseId = oc.courseId)courseName,
-               (select rname from room where room.rid = ct.rid)rname,
-               (select tname from teacher where teacher.tid = oc.tid)tname
+            (select courseName from course where course.courseId = oc.courseId)courseName,
+            (select rname from room where room.rid = ct.rid)rname,
+            (select tname from teacher where teacher.tid = oc.tid)tname
         from arrange_course ct,open_course oc
-        where ct.oid = oc.oid and cid=#{cid}
+        where ct.oid = oc.oid and year=#{year} and term=#{term} and cid=#{cid}
     </select>
 </mapper>

@@ -15,11 +15,11 @@ public class TableShowServiceImpl implements TableShowService {
     TableShowDao tableSHowDao;
 
     @Override
-    public String[][] findTable(int cid, int weekno) {
+    public String[][] findTable(String year, String term, int cid, int weekno) {
 
         String[][] res = new String[5][10];
 
-        List<CourseDetail> courseDetails = tableSHowDao.selectCourseDetail(cid);
+        List<CourseDetail> courseDetails = tableSHowDao.selectCourseDetail(year, term, cid);
         for (CourseDetail courseDetail : courseDetails) {
             String weeknoStr = courseDetail.getWeekno();
 

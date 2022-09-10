@@ -117,7 +117,30 @@ String basePath = request.getScheme() + "://"
     <div style="margin: 10px 10px 10px 10px;">
         <form class="layui-form layui-form-pane" action="" lay-filter="searchForm">
             <div class="layui-form-item">
-                <%--班级--%>
+                <!--学年-->
+                <div class="layui-inline">
+                    <label class="layui-form-label">学年</label>
+                    <div class="layui-input-inline">
+                        <select name="year" id="search_year" lay-search="">
+                            <!--从2021到2030-->
+                            <c:forEach begin="2021" end="2030" var="i">
+                                <option value="${i}-${i + 1}学年">${i}-${i + 1}学年</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <!--学期-->
+                <div class="layui-inline">
+                    <label class="layui-form-label">学期</label>
+                    <div class="layui-input-inline">
+                        <select name="term" id="search_term" lay-search="">
+                            <option value="">请选择学期</option>
+                            <option value="第一学期">第一学期</option>
+                            <option value="第二学期">第二学期</option>
+                        </select>
+                    </div>
+                </div>
+                <!--班级-->
                 <div class="layui-inline">
                     <label class="layui-form-label">班级</label>
                     <div class="layui-input-inline">
@@ -126,13 +149,13 @@ String basePath = request.getScheme() + "://"
                         </select>
                     </div>
                 </div>
-                <%--周数--%>
+                <!--周数-->
                 <div class="layui-inline">
                     <label class="layui-form-label">周数</label>
                     <div class="layui-input-inline">
                         <select name="weekno" id="search_weekno" lay-search="">
                             <option value="">请选择周数</option>
-                            <%--从1到20--%>
+                            <!--从1到20-->
                             <c:forEach begin="1" end="20" var="i">
                                 <option value="${i}">第${i}周</option>
                             </c:forEach>

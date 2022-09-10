@@ -25,9 +25,11 @@ public class TableShowController {
     public String[][] queryTable(String json) {
         //获得搜索的参数
         Map<String, Object> searchParam = JsonUtil.parseMap(json, String.class, Object.class);
+        String year = (String) searchParam.get("year");
+        String term = (String) searchParam.get("term");
         int cid = Integer.parseInt((String) searchParam.get("cid"));
         int weekno = Integer.parseInt((String) searchParam.get("weekno"));
-        String[][] table = service.findTable(cid, weekno);
+        String[][] table = service.findTable(year, term, cid, weekno);
         return table;
     }
 
