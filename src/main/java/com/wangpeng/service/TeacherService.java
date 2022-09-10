@@ -62,5 +62,10 @@ public interface TeacherService {
      */
     List<Teacher> findAllTeachers();
 
+    /**
+     * 通过教师id找教师
+     * @param tid
+     * @return
+     */
     Teacher findTeacher(int tid);
 }

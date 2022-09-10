@@ -81,7 +81,6 @@ public class StudentController {
         List<Student> students = service.findStudentsByOid(oid);
 
         List<Map<String,Object>> res = new ArrayList<>();
-
         for(Student student : students) {
             Map<String,Object> map = new HashMap<>();
             map.put("sid", student.getSid());
@@ -186,7 +185,7 @@ public class StudentController {
     }
 
     /**
-     * 打印学生信息
+     * 导出学生信息
      * @param req
      * @return
      */

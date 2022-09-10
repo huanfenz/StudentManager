@@ -193,9 +193,9 @@ String basePath = request.getScheme() + "://"
                     "cid": 7,
                     "weekno": 1,
                 });
-                var data = form.val("searchForm");
-                console.log(data);
-                my_search(data);
+                var data1 = form.val("searchForm");
+                console.log(data1);
+                my_search(data1);
             }
         });
 

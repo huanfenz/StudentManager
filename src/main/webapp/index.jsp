@@ -156,8 +156,6 @@
                 success: function (res) {
                     /*
                     * return: 0验证码错误，1账号密码错误，2成功
-                    * info: 错误信息
-                    * name: 登录成功的账户姓名
                     * */
                     switch (res) {
                         case 3:
@@ -177,7 +175,7 @@
                             if(data.rememberMe == "true") {   //记住密码了
                                 //设置cookie的过期时间7天
                                 var date = new Date();
-                                date.setTime(date.getTime() + 60*60*24*7);
+                                date.setTime(date.getTime() + 1000*60*60*24*7);
                                 //设置cookie
                                 $.cookie("username",data.username,{ expires: date, path: '/' });
                                 $.cookie("password",$.base64.encode(data.password),{ expires: date, path: '/' });
@@ -200,9 +198,6 @@
                                     location.href="student/student_index.jsp";
                                 }
                             });
-                            break;
-                        case 4:
-                            layer.msg("该学号不唯一，请联系管理员",{time:1000});
                             break;
                     }
                 }

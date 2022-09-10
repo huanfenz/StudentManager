@@ -35,7 +35,7 @@ public interface ClazzDao {
     List<Clazz> selectClazzs();
 
     /**
-     * 通过教师查询所有
+     * 通过教师查询所有班级
      */
     List<Clazz> getCLazzsByTeacher(int tid);
 

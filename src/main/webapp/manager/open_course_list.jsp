@@ -359,9 +359,6 @@
                     area: ['90%', '90%'],
                     btn: ['确定'],
                     content: 'manager/arrange_course_list.jsp?oid=' + data[0].oid,
-                    // success: function () {  //弹出框成功回调
-                    //
-                    // },
                     yes: function (index, layero) { //确认的回调
                         layer.close(index); //关闭弹出框
                     }

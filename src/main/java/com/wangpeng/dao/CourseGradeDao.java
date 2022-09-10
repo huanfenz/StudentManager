@@ -69,7 +69,18 @@ public interface CourseGradeDao {
      */
     int getSearchCount(Map<String,Object> map);
 
+    /**
+     * 根据oid和sid查询成绩
+     * @param oid
+     * @param sid
+     * @return
+     */
     CourseGrade selectCourseGradeByOidAndSid(@Param("oid")int oid, @Param("sid")int sid);
 
+    /**
+     * 根据oid和sid更新成绩
+     * @param courseGrade
+     * @return
+     */
     int updateCourseGradeByOidAndSid(CourseGrade courseGrade);
 }

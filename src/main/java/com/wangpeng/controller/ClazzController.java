@@ -54,7 +54,6 @@ public class ClazzController {
     public List<Clazz> queryAllClazzsByTeacher(HttpServletRequest req){
         //获取当前账号信息
         Teacher loginTeacher =  (Teacher) req.getSession().getAttribute("loginObj");
-
         return service.queryAllClazzsByTeacher(loginTeacher.getTid());
     }
 

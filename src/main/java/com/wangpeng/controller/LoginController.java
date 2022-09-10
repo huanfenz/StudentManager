@@ -76,7 +76,7 @@ public class LoginController {
         //获取当前登录的权限
         String authority = (String) req.getSession().getAttribute("authority");
 
-        if(authority.equals("manager")) {
+        if (authority.equals("manager")) {
             //获取当前账号信息
             Manager loginManager =  (Manager) req.getSession().getAttribute("loginObj");
 

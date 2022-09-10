@@ -70,5 +70,9 @@ public interface TeacherDao {
      */
     Teacher checkByUsernameAndPassword(Map<String,Object> map);
 
+    /**
+     * 查询所有教师
+     * @return
+     */
     List<Teacher> selectTeachers();
 }

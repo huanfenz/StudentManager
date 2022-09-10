@@ -56,6 +56,11 @@ public interface StudentDao {
      */
     List<Student> searchStudentsByLimit(Map<String,Object> map);
 
+    /**
+     * 教师分页搜索学生
+     * @param map
+     * @return
+     */
     List<Student> searchStudentsByLimitByTeacher(Map<String, Object> map);
 
     /**
@@ -65,6 +70,11 @@ public interface StudentDao {
      */
     int getSearchCount(Map<String,Object> map);
 
+    /**
+     * 教师搜索学生数量
+     * @param searchParam
+     * @return
+     */
     int getSearchCountByTeacher(Map<String, Object> searchParam);
 
     /**
@@ -75,14 +85,30 @@ public interface StudentDao {
     Student checkByUsernameAndPassword(Map<String,Object> map);
 
     /**
-     * 获得教师所教学生的数量
+     * 教师获得学生数量
      * @return
      */
     int getStudentsCountByTeacher(int tid);
 
+    /**
+     * 教师分页查询学生
+     * @param begin
+     * @param size
+     * @param tid
+     * @return
+     */
     List<Student> selectStudentsByLimitByTeacher(@Param("begin")int begin, @Param("size")int size, @Param("tid")int tid);
 
+    /**
+     * 通过oid查询学生
+     * @param oid
+     * @return
+     */
     List<Student> selectStudentsByOid(int oid);
 
+    /**
+     * 查询学生
+     * @return
+     */
     List<Student> selectStudents();
 }

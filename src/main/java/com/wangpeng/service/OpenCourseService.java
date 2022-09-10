@@ -63,9 +63,19 @@ public interface OpenCourseService {
      */
     int getSearchCount(Map<String, Object> searchParam);
 
+    /**
+     * 教师
+     * @param tid
+     * @return
+     */
     int getOpenCoursesCountByTeacher(int tid);
 
     List<OpenCourse> findOpenCoursesByPageByTeacher(Integer page, Integer size, Integer tid);
 
+    /**
+     * 学生查询开课
+     * @param sid
+     * @return
+     */
     List<OpenCourseAndScore> findOpenCoursesByStudent(Integer sid);
 }
