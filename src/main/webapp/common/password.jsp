@@ -16,14 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="layuimini/css/public.css" media="all">
-
     <script src="layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
     <script src="layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
     <script src="layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
-
-<%--    <style>--%>
-<%--        .layui-form-item .layui-input-company {width: auto;padding-right: 10px;line-height: 38px;}--%>
-<%--    </style>--%>
 </head>
 <body>
 <div class="layuimini-container">
