@@ -160,9 +160,8 @@ String basePath = request.getScheme() + "://"
                 data: {json: result},
                 success: function (res) {
                     console.log(res);
-                    var courseListOther = res;
                     Timetable.setOption({
-                        timetables: courseListOther,
+                        timetables: res,
                         gridOnClick: function (e) {
                             alert(e.name + '  ' + e.week + ', 第' + e.index + '节课, 课长' + e.length + '节');
                             console.log(e);
