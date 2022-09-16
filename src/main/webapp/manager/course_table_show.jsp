@@ -165,7 +165,6 @@ String basePath = request.getScheme() + "://"
                 <div class="layui-inline">
                     <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 确　　定 </button>
                 </div>
-                <span style="color: red">测试数据20计科1班和20计科2班</span>
             </div>
         </form>
     </div>
@@ -211,6 +210,8 @@ String basePath = request.getScheme() + "://"
                 form.render('select', 'searchForm'); //刷新select选择框渲染
 
                 form.val("searchForm", {
+                    "year": "2021-2022学年",
+                    "term": "第一学期",
                     "cid": 7,
                     "weekno": 1,
                 });

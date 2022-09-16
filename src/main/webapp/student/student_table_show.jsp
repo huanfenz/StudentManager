@@ -119,6 +119,30 @@ String basePath = request.getScheme() + "://"
             <div class="layui-form-item">
                 <%--隐藏域，cid--%>
                 <input type="hidden" id="search_cid" name="cid" class="layui-input" value="${sessionScope.loginObj.cid}">
+                <!--学年-->
+                <div class="layui-inline">
+                    <label class="layui-form-label">学年</label>
+                    <div class="layui-input-inline">
+                        <select name="year" id="search_year" lay-search="">
+                            <option value="">请选择学年</option>
+                            <!--从2021到2030-->
+                            <c:forEach begin="2021" end="2030" var="i">
+                                <option value="${i}-${i + 1}学年">${i}-${i + 1}学年</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <!--学期-->
+                <div class="layui-inline">
+                    <label class="layui-form-label">学期</label>
+                    <div class="layui-input-inline">
+                        <select name="term" id="search_term" lay-search="">
+                            <option value="">请选择学期</option>
+                            <option value="第一学期">第一学期</option>
+                            <option value="第二学期">第二学期</option>
+                        </select>
+                    </div>
+                </div>
                 <%--周数--%>
                 <div class="layui-inline">
                     <label class="layui-form-label">周数</label>
@@ -179,6 +203,8 @@ String basePath = request.getScheme() + "://"
                 });
                 form.render('select', 'searchForm'); //刷新select选择框渲染
                 form.val("searchForm", {
+                    "year": "2021-2022学年",
+                    "term": "第一学期",
                     "weekno": 1,
                 });
                 var data = form.val("searchForm");
