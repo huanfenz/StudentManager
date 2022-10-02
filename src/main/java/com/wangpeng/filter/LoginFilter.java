@@ -57,8 +57,8 @@ public class LoginFilter implements Filter {
 
         // 教师允许访问的地址的正则表达式表
         String[] teacherPassRegex = {
-                "\\/student\\/.+\\.jsp",        // 学生界面
-                "\\/.+\\/student\\/.+\\.do",    // 学生接口
+                "\\/teacher\\/.+\\.jsp",        // 教师界面
+                "\\/.+\\/teacher\\/.+\\.do",    // 教师接口
                 "\\/common\\/password\\.jsp",   // 修改密码界面
                 "\\/login\\/alterPassword\\.do" // 修改密码接口
         };
