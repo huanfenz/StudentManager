@@ -95,7 +95,7 @@
 <script>
     //点击验证码
     $("#code_pic").click(function () {
-        this.src = "${basePath}kaptcha.jpg?d=" + new Date();
+        this.src = "kaptcha.jpg?d=" + new Date().getTime();
     });
 
     layui.use(['form'], function () {
@@ -159,15 +159,15 @@
                     switch (res) {
                         case 3:
                             layer.msg("验证码失效，请重新输入!",{time:1000});
-                            $("#code_pic").prop("src","${basePath}kaptcha.jpg?d=" + new Date());
+                            $("#code_pic").prop("src","kaptcha.jpg?d=" + new Date().getTime());
                             break;
                         case 0:
                             layer.msg("验证码错误!",{time:1000});
-                            $("#code_pic").prop("src","${basePath}kaptcha.jpg?d=" + new Date());
+                            $("#code_pic").prop("src","kaptcha.jpg?d=" + new Date().getTime());
                             break;
                         case 1:
                             layer.msg("账号或密码错误!",{time:1000});
-                            $("#code_pic").prop("src","${basePath}kaptcha.jpg?d=" + new Date());
+                            $("#code_pic").prop("src","kaptcha.jpg?d=" + new Date().getTime());
                             break;
                         case 2: //登录成功
 

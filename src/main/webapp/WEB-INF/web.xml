@@ -57,15 +57,8 @@
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
-        <url-pattern>/manager/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/teacher/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/student/*</url-pattern>
+        <url-pattern>*.jsp</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </filter-mapping>
 
     <!--验证码-->
