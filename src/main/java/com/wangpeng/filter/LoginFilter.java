@@ -20,7 +20,7 @@ public class LoginFilter implements Filter {
         String uri = String.valueOf(req.getRequestURI());
         String contextPath = req.getContextPath();
         String basePath = uri.substring(contextPath.length());
-        System.out.println("basePath=" + basePath);
+        // System.out.println("basePath=" + basePath);
 
         // 如果是登录相关的界面和接口，直接放行
         if (basePath.equals("/index.jsp") || basePath.equals("/login/login.do")) {

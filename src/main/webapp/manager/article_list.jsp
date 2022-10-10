@@ -50,7 +50,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">上传文章</label>
             <div class="layui-input-block">
-                <button type="button" class="layui-btn" id="article_upload"><i class="layui-icon"></i>上传HTML格式文档</button>
+                <button type="button" class="layui-btn" id="article_upload"><i class="layui-icon"></i>上传HTML格式文档</button>
                 <span id="fileName"></span>
             </div>
         </div>
@@ -122,7 +122,7 @@
                 layer.msg('上传成功');
                 console.log(res);
                 $("#url").val(res.data.src);    //放url隐藏域
-                $("#fileName").html(res.fileName);  //放文件名显示
+                $("#fileName").html(res.data.fileName);  //放文件名显示
             }
         });
 
