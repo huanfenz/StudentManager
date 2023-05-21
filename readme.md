@@ -58,7 +58,7 @@
 
 ## 演示地址
 
-项目演示地址：http://47.97.104.230:8098/StudentManager/
+项目演示地址：[http://student.huanfenz.top/](http://student.huanfenz.top/)
 
 **数据库每天自动恢复，请勿保存重要信息。**
 
