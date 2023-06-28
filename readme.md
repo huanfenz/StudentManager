@@ -32,27 +32,33 @@
 
 登录界面
 
-![image-20211121180252003](http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/202111211802657.png)
+![1](https://github.com/huanfenz/StudentManager/assets/49386166/063220a1-e5c1-416f-822b-3f7cb1ee6c00)
+
 
 管理员首页
 
-![image-20211121180252004](http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/202111211802098.png)
+![2](https://github.com/huanfenz/StudentManager/assets/49386166/4eef6dee-8d54-4056-9c4d-17ba1449db75)
+
 
 学生管理
 
-![image-20211121180318460](http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/202111211803542.png)
+![3](https://github.com/huanfenz/StudentManager/assets/49386166/3a128883-e2b0-4f93-8972-c35d6cb1e763)
+
 
 课表展示
 
-![image-20211121180402768](http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/202111211804850.png)
+![4](https://github.com/huanfenz/StudentManager/assets/49386166/8f647837-bab5-49b9-9086-aedcff672da9)
+
 
 教师录入成绩
 
-![image-20211121180750387](http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/202111211807469.png)
+![5](https://github.com/huanfenz/StudentManager/assets/49386166/6ae96c8a-af0a-4c20-9c08-d94f49ce4737)
+
 
 学生查看成绩
 
-![image-20211121180835738](http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/202111211808823.png)
+![6](https://github.com/huanfenz/StudentManager/assets/49386166/e5141d6c-5529-4cd3-b80f-03d3a2dbf5a2)
+
 
 更多功能就在演示地址自己看吧！:smile:
 
@@ -86,7 +92,8 @@
 
 ### 数据库结构
 
-![image-20211121190533286](http://wangpeng-imgsubmit.oss-cn-hangzhou.aliyuncs.com/img/202111211905354.png)
+![7](https://github.com/huanfenz/StudentManager/assets/49386166/bf4c968c-65e3-440e-8658-f9ca4fa38f4c)
+
 
 ## 联系方式
 
